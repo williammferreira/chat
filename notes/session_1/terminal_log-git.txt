@@ -1,0 +1,182 @@
+william@williams-linux:~/chat/project/chat$ git branch
+* main
+william@williams-linux:~/chat/project/chat$ git checkout -b create_channels
+Switched to a new branch 'create_channels'
+william@williams-linux:~/chat/project/chat$ git branch
+* create_channels
+  main
+william@williams-linux:~/chat/project/chat$ git checkout main
+M	project/chat/chat/urls.py
+M	project/chat/main/templates/base.html
+M	project/chat/main/views.py
+M	project/chat/new_chat/views.py
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+william@williams-linux:~/chat/project/chat$ git checkout create_channels
+M	project/chat/chat/urls.py
+M	project/chat/main/templates/base.html
+M	project/chat/main/views.py
+M	project/chat/new_chat/views.py
+Switched to branch 'create_channels'
+william@williams-linux:~/chat/project/chat$ git branch
+* create_channels
+  main
+william@williams-linux:~/chat/project/chat$ git status
+On branch create_channels
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	../chat_envirement/lib64
+
+nothing added to commit but untracked files present (use "git add" to track)
+william@williams-linux:~/chat/project/chat$ git config --global core.editor "vim"
+william@williams-linux:~/chat/project/chat$ git rebase -i main
+Successfully rebased and updated refs/heads/gitignore-update.
+william@williams-linux:~/chat/project/chat$ git push --force-with-lease origin gitignore-update
+Username for 'https://github.com': williammferreira
+Password for 'https://williammferreira@github.com': 
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/williammferreira/chat.git/'
+william@williams-linux:~/chat/project/chat$ git push --force-with-lease origin gitignore-update
+Username for 'https://github.com': williammferreira
+Password for 'https://williammferreira@github.com': 
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 452 bytes | 452.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/williammferreira/chat.git
+ + d997bcf...bc01724 gitignore-update -> gitignore-update (forced update)
+william@williams-linux:~/chat/project/chat$ git checkout main
+Switched to branch 'main'
+Your branch is behind 'origin/main' by 2 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+william@williams-linux:~/chat/project/chat$ git pull
+Username for 'https://github.com': williammferreira
+Password for 'https://williammferreira@github.com': 
+Updating 6b86cdf..fff499f
+Fast-forward
+ .gitignore                                         |   4 +
+ project/chat_envirement/bin/Activate.ps1           | 241 ---------------------
+ project/chat_envirement/bin/activate               |  76 -------
+ project/chat_envirement/bin/activate.csh           |  37 ----
+ project/chat_envirement/bin/activate.fish          |  75 -------
+ project/chat_envirement/bin/automat-visualize      |   8 -
+ project/chat_envirement/bin/cftp                   |   8 -
+ project/chat_envirement/bin/ckeygen                |   8 -
+ project/chat_envirement/bin/conch                  |   8 -
+ project/chat_envirement/bin/daphne                 |   8 -
+ project/chat_envirement/bin/django-admin           |   8 -
+ project/chat_envirement/bin/django-admin.py        |  21 --
+ project/chat_envirement/bin/easy_install           |   8 -
+ project/chat_envirement/bin/easy_install-3.8       |   8 -
+ project/chat_envirement/bin/mailmail               |   8 -
+ project/chat_envirement/bin/markdown_py            |   8 -
+ project/chat_envirement/bin/pip                    |   8 -
+ project/chat_envirement/bin/pip3                   |   8 -
+ project/chat_envirement/bin/pip3.8                 |   8 -
+ project/chat_envirement/bin/pyhtmlizer             |   8 -
+ project/chat_envirement/bin/python                 |   1 -
+ project/chat_envirement/bin/python3                |   1 -
+ project/chat_envirement/bin/sqlformat              |   8 -
+ project/chat_envirement/bin/tkconch                |   8 -
+ project/chat_envirement/bin/trial                  |   8 -
+ project/chat_envirement/bin/twist                  |   8 -
+ project/chat_envirement/bin/twistd                 |   8 -
+ project/chat_envirement/bin/uwsgi                  | Bin 1241600 -> 0 bytes
+ project/chat_envirement/bin/wamp                   |   8 -
+ project/chat_envirement/bin/xbrnetwork             |   8 -
+ project/chat_envirement/pyvenv.cfg                 |   3 -
+ .../CacheControl-0.12.6-py2.py3-none-any.whl       | Bin 28023 -> 0 bytes
+ .../appdirs-1.4.3-py2.py3-none-any.whl             | Bin 18776 -> 0 bytes
+ .../certifi-2019.11.28-py2.py3-none-any.whl        | Bin 164552 -> 0 bytes
+ .../chardet-3.0.4-py2.py3-none-any.whl             | Bin 141487 -> 0 bytes
+ .../colorama-0.4.3-py2.py3-none-any.whl            | Bin 25094 -> 0 bytes
+ .../contextlib2-0.6.0-py2.py3-none-any.whl         | Bin 17188 -> 0 bytes
+ .../distlib-0.3.0-py2.py3-none-any.whl             | Bin 152027 -> 0 bytes
+ .../distro-1.4.0-py2.py3-none-any.whl              | Bin 23898 -> 0 bytes
+ .../html5lib-1.0.1-py2.py3-none-any.whl            | Bin 120020 -> 0 bytes
+ .../python-wheels/idna-2.8-py2.py3-none-any.whl    | Bin 66836 -> 0 bytes
+ .../ipaddr-2.2.0-py2.py3-none-any.whl              | Bin 24287 -> 0 bytes
+ .../lockfile-0.12.2-py2.py3-none-any.whl           | Bin 21972 -> 0 bytes
+ .../msgpack-0.6.2-py2.py3-none-any.whl             | Bin 92927 -> 0 bytes
+ .../packaging-20.3-py2.py3-none-any.whl            | Bin 42242 -> 0 bytes
+ .../pep517-0.8.2-py2.py3-none-any.whl              | Bin 26686 -> 0 bytes
+ .../python-wheels/pip-20.0.2-py2.py3-none-any.whl  | Bin 262196 -> 0 bytes
+ .../pkg_resources-0.0.0-py2.py3-none-any.whl       | Bin 127312 -> 0 bytes
+ .../progress-1.5-py2.py3-none-any.whl              | Bin 17547 -> 0 bytes
+ .../pyparsing-2.4.6-py2.py3-none-any.whl           | Bin 77093 -> 0 bytes
+ .../pytoml-0.1.21-py2.py3-none-any.whl             | Bin 17938 -> 0 bytes
+ .../requests-2.22.0-py2.py3-none-any.whl           | Bin 67470 -> 0 bytes
+ .../retrying-1.3.3-py2.py3-none-any.whl            | Bin 16358 -> 0 bytes
+ .../setuptools-44.0.0-py2.py3-none-any.whl         | Bin 477446 -> 0 bytes
+ .../python-wheels/six-1.14.0-py2.py3-none-any.whl  | Bin 20256 -> 0 bytes
+ .../urllib3-1.25.8-py2.py3-none-any.whl            | Bin 127041 -> 0 bytes
+ .../webencodings-0.5.1-py2.py3-none-any.whl        | Bin 20484 -> 0 bytes
+ .../wheel-0.34.2-py2.py3-none-any.whl              | Bin 35611 -> 0 bytes
+ 58 files changed, 4 insertions(+), 623 deletions(-)
+ delete mode 100644 project/chat_envirement/bin/Activate.ps1
+ delete mode 100644 project/chat_envirement/bin/activate
+ delete mode 100644 project/chat_envirement/bin/activate.csh
+ delete mode 100644 project/chat_envirement/bin/activate.fish
+ delete mode 100755 project/chat_envirement/bin/automat-visualize
+ delete mode 100755 project/chat_envirement/bin/cftp
+ delete mode 100755 project/chat_envirement/bin/ckeygen
+ delete mode 100755 project/chat_envirement/bin/conch
+ delete mode 100755 project/chat_envirement/bin/daphne
+ delete mode 100755 project/chat_envirement/bin/django-admin
+ delete mode 100755 project/chat_envirement/bin/django-admin.py
+ delete mode 100755 project/chat_envirement/bin/easy_install
+ delete mode 100755 project/chat_envirement/bin/easy_install-3.8
+ delete mode 100755 project/chat_envirement/bin/mailmail
+ delete mode 100755 project/chat_envirement/bin/markdown_py
+ delete mode 100755 project/chat_envirement/bin/pip
+ delete mode 100755 project/chat_envirement/bin/pip3
+ delete mode 100755 project/chat_envirement/bin/pip3.8
+ delete mode 100755 project/chat_envirement/bin/pyhtmlizer
+ delete mode 120000 project/chat_envirement/bin/python
+ delete mode 120000 project/chat_envirement/bin/python3
+ delete mode 100755 project/chat_envirement/bin/sqlformat
+ delete mode 100755 project/chat_envirement/bin/tkconch
+ delete mode 100755 project/chat_envirement/bin/trial
+ delete mode 100755 project/chat_envirement/bin/twist
+ delete mode 100755 project/chat_envirement/bin/twistd
+ delete mode 100755 project/chat_envirement/bin/uwsgi
+ delete mode 100755 project/chat_envirement/bin/wamp
+ delete mode 100755 project/chat_envirement/bin/xbrnetwork
+ delete mode 100644 project/chat_envirement/pyvenv.cfg
+ delete mode 100644 project/chat_envirement/share/python-wheels/CacheControl-0.12.6-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/appdirs-1.4.3-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/certifi-2019.11.28-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/chardet-3.0.4-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/colorama-0.4.3-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/contextlib2-0.6.0-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/distlib-0.3.0-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/distro-1.4.0-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/html5lib-1.0.1-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/idna-2.8-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/ipaddr-2.2.0-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/lockfile-0.12.2-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/msgpack-0.6.2-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/packaging-20.3-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/pep517-0.8.2-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/pip-20.0.2-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/pkg_resources-0.0.0-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/progress-1.5-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/pyparsing-2.4.6-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/pytoml-0.1.21-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/requests-2.22.0-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/retrying-1.3.3-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/setuptools-44.0.0-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/six-1.14.0-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/urllib3-1.25.8-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/webencodings-0.5.1-py2.py3-none-any.whl
+ delete mode 100644 project/chat_envirement/share/python-wheels/wheel-0.34.2-py2.py3-none-any.whl
+william@williams-linux:~/chat/project/chat$ git checkout create_channels
+Switched to branch 'create_channels'
+william@williams-linux:~/chat/project/chat$ git rebase main
+First, rewinding head to replay your work on top of it...
+Applying: branches
+william@williams-linux:~/chat/project/chat$ 
+
