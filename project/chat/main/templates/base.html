@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <title>Chat</title>
+    <meta charset="utf-8">
+    <meta name="description" content="A chat site"/>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nav-bar.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/chat-grid.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/controls.css' %}" type="text/css">
+  </head>
+  <body>
+    <div class="top-nav">
+      <a href="{% url 'main' %}">Home</a>
+    </div>
+		<div class="controls">
+			<span class="new-chat-plus" onclick="location.replace(`{% url 'new_chat' %}`)">+<span>
+		</div>
+    <div class="chat-grid">
+      <div class="chats chat-grid-object">
+        {% if chat_number == 0 %}
+        <p><i><center>You don't have any chats yet.</center></i></p>
+        {% endif %}
+        {% for chat in chats %}
+          <div class="chat">
+            <div class="title">{{ chat.chat_name }}</div><br>
+            <div>{{ chat.chat_users }}</div><br>
+            <div>{{ chat.chat_date_created }}</div><br><hr>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="chat-grid-object">
+        {% block main %}
+
+        {% endblock main %}
+      </div>
+    </div>
+  </body>
+</html>

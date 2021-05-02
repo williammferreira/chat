@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+	<style>
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+  		background: linear-gradient(to right, rgb(0, 255, 242) 0%, #00ffb3 100%);
+			font-size: 50px;
+		}
+
+		.sub {
+			padding-right: 25px;
+			padding-left: 25px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			background-color: aqua;
+		}
+input {
+	font-size: 50px;
+}
+	</style>
+	<div id="addchat">
+		<form action="" method="POST">
+			{% csrf_token %}
+			<center>
+				<!-- <h1>Chat Name</h1>
+				<input type="text" name="room" />
+				<br>
+				<br>
+				<h1>Invites (seperate different people by using a comma)</h1>
+				<input type="text" name="invites" />
+				<br>
+				<br>
+				<input class="sub" type="submit"> --->
+				{{ form|crispy }}<br>
+				<input type="submit" />
+			</center>
+		</form>
+	</div>
+{% endblock %}

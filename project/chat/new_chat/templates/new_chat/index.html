@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block main %}
+{% load crispy_forms_tags %}
+	<div id="addchat">
+		<form action="" method="POST">
+			{% csrf_token %}
+			<center>
+				<!-- <h1>Chat Name</h1>
+				<input type="text" name="room" />
+				<br>
+				<br>
+				<h1>Invites (seperate different people by using a comma)</h1>
+				<input type="text" name="invites" />
+				<br>
+				<br>
+				<input class="sub" type="submit"> --->
+				{{ form|crispy }}<br>
+				<input type="submit" />
+			</center>
+		</form>
+	</div>
+{% endblock %}

@@ -1,0 +1,478 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<!--Daryl Duckmanton is the owner-->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Chat</title>
+	<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css" />
+	<!-- <script src='https://cdn.jsdelivr.net/npm/socket.io-client@2.2.0/dist/socket.io.js'></script>
+  <script src='https://socketio-server.codeisamazing.repl.co'></script> -->
+	<!-- <script src="http://chat555-script.codeisamazing.repl.co"></script> -->
+</head>
+
+<body>
+	<!-- {{ password }} -->
+	<div id="chat-container">
+		<div id="search-container">
+			<input type="text" placeholder="search" />
+      </div>
+      <div id="conversation-list">
+
+        <!--<button style="background-color: #0048AA;" width="100%">-->
+          <!--<a href="#William">-->
+        <div class="conversation">
+					<!-- <script>
+				// function getChats() {
+	// alert("wow");
+	try {
+		// document.write("wow");
+		// document.getElementById("test").innerHTML = "wow";
+		var chats1 = "{{ chats }}";
+		var created_date1 = "{{ created_date }}";
+		var invites1 = "{{ invites }}";
+		var d_split = created_date1.split("spliter234;");
+		var i_split = invites1.split("spliter234;");
+		var c_all = "";
+		var csplit = chats1.split("spliter234;");
+		for (i = 0; i < csplit.length; i++) {
+			length = "<br>" + `<div class="column" onclick="openTab('b1');">
+               <div class="title-text"><p></p></div><div class="created-date"><p></p></div><div class="conversation-message"><p></p><hr></div></div>`
+  		c_all = c_all + "<br>" + `<div class="column" onclick="openTab('b1');">
+               <div class="title-text"><p>` + csplit[i] + `</p></div><div class="created-date"><p>` + d_split[i] + `</p></div><div class="conversation-message"><p>` + i_split[i] + `</p><hr></div></div>`;
+			c_edit = c_all.substr(0, c_all.length - length.length);
+		}
+		document.write(c_edit);
+		// document.write("wow");
+	}
+
+	catch(err) {
+  document.write(err.message);
+	}
+
+</script> -->
+{% if objects %}
+{% for i in objects %}
+<div class="column" onclick="location.replace('/~/chats/{{ i.location_url }}')">
+               <div class="title-text">
+            <p>{{ i.chat_name }}</p>
+          </div>
+          <div class="created-date">
+            <p>{{ i.chat_date_created }}</p>
+          </div>
+          <div class="conversatiuon-message">
+            <p>{{ i.chat_users }}</p>
+            <hr>
+          </div>
+        </div>
+<!-- {{ i.chat_name }} -->
+{% endfor %}
+{% else %}
+<p><center><i>You don't have any chats yet.</i></center></p>
+{% endif %}
+
+          <!--<img src="trash.png" width="20px" height="20px" alt="William Ferreira" />-->
+					<!-- Chats -->
+					<!-- { if chat_number != 0 }
+			{ for x in range() }
+			<div class="alert alert-{{ message.tags }}">
+				{ message }
+			</div>
+			{ endfor } -->
+
+					<!-- <div id="test"></div> -->
+					<!-- <script>
+						try {
+							// document.write("wow");
+							// document.getElementById("test").innerHTML = "wow";
+							var chats1 = "{{ chats }}";
+							var c_all = "";
+							var csplit = chats1.split("spliter234;");
+							for (i = 0; i < csplit.length; i++) {
+  						c_all = c_all + "<br>" + csplit[i];
+							}
+							document.getElementById("test").innerHTML = c_all;
+							// document.write("wow");
+						}
+
+						catch(err) {
+  						document.write(err.message);
+						}
+					</script> -->
+					<!-- <i>{{ chats }}</i> -->
+
+					<!-- { endif } -->
+
+					{% if chat_number == 0 %}
+						<!-- <p><center><i>You don't have any chats yet.</i></center></p> -->
+					{% endif %}
+					<!-- <div class="column" onclick="openTab('b1');">
+               <div class="title-text">
+            <p>William Ferreira</p>
+          </div>
+          <div class="created-date">
+            <p>Apr 16</p>
+          </div>
+          <div class="conversation-message">
+            <p>William, Alex, Dad</p>
+            <hr>
+          </div>
+        </div>
+             <div class="column" onclick="openTab('b2');">
+               <div class="title-text">
+            <p>William Ferreira</p>
+          </div>
+          <div class="created-date">
+            <p>Apr 31</p>
+          </div>
+          <div class="conversation-message">
+            <p>William, Mom, Nana</p>
+          </div>
+          <hr>
+        </div>
+             <div class="column" onclick="openTab('b3');">
+               <div class="title-text">
+            <p>William Ferreira</p>
+          </div>
+          <div class="created-date">
+            <p>Mar 1</p>
+          </div>
+          <div class="conversation-message">
+            <p>William, Grandpa, Grandma</p>
+            <hr>
+          </div>
+        </div> -->
+        </div>
+        <!--</a>-->
+      </div>
+      <div id="new-message-container">
+        <a href="/newchat">+</a>
+      </div>
+      <div id="chat-title">
+        <span id="name"></span>
+        <button><span><img src="trash.png" width="50px" height="50px" /></span></button><!-- <input onclick="a = confirm('Are you sure?'); if (a) { location.replace('') }" value="leave site?" /> -->
+      </div>
+      <div id="chat-message-list" style="overflow: scroll;">
+        <!-- <div id="b1" class="containerTab" style="display:none;" onunload="save1">
+  <h2 style="text-align: center;">William Ferreia<hr></h2>
+
+</div>
+
+<div id="b2" class="containerTab" style="display:none;">
+  <h2 style="text-align: center;">William Ferreia<hr></h2>
+
+</div> -->
+
+<div id="b3" class="containerTab" style="">
+	{% block content %}
+
+	<!-- <div id="messageareabox2"></div> -->
+		<!--<input id="input043" size=60 data-post oninput="checkInput(event)" onkeypress="if(event.key == 'Enter') post()" type="text">
+		<button disabled data-post onclick="post()">Post</button>-->
+		{% endblock %}
+</div>
+      </div>
+      <div id="chat-form">
+        <img src="attach.png" width="20px" height="20px" />
+        <input oninput="checkInput(event)" onkeypress="if(event.key == 'Enter') post()" type="text" id="myInput" placeholder="type a message" autocomplete="off" />
+        <button id="myBtn" onclick="mess()" hidden post>
+      </div>
+    </div>
+    <!--stuff---------------------------------------------->
+		<!-- <script src="{% static 'js/index.js' %}"></script> -->
+		{% comment %}
+		<!-- <script>
+
+// function setCookie(cname,cvalue,exdays) {
+//   var d = new Date();
+//   d.setTime(d.getTime() + (exdays*24*60*60*1000));
+//   var expires = "expires=" + d.toGMTString();
+//   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+// 	location.reload;
+// }
+
+// function getCookie(cname) {
+//   var name = cname + "=";
+//   var decodedCookie = decodeURIComponent(document.cookie);
+//   var ca = decodedCookie.split(';');
+//   for(var i = 0; i < ca.length; i++) {
+//     var c = ca[i];
+//     while (c.charAt(0) == ' ') {
+//       c = c.substring(1);
+//     }
+//     if (c.indexOf(name) == 0) {
+//       return c.substring(name.length, c.length);
+//     }
+//   }
+//   return "";
+// }
+
+// function checkCookie() {
+//   var user=getCookie("username");
+//   if (user != "") {
+//     document.getElementById("name").innerHTML = user;
+//   } else {
+//      user = prompt("What do you want people to call you?","William Ferreira");
+//      if (user != "" && user != null) {
+//        setCookie("username", user, 30);
+//      }
+//   }
+// }
+
+var input = document.getElementById("myInput");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("myBtn").click();
+	 document.getElementById("myInput").innerHTML = "";
+  }
+});
+
+function mess(){
+  if (delay && messageInput.value.replace(/\s/g, "") != ""){
+    delay = false;
+    setTimeout(delayReset, 1000);
+    socket.emit("send", messageInput.value);
+    messageInput.value = "";
+  }
+}
+
+document.cookie = "user=index; path=/;";
+
+
+function openTab(tabName) {
+  var i, x;
+  x = document.getElementsByClassName("containerTab");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  document.getElementById(tabName).style.display = "block";
+}
+
+
+
+//const input2 = document.getElementById("input043");
+const input2 = document.getElementById("myInput");
+const button = document.querySelector(`button[data-post]`);
+const textarea = document.getElementById("messageareabox");
+
+function checkInput(event) {
+	button.disabled = (input2.value.length == 0);
+}
+
+function post() {
+	if(input2.value.length > 0) {
+		const inputValue = input2.value;
+		/*const message = {
+			id : socket.id,
+			value : inputValue,
+		};*/
+		const message = {
+			id : getCookie("username"),
+			value : inputValue,
+		};
+		socket.emit('message-room', {room, message});
+		appendPost(message);
+		input2.value = '';
+	}
+}
+
+function appendPost({id, value}) {
+	appendText(`${id == getCookie("username")? "<div id='my-message'>":'<div id="other-message">'}<p style="opacity: 0.5;">${id}</p><br> ${value}`);
+	value.className = "container";
+}
+
+function appendText(text) {
+	textarea.innerHTML += `${text}\n</div>`;
+	textarea.scrollTop = textarea.clientHeight;
+}
+
+const socket = io("https://socketio-server.codeisamazing.repl.co");
+const random = Math.round(Math.random() * 99999999999999999999);
+const room = "wow";
+socket.on('connect', () => {
+	socket.emit("join", {room});/*
+	//appendText(`user ${socket.id} (YOU) entered the chat`);
+	appendText(`user ${socket.id} (YOU) entered the chat`);*/
+	socket.on('user-connect', message => {
+		console.log('user-connect', message);
+	});
+	socket.on('message', message => {
+		console.log("message", message);
+	});
+
+	socket.on('direct-message', message => {
+		console.log("direct-message", message);
+	});
+
+	socket.on('user-join', message => {
+		console.log('user-join', message);
+
+		const {id} = message;
+		//appendText(`user ${id} entered the chat`);
+			});
+
+	socket.on('message-room', message => {
+		appendPost(message);
+	});
+
+	socket.on('user-leave', message => {
+		console.log('user-leave', message);
+
+		const {id} = message;
+		//appendText(`user ${id} left the chat`);
+	});
+
+	socket.on('user-disconnect', message => {
+		console.log('user-disconnect', message);
+	});
+});
+
+window.onbeforeunload = function(event) {
+  event.returnValue = "Write something clever here..";
+};
+
+		</script> -->
+
+		<!-- <script>
+
+const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+        const chatSocket = new WebSocket(
+            '{{ i.chat_location }}'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#MyInput').focus();
+        document.querySelector('#MyInput').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#myBtn').click();
+            }
+        };
+
+        document.querySelector('#myBtn').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+        };
+
+</script> -->
+<!--
+<script>
+		//const input2 = document.getElementById("input043");
+		const input2 = document.getElementById("myInput");
+		const button = document.querySelector(`input[post]`);
+		const textarea = document.getElementById("messageareabox");
+
+		function checkInput(event) {
+			button.disabled = (input2.value.length == 0);
+		}
+
+		function post() {
+			if(input2.value.length > 0) {
+				const inputValue = input2.value;
+				/*const message = {
+					id : socket.id,
+					value : inputValue,
+				};*/
+				const message = {
+					id : "{{ first_name }} {{ last_name }}",
+					value : inputValue,
+				};
+
+				socket.emit('message-room', {room, message});
+				appendPost(message);
+
+				input2.value = '';
+			}
+		}
+
+		function appendPost({id, value}) {
+			appendText(`${id == "{{ first_name }} {{ last_name }}"? "<div id='my-message'>":'<div id="other-message">'}<p style="opacity: 0.5;">${id}</p><br> ${value}`);
+			value.className = "container";
+
+			const newsave = texarea.innerHTML;
+
+			localStorage.setItem("{{}}", newsave)
+
+
+		}
+
+		function appendText(text) {
+			textarea.innerHTML += `${text}\n</div>`;
+			textarea.scrollTop = textarea.clientHeight;
+		}
+	</script>
+
+	<script>
+		const socket = io("https://socketio-server.codeisamazing.repl.co");
+		const random = Math.round(Math.random() * 99999999999999999999);
+		const room = "room";
+		socket.on('connect', () => {
+			socket.emit("join", {room});/*
+			//appendText(`user ${socket.id} (YOU) entered the chat`);
+			appendText(`user ${socket.id} (YOU) entered the chat`);*/
+
+			socket.on('user-connect', message => {
+				console.log('user-connect', message);
+			});
+
+			socket.on('message', message => {
+				console.log("message", message);
+			});
+
+			socket.on('direct-message', message => {
+				console.log("direct-message", message);
+			});
+
+			socket.on('user-join', message => {
+				console.log('user-join', message);
+
+				const {id} = message;
+				//appendText(`user ${id} entered the chat`);
+			});
+
+			socket.on('message-room', message => {
+				appendPost(message);
+			});
+
+			socket.on('user-leave', message => {
+				console.log('user-leave', message);
+
+				const {id} = message;
+				//appendText(`user ${id} left the chat`);
+			});
+
+			socket.on('user-disconnect', message => {
+				console.log('user-disconnect', message);
+			});
+		});
+
+		// addEventListener
+
+		// while (true) {
+			// alert("wow");
+		// }
+	</script> -->
+	{% endcomment %}
+<script type="text/javascript">
+		chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/room/1');
+</script>
+</body>
+</html>

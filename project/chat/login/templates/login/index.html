@@ -1,0 +1,54 @@
+	<!-- extend
+	<!--Add form in views-->
+	{% load crispy_forms_tags %}
+	<!-- { block content } -->
+<!--	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	</head>
+		<!-- crispy form form.helper --
+		<div class="c-s">
+			<form method="POST" action="">
+				{% csrf_token %}
+				<fieldset class="f-g">
+					<legend>Sign Up</legend>
+					{{ form|crispy }}
+					<!-- crispy form --
+				</fieldset>
+				<div>
+					<button type="submit">Sign Up</button>
+				</div>
+			</form>
+			<div><hr>
+				<small>Already Have An Account? <a href="{% url 'login' %}">Log in</a></small>
+			</div>
+			</div>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script> -->
+	<!-- { endblock content } -->
+
+		<!-- extend -->
+	{% block content %}
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		{% if messages %}
+			{% for message in messages %}
+			<div class="alert alert-{{ message.tags }}">
+				{{ message }}
+			</div>
+			{% endfor %}
+		{% endif %}
+		<div class="c-s">
+			<form method="POST" action="">
+				{% csrf_token %}
+				<fieldset class="f-g">
+					<legend>Log In</legend>
+					{{ form|crispy }}
+				</fieldset>
+				<div>
+					<button type="submit">Log In</button>
+				</div>
+			</form>
+			<div><hr>
+				<small>Need An Account? <a href="{% url 'sign_up' %}">Sign Up Now</a></small>
+			</div>
+			</div>
+
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+	{% endblock content %}

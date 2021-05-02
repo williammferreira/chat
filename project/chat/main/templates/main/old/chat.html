@@ -1,0 +1,209 @@
+{% extends 'main/base_extended.html' %}
+<script type="text/javascript">
+		chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/room/1')
+</script>
+{% block content %}
+{% for i in objects %}
+<!-- {{ chat.name }} -->
+	{% if i.location_url ==  chat.name %}
+		<h2 style="text-align: center; color: #0055cc;">{{ i.chat_name }}<hr></h2>
+		<div readonly data-post rows=8 id="messageareabox"></div>
+		{{ i.chat_area }} <!--<p>It works!</p> -->
+	{% endif %}
+	<!-- { objects } -->
+{% endfor %}
+
+<!-- <script>
+	// alert("runnng");
+
+// function setCookie(cname,cvalue,exdays) {
+//   var d = new Date();
+//   d.setTime(d.getTime() + (exdays*24*60*60*1000));
+//   var expires = "expires=" + d.toGMTString();
+//   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+// 	location.reload;
+// }
+
+// function getCookie(cname) {
+//   var name = cname + "=";
+//   var decodedCookie = decodeURIComponent(document.cookie);
+//   var ca = decodedCookie.split(';');
+//   for(var i = 0; i < ca.length; i++) {
+//     var c = ca[i];
+//     while (c.charAt(0) == ' ') {
+//       c = c.substring(1);
+//     }
+//     if (c.indexOf(name) == 0) {
+//       return c.substring(name.length, c.length);
+//     }
+//   }
+//   return "";
+// }
+
+// function checkCookie() {
+//   var user=getCookie("username");
+//   if (user != "") {
+//     document.getElementById("name").innerHTML = user;
+//   } else {
+//      user = prompt("What do you want people to call you?","William Ferreira");
+//      if (user != "" && user != null) {
+//        setCookie("username", user, 30);
+//      }
+//   }
+// }
+// alert("runningadfunning");
+var input = document.getElementById("myInput");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("myBtn").click();
+	 document.getElementById("myInput").innerHTML = "";
+  }
+});
+
+// alert("runningadfunning");
+
+function mess(){
+  if (delay && messageInput.value.replace(/\s/g, "") != ""){
+    delay = false;
+    setTimeout(delayReset, 1000);
+    socket.emit("send", messageInput.value);
+    messageInput.value = "";
+  }
+}
+
+document.cookie = "user=index; path=/;";
+
+
+function openTab(tabName) {
+  var i, x;
+  x = document.getElementsByClassName("containerTab");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  document.getElementById(tabName).style.display = "block";
+}
+
+
+
+//const input2 = document.getElementById("input043");
+const input2 = document.getElementById("myInput");
+const button = document.querySelector(`button[data-post]`);
+const textarea = document.getElementById("messageareabox");
+
+function checkInput(event) {
+	button.disabled = (input2.value.length == 0);
+}
+
+function post() {
+	if(input2.value.length > 0) {
+		const inputValue = input2.value;
+		/*const message = {
+			id : socket.id,
+			value : inputValue,
+		};*/
+		const message = {
+			id : getCookie("username"),
+			value : inputValue,
+		};
+		socket.emit('message-room', {room, message});
+		appendPost(message);
+		input2.value = '';
+	}
+}
+
+function appendPost({id, value}) {
+	appendText(`${id == getCookie("username")? "<div id='my-message'>":'<div id="other-message">'}<p style="opacity: 0.5;">${id}</p><br> ${value}`);
+	value.className = "container";
+}
+
+function appendText(text) {
+	textarea.innerHTML += `${text}\n</div>`;
+	textarea.scrollTop = textarea.clientHeight;
+}
+
+const socket = io.connect("https://socketio-server.codeisamazing.repl.co");
+const random = Math.round(Math.random() * 99999999999999999999);
+const room = "wow";
+socket.on('connect', () => {
+	socket.emit("join", {room});/*
+	//appendText(`user ${socket.id} (YOU) entered the chat`);
+	appendText(`user ${socket.id} (YOU) entered the chat`);*/
+	socket.on('user-connect', message => {
+		console.log('user-connect', message);
+	});
+	socket.on('message', message => {
+		console.log("message", message);
+	});
+
+	socket.on('direct-message', message => {
+		console.log("direct-message", message);
+	});
+
+	socket.on('user-join', message => {
+		console.log('user-join', message);
+
+		const {id} = message;
+		//appendText(`user ${id} entered the chat`);
+			});
+
+	socket.on('message-room', message => {
+		appendPost(message);
+	});
+
+	socket.on('user-leave', message => {
+		console.log('user-leave', message);
+
+		const {id} = message;
+		//appendText(`user ${id} left the chat`);
+	});
+
+	socket.on('user-disconnect', message => {
+		console.log('user-disconnect', message);
+	});
+});
+
+window.onbeforeunload = function(event) {
+  alert("wow");
+};
+
+
+</script> -->
+
+<!-- <script>
+
+const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+        };</script> -->
+{% endblock %}
