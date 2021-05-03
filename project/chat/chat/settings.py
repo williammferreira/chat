@@ -33,9 +33,9 @@ ALLOWED_HOSTS = ["chat.codeisamazing.repl.co", "chat--codeisamazing.repl.co", '1
 # Application definition
 
 INSTALLED_APPS = [
-	# 'chat',
-	# 'channels',
-	# 'rest_framework',
+	'chat',
+	'channels',
+	'rest_framework',
 	'clear_cache',
 	'new_chat.apps.NewChatConfig',
 	'crispy_forms',
@@ -43,24 +43,24 @@ INSTALLED_APPS = [
 	'login.apps.LoginConfig',
 	'main.apps.MainConfig',
 	'django.contrib.postgres',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-	'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.common.CommonMiddleware',
-	'django.middleware.cache.FetchFromCacheMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.middleware.security.SecurityMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	# 'django.middleware.cache.UpdateCacheMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	# 'django.middleware.cache.FetchFromCacheMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'chat.urls'
@@ -92,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'chat_db',
 		'USER': 'william',
-		'PASSWORD': 'Fishingisgreat',
+		'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
     }
 }
 

@@ -1,15 +1,14 @@
 import random
 from django.shortcuts import render, redirect
-# from django.http import HttpResponse
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from main.models import chats as all_chats
 from main.models import chats
 from .forms import UserChatsForm
 from .dates import getdatenow
-# from django.utils import timezone
+from django.utils import timezone
 
 # Create your views here.
-# print(timezone.now())
 
 @login_required
 def main(request):
