@@ -2,8 +2,8 @@ import random
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from main.models import chats as all_chats
-from main.models import chats
+from client.models import chats as all_chats
+from client.models import chats
 from .forms import UserChatsForm
 from .dates import getdatenow
 from django.utils import timezone
@@ -32,13 +32,13 @@ def main(request):
 				location_url = url,
 				)
 			chat_1.save()
-			return redirect("main")
+			return redirect("client")
 
 	form = UserChatsForm()
 	UserChatsForm()
 	data = {
 		"form": form,
-		'chat_number': all_chats.objects.all(),
+		'chat_number': len(all_chats.objects.all()),
 		'first_name': request.user.first_name,
 		'last_name': request.user.last_name,
 		'username': request.user.username,

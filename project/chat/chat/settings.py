@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 	'crispy_forms',
 	'sign_up.apps.SignUpConfig',
 	'login.apps.LoginConfig',
-	'main.apps.MainConfig',
+	'client.apps.clientConfig',
 	'django.contrib.postgres',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -146,7 +146,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = 'static/'
 
-LOGIN_REDIRECT_URL = 'main'
+LOGIN_REDIRECT_URL = 'client'
 LOGIN_URL = 'login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

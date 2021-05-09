@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width">
 	<title>Chat</title>
 	<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css" />
-	<!-- <script src='https://cdn.jsdelivr.net/npm/socket.io-client@2.2.0/dist/socket.io.js'></script>
+	<!-- <script src='https://cdn.jsdelivr.net/npm/socket.io-main@2.2.0/dist/socket.io.js'></script>
   <script src='https://socketio-server.codeisamazing.repl.co'></script> -->
 	<!-- <script src="http://chat555-script.codeisamazing.repl.co"></script> -->
 </head>
@@ -289,7 +289,7 @@ function appendPost({id, value}) {
 
 function appendText(text) {
 	textarea.innerHTML += `${text}\n</div>`;
-	textarea.scrollTop = textarea.clientHeight;
+	textarea.scrollTop = textarea.mainHeight;
 }
 
 const socket = io("https://socketio-server.codeisamazing.repl.co");
@@ -416,7 +416,7 @@ const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
 		function appendText(text) {
 			textarea.innerHTML += `${text}\n</div>`;
-			textarea.scrollTop = textarea.clientHeight;
+			textarea.scrollTop = textarea.mainHeight;
 		}
 	</script>
 

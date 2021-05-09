@@ -100,7 +100,7 @@ function appendPost({id, value}) {
 
 function appendText(text) {
 	textarea.innerHTML += `${text}\n</div>`;
-	textarea.scrollTop = textarea.clientHeight;
+	textarea.scrollTop = textarea.mainHeight;
 }
 
 const socket = io("https://socketio-server.codeisamazing.repl.co");

@@ -30,7 +30,7 @@ class main(LoginRequiredMixin, ListView):
 			'chats': all_chats.objects.filter(chat_creator = request.user.username),
 		}
 		print(all_chats.objects.filter(chat_creator = request.user.username).count())
-		return render(request, "main/index.html", data)
+		return render(request, "client/index.html", data)
 
 class ChatsView(DetailView):
 	def get(self, request, *args, **krargs):
