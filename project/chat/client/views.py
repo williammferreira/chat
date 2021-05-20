@@ -33,9 +33,22 @@ class main(LoginRequiredMixin, ListView):
 		return render(request, "client/index.html", data)
 
 class ChatsView(DetailView):
-	def get(self, request, *args, **krargs):
+	def get(self, request, name, *args, **krargs):
+		try:
+			chat_name = all_chats.objects.filter(location_url = name, chat_creator = request.user.username).values('chat_name')[0]['chat_name']
+		except:
+			return render(request, "client/chat-not-found.html", {})
+		chat_length = 0
+		for i in chat_name:
+			chat_length += 1
+		if chat_length >= 20:
+			chat_name = all_chats.objects.filter(location_url = name, chat_creator = request.user.username).values('chat_name')[0]['chat_name'][0:50] + '...'
 		data = {
-			"objects": all_chats.objects.filter(chat_creator = request.user.username),
-			"chat": krargs
+			'chat_number': all_chats.objects.filter(chat_creator = request.user.username).count(),
+			'first_name': request.user.first_name,
+			'last_name': request.user.last_name,
+			'username': request.user.username,
+			'chats': all_chats.objects.filter(chat_creator = request.user.username),
+			'chat_name': chat_name,
 		}
-		return render(request, "main/chat.html", data)
+		return render(request, "client/client.html", data)

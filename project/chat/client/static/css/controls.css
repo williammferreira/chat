@@ -3,7 +3,10 @@
 	background-color: #00019f;
 	text-align: right;
 	padding-right: 10px;
-	display: flex;
+	display: grid;
+  grid-template-columns: 25% auto;
+	grid-template-areas: 'left right';
+
 }
 
 .controls > .new-chat-plus {
@@ -15,4 +18,15 @@
 	margin: auto;
 	margin-right: 0px;
 	cursor: pointer;
+	grid-area: right;
+}
+
+.controls > .chat-name {
+	font-size: 30px;
+	color: white;
+	margin-right: 0px;
+	text-align: center;
+	margin: auto;
+	overflow: hidden;
+	grid-area: right;
 }

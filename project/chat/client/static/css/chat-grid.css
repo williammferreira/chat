@@ -30,3 +30,15 @@
 	width: 90%;
 	align-self: center;
 }
+
+.search-input {
+  margin-top: 10px;
+  border-radius: 10px;
+  height: 25px;
+  width: 90%;
+}
+
+.chat-grid-space {
+  height: 100%;
+  width: 100%;
+}

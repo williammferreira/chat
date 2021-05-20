@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_scripts %}
+  <link rel="stylesheet" href="{% static 'css/chat-input.css' %}">
+  <script src="" charset="utf-8"></script>
+{% endblock %}
+{% block chat_name %}
+  <p class="chat-name"><b>{{ chat_name }}</b></p>
+{% endblock %}
+{% block content %}
+<div class="input-area">
+
+  <input type="text" name="chat-input" class="chat-input" placeholder="Type Here" value="">
+  <input type="submit" name="chat-send" value="send" class="chat-send">
+</div>
+{% endblock %}
