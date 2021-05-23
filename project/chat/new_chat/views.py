@@ -23,6 +23,10 @@ def main(request):
 
 			for i in range(0, 100):
 				url = url + characters[random.randint(0,len(characters)-1)]
+
+			token = '';
+			for i in range(0, 200):
+				token = token + characters[random.randint(0,len(characters)-1)]
 			chat_1 = chats(
 				chat_creator = f"{ request.user.username }",
 				chat_users = users,
@@ -30,6 +34,7 @@ def main(request):
 				chat_date_created = getdatenow(),
 				chat_area = "",
 				location_url = url,
+				token = token,
 				)
 			chat_1.save()
 			return redirect("client")

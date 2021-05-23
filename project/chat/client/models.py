@@ -11,7 +11,8 @@ class chats(models.Model):
 	chat_name = models.TextField()
 	chat_date_created = models.TextField()
 	chat_area = models.TextField()
-	location_url = models.TextField(default="notworking", primary_key=True)
+	location_url = models.TextField()
+	token = models.TextField(primary_key=True)
 	# def __str__(self):
 	# 	return f"""[
 	# 	{ self.chat_name },

@@ -50,5 +50,6 @@ class ChatsView(DetailView):
 			'username': request.user.username,
 			'chats': all_chats.objects.filter(chat_creator = request.user.username),
 			'chat_name': chat_name,
+			'chat_token': all_chats.objects.filter(location_url = name, chat_creator = request.user.username).values('token')[0]['token'],
 		}
 		return render(request, "client/client.html", data)
