@@ -11,7 +11,7 @@
   text-align: center;
   font-size: 1.3rem;
 	line-height: 13px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .chats > .chat > .title {
@@ -41,4 +41,5 @@
 .chat-grid-space {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }

@@ -22,14 +22,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
-        now = timezone.now()
+        rawMonth = timezone.now().strftime("%m")
+        month = rawMonth.replace('01', 'January').replace('02', 'Febuary').replace('03', 'March').replace('04', 'April').replace('05', 'May').replace('06', 'June').replace('07', 'July').replace('08', 'Augest').replace('09', 'September').replace('10', 'October').replace('11', 'November').replace('12', 'December')
+        now = month + ' ' + timezone.now().strftime("%d, %Y")
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'chat_message',
                 'message': message,
-                'user': self.user.username,
-                'datetime': now.isoformat()
+                'username': self.user.username,
+                'datetime': now
             }
         )
 

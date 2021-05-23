@@ -1,8 +1,37 @@
+.messages {
+  height: 100%;
+}
+
+.message-area {
+  height: 100%;
+  overflow: auto;
+  height: 90%;
+}
 .message {
-  height: 300px;
-  color: red;
+  border: 2px solid #dedede;
+  color: #000160;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px auto;
+  word-break: break-all;
+  font-size: 15px;
+  line-height: 20px;
 }
 
 .mymessage {
-  background-color: blue;
+  background-color: rgba(0, 247, 255, 0.753);
+  text-align: left;
+  width: 90%;
+}
+
+.othermessage {
+  background-color: rgba(0, 247, 255, 0.753);
+  text-align: right;
+  width: 90%;
+}
+
+.message-info {
+  font-size: 10px;
+  color: gray;
+  line-height: 10px;
 }

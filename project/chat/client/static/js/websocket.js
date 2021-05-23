@@ -14,11 +14,23 @@ chatSocket.onmessage = function(rawData) {
   if (data.user == document.getElementById('user_username').textContent.slice(1,-1)) {
     document.getElementById('message-area').innerHTML += `
       <div class='message mymessage'>
-        <p>name</p>
-        <p>date</p>
-        <p>message</p>
+        <div class='message-info'>
+          <em>Me</em><br>
+          <em>date</em>
+        </div>
+        <p>myMessage</p>
       </div>
-    `.replace('name', data.user).replace('date', data.datetime).replace('message', data.message);//data.message;
+    `.replace('date', data.datetime).replace('myMessage', data.message);
+  } else {
+    document.getElementById('message-area').innerHTML += `
+      <div class='message othermessage'>
+        <div class='message-info'>
+          <em>user</em><br>
+          <em>date</em>
+        </div>
+        <p>otherMessage</p>
+      </div>
+    `.replace('user', data.username).replace('date', data.datetime).replace('otherMessage', data.message);
   }
 }
 
