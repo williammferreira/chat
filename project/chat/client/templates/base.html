@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/chat-grid.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/controls.css' %}" type="text/css">
     <script src="{% static 'js/jquery/jquery.js' %}" charset="utf-8"></script>
-    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+    <script src="{% static 'js/base.js' %}" charset="utf-8"></script>
     {% block extra_scripts %}
 
     {% endblock %}
@@ -31,11 +31,19 @@
         {% if chat_number == 0 %}
           <p><i><center>You don't have any chats yet.</center></i></p>
         {% endif %}
-        {% for chat in chats %}
-          <div class="chat" onclick="replace('{% url 'chats_view' chat.location_url %}')">
-            <div class="title">{{ chat.chat_name }}</div><br>
-            <div>{{ chat.chat_users }}</div><br>
-            <div>{{ chat.chat_date_created }}</div><br><hr>
+        {% for chat in mychats %}
+          <div class="chat" onclick="replace(`{% url 'chats_view' chat.locationUrl %}`)">
+            <div class="title">{{ chat.chatName }}</div><br>
+            <div>{{ chat.chatUsers }}</div><br>
+            <div>{{ chat.chatDateCreated }}</div><br><hr>
+          </div>
+        {% endfor %}
+        <hr>
+        {% for chat in otherchats %}
+          <div class="chat" onclick="replace(`{% url 'chats_view' chat.locationUrl %}`)">
+            <div class="title">{{ chat.chatName }}</div><br>
+            <div><b>{{ chat.chatCreator }}</b> {{ chat.chatUsers }}</div><br>
+            <div>{{ chat.chatDateCreated }}</div><br><hr>
           </div>
         {% endfor %}
       </div>

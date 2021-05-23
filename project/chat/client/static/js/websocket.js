@@ -11,7 +11,7 @@ function sendMessage() {
 
 chatSocket.onmessage = function(rawData) {
   var data = JSON.parse(rawData.data);
-  if (data.user == document.getElementById('user_username').textContent.slice(1,-1)) {
+  if (data.username == document.getElementById('user_username').textContent.slice(1,-1)) {
     document.getElementById('message-area').innerHTML += `
       <div class='message mymessage'>
         <div class='message-info'>
