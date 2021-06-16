@@ -14,10 +14,11 @@
     {% block extra_scripts %}
 
     {% endblock %}
+    <script src="{% static 'js/functions.js' %}" charset="utf-8"></script>
   </head>
   <body>
     <div class="top-nav">
-      <a href="{% url 'client' %}">Home</a>
+      <a href="{% url 'client' %}">Dashboard</a>
     </div>
 		<div class="controls">
       {% block chat_name %}
@@ -33,25 +34,24 @@
         {% endif %}
         {% for chat in mychats %}
           <div class="chat" onclick="replace(`{% url 'chats_view' chat.locationUrl %}`)">
-            <div class="title">{{ chat.chatName }}</div><br>
-            <div>{{ chat.chatUsers }}</div><br>
+            <div class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</div><br>
+            <div>{{ chat.chatDescription }}</div><br>
             <div>{{ chat.chatDateCreated }}</div><br><hr>
           </div>
         {% endfor %}
-        <hr>
         {% for chat in otherchats %}
           <div class="chat" onclick="replace(`{% url 'chats_view' chat.locationUrl %}`)">
-            <div class="title">{{ chat.chatName }}</div><br>
-            <div><b>{{ chat.chatCreator }}</b> {{ chat.chatUsers }}</div><br>
+            <div class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</div><br>
+            <div>{{ chat.chatDescription }}</div><br>
             <div>{{ chat.chatDateCreated }}</div><br><hr>
           </div>
         {% endfor %}
       </div>
-      <div class="chat-grid-space chat-grid-object">
-        {% block content %}
+        <div class="chat-grid-space chat-grid-object">
+          {% block content %}
 
-        {% endblock content %}
+          {% endblock content %}
+        </div>
       </div>
-    </div>
   </body>
 </html>
