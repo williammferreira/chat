@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 25% auto;
   height: 85%;
+  position: relative;
 }
 
 .chats {

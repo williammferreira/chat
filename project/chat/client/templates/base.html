@@ -11,12 +11,16 @@
     <link rel="stylesheet" href="{% static 'css/controls.css' %}" type="text/css">
     <script src="{% static 'js/jquery/jquery.js' %}" charset="utf-8"></script>
     <script src="{% static 'js/base.js' %}" charset="utf-8"></script>
+    <script src="{% static 'js/notifications.js' %}" charset="utf-8"></script>
     {% block extra_scripts %}
 
     {% endblock %}
     <script src="{% static 'js/functions.js' %}" charset="utf-8"></script>
   </head>
   <body>
+    <div id="notifacations-container">
+      
+    </div>
     <div class="top-nav">
       <a href="{% url 'client' %}">Dashboard</a>
     </div>

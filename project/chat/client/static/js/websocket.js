@@ -2,6 +2,7 @@ const chatSocket = new WebSocket('ws://127.0.0.1:8000/ws/chat/room/' + document.
 username = document.getElementById('username').textContent.slice(1, -1);
 chatSocket.onopen = function () {
   document.getElementById("message-area").scrollTop = document.getElementById("message-area").scrollHeight;
+  sendNotification("connected!");
 }
 
 chatSocket.onmessage = function (rawData) {
@@ -42,11 +43,12 @@ chatSocket.onmessage = function (rawData) {
 
 chatSocket.onclose = function (closeCode) {
   if (closeCode.code == 1000) {
-    document.getElementById('message-area').innerHTML = 'connecting...';
+    sendNotification("connecting...");
   }
 
   else {
-    document.getElementById('message-area').innerHTML = 'The chat socket closed unexpectedly.';
-    console.log(closeCode.code, closeCode.reason)
+    sendNotification("The chat socket closed unexpectedly.", "red", "400px");
+    document.getElementById("message-area").innerHTML = "";
+    console.log(closeCode.code, closeCode.reason);
   }
 }

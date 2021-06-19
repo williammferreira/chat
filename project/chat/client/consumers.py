@@ -26,10 +26,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         number = await self.numChats(text_data_json)
-        await self.updateArea(text_data_json)
         rawMonth = timezone.now().strftime("%m")
         month = rawMonth.replace('01', 'January').replace('02', 'Febuary').replace('03', 'March').replace('04', 'April').replace('05', 'May').replace('06', 'June').replace('07', 'July').replace('08', 'Augest').replace('09', 'September').replace('10', 'October').replace('11', 'November').replace('12', 'December')
-        now = month + ' ' + timezone.now().strftime("%d, %Y")
+        now = month + ' ' + timezone.now().strftime("%d, %Y, ")
+        if (str(timezone.now().strftime("%p")) == "AM"):
+            now = month + ' ' + str(timezone.now().strftime("%d, %Y, %I:%M ")) + "a.m."
+        else:
+            now = month + ' ' + str(timezone.now().strftime("%d, %Y, %I:%M ")) + "p.m."
+        await self.updateArea(text_data_json)
         await self.channel_layer.group_send(
             self.room_group_name,
             {
@@ -46,17 +50,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def updateArea(self, text_data_json):
-        rawMonth = timezone.now().strftime("%m")
-        month = rawMonth.replace('01', 'January').replace('02', 'Febuary').replace('03', 'March').replace('04', 'April').replace('05', 'May').replace('06', 'June').replace('07', 'July').replace('08', 'Augest').replace('09', 'September').replace('10', 'October').replace('11', 'November').replace('12', 'December')
-        now = month + ' ' + timezone.now().strftime("%d, %Y")
-
-        # chats.objects.filter(token = text_data_json['token']).update(chatArea = (chats.objects.filter(token = text_data_json['token']).values('chatArea')[0]['chatArea'] + """#startdiv; class='message mymessage'#end;#startdiv; class='message-info'#end;#em;Me#emend;#break;#em;date#emend;#enddiv;#p;myMessage#endp;#enddiv;""".replace('date', now).replace('myMessage', text_data_json['message'])).encode('utf-8'))
-
-        # chats.objects.filter(token = text_data_json['token']).update(chatArea = (f"{ chats.objects.filter(token = text_data_json['token']).values('chatArea')[0]['chatArea'] }" + '''<div class="message mymessage"><div class="message-info"><em>Me</em><br><em>date</em></div><p>myMessage</p></div>'''.replace('date', now).replace('myMessage', text_data_json['message'])).encode('utf-8'))
-
-        # print(text_data_json['content'])
-        
-        # chats.objects.filter(token = text_data_json['token']).update(chatArea = text_data_json['content'] + "<div class='message mymessage'><div class='message-info'><em>Me</em><br><em>date</em></div><p>myMessage</p></div>".replace('date', now).replace('myMessage', text_data_json['message']))
 
         chat = chats.objects.filter(token = text_data_json['token'])[0]
 

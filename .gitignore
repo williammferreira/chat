@@ -132,3 +132,5 @@ dmypy.json
 
 dump.rdb
 project/chat/.vscode
+
+.vscode/

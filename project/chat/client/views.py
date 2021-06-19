@@ -19,7 +19,7 @@ from .models import chats, messages
 class main(LoginRequiredMixin, ListView):
 	def get(self, request, *args, **krargs):
 		data = {
-			'chat_number': all_chats.objects.filter(chatUsers__contains = request.user.username).count(),
+			'chat_number': chats.objects.filter(chatUsers__contains = request.user.username).count() + chats.objects.filter(chatCreator = request.user.username).count(),
 			'first_name': request.user.first_name,
 			'last_name': request.user.last_name,
 			'username': request.user.username,
