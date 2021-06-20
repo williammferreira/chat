@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 # from .models import Profile
 
 class UserChatsForm(forms.Form):
-	Chat_Name = forms.CharField()
+	Description = forms.CharField()
 	Invites = forms.CharField()
 	class Meta:
 		model = User
-		fields = ['Chat_Name', 'Invites']
+		fields = ['Description', 'Invites']

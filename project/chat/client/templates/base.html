@@ -9,32 +9,53 @@
     <link rel="stylesheet" href="{% static 'css/nav-bar.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/chat-grid.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/controls.css' %}" type="text/css">
+    <script src="{% static 'js/jquery/jquery.js' %}" charset="utf-8"></script>
+    <script src="{% static 'js/base.js' %}" charset="utf-8"></script>
+    <script src="{% static 'js/notifications.js' %}" charset="utf-8"></script>
+    {% block extra_scripts %}
+
+    {% endblock %}
+    <script src="{% static 'js/functions.js' %}" charset="utf-8"></script>
   </head>
   <body>
+    <div id="notifacations-container">
+      
+    </div>
     <div class="top-nav">
-      <a href="{% url 'client' %}">Home</a>
+      <a href="{% url 'client' %}">Dashboard</a>
     </div>
 		<div class="controls">
+      {% block chat_name %}
+
+      {% endblock %}
 			<span class="new-chat-plus" onclick="location.replace(`{% url 'new_chat' %}`)">+<span>
 		</div>
     <div class="chat-grid">
       <div class="chats chat-grid-object">
+        <input type="text" name="" value="" class="search-input" placeholder="search"><hr>
         {% if chat_number == 0 %}
-        <p><i><center>You don't have any chats yet.</center></i></p>
+          <p><i><center>You don't have any chats yet.</center></i></p>
         {% endif %}
-        {% for chat in chats %}
-          <div class="chat" onclick="replace({{ chat.location_url }})">
-            <div class="title">{{ chat.chat_name }}</div><br>
-            <div>{{ chat.chat_users }}</div><br>
-            <div>{{ chat.chat_date_created }}</div><br><hr>
+        {% for chat in mychats %}
+          <div class="chat" onclick="replace(`{% url 'chats_view' chat.locationUrl %}`)">
+            <div class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</div><br>
+            <div>{{ chat.chatDescription }}</div><br>
+            <div>{{ chat.chatDateCreated }}</div><br><hr>
+          </div>
+        {% endfor %}
+        {% for chat in otherchats %}
+          <div class="chat" onclick="replace(`{% url 'chats_view' chat.locationUrl %}`)">
+            <div class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</div><br>
+            <div>{{ chat.chatDescription }}</div><br>
+            <div>{{ chat.chatDateCreated }}</div><br><hr>
           </div>
         {% endfor %}
       </div>
-      <div class="chat-grid-object">
-        {% block content %}
+        <div class="chat-grid-space chat-grid-object">
+          {% block content %}
 
-        {% endblock content %}
+          {% endblock content %}
+        </div>
       </div>
-    </div>
   </body>
 </html>

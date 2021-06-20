@@ -1,23 +1,28 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+import random
 
 # Create your models here.
 
 class chats(models.Model):
-	# user = models.OneToOneField(User, on_delete=models.CASCADE)
-	chat_creator = models.TextField()
-	chat_users = models.TextField()
-	chat_name = models.TextField()
-	chat_date_created = models.TextField()
-	chat_area = models.TextField()
-	location_url = models.TextField(default="notworking", primary_key=True)
-	def __str__(self):
-		return f"""[
-		{ self.chat_name },
-		{ self.chat_creator },
-		{ self.chat_users },
-		{ self.chat_date_created },
-		{ self.chat_area },
-		{ self.location_url }
-		]""" #f"{ self.user.username } Chats"
+	chatCreator = models.TextField()
+	chatUsers = models.TextField()
+	chatDescription = models.TextField()
+	chatDateCreated = models.TextField()
+	locationUrl = models.TextField()
+	token = models.TextField(primary_key=True)
+
+	class Meta:
+		db_table = 'chats'
+
+class messages(models.Model):
+	chat = models.ForeignKey(chats, on_delete=models.CASCADE)
+	message = models.TextField()
+	creator = models.TextField()
+	date = models.DateTimeField()
+	id = models.TextField(primary_key=True)
+	
+
+	class Meta:
+		db_table = 'messages'
