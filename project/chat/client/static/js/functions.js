@@ -14,3 +14,11 @@ function sendMessage() {
 		document.getElementById('chat-input').value = '';
 	}
 }
+
+function searchChats() {
+	searchSocket.send(JSON.stringify(
+		{
+			"input": document.getElementById('searchInput').value,
+		}
+	));
+}

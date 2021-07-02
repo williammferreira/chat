@@ -4,12 +4,11 @@
 	text-align: right;
 	padding-right: 10px;
 	display: grid;
-  grid-template-columns: 25% auto;
+	grid-template-columns: 25% auto;
 	grid-template-areas: 'left right';
-
 }
 
-.controls > .new-chat-plus {
+.controls>.new-chat-plus {
 	background-color: white;
 	border-radius: 100%;
 	text-align: center;
@@ -22,7 +21,7 @@
 }
 
 .controls > .chat-name {
-	font-size: 30px;
+	font-size: 25px;
 	color: white;
 	margin-right: 0px;
 	text-align: center;
