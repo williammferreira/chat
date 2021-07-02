@@ -38,7 +38,7 @@ class ChatsView(LoginRequiredMixin, DetailView):
                     'mychats': all_chats.objects.filter(chatCreator=request.user.username),
                     'otherchats': all_chats.objects.filter(chatUsers__contains=request.user.username),
                 }
-            return render(request, "client/chat-not-found.html", data)
+                return render(request, "client/chat-not-found.html", data)
         chat_length = 0
         for i in chat_name:
             chat_length += 1

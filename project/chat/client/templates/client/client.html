@@ -6,7 +6,6 @@
   {{ chat_token|json_script:"token" }}
   {{ username|json_script:"user_username" }}
   {{ username|json_script:"username" }}
-  <script id="chatAreaRaw" type="application/json">{{ chatArea }}</script>
   <script src="{% static 'js/websocket.js' %}" charset="utf-8"></script>
 {% endblock %}
 {% block chat_name %}
