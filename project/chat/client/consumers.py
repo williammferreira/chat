@@ -72,7 +72,6 @@ class SearchConsumer(AsyncWebsocketConsumer):
         await self.close();
 
     async def receive(self, text_data):
-        print(text_data)
         searchOutput = await self.search(json.loads(text_data)['input'])
         await self.send(text_data=json.dumps(
             {
