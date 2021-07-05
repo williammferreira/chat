@@ -1,3 +1,4 @@
+from client.extensions import *
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -45,8 +46,7 @@ class ChatsView(LoginRequiredMixin, DetailView):
         if chat_length >= 20:
             chat_name = all_chats.objects.filter(locationUrl=name).values(
                 'chatDescription')[0]['chatDescription'][0:50] + '...'
-        token = chats.objects.filter(
-            locationUrl=name).values('token')[0]['token']
+        token = chats.objects.filter(locationUrl=name).values('token')[0]['token']
         chat = chats.objects.filter(token=token)
         data = {
             'chat_number': chats.objects.filter(chatUsers__contains=request.user.username).count() + chats.objects.filter(chatCreator=request.user.username).count(),
@@ -60,3 +60,20 @@ class ChatsView(LoginRequiredMixin, DetailView):
             'messages': messages.objects.filter(chat=chat[0]),
         }
         return render(request, "client/client.html", data)
+
+
+class SettingsView(LoginRequiredMixin, DetailView):
+    configured_settings = {
+        
+    }
+    def get(self, request):
+        array_actions = dicts()
+        data = {
+            'chat_number': chats.objects.filter(chatUsers__contains=request.user.username).count() + chats.objects.filter(chatCreator=request.user.username).count(),
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'username': request.user.username,
+            'mychats': all_chats.objects.filter(chatCreator=request.user.username),
+            'otherchats': all_chats.objects.filter(chatUsers__contains=request.user.username),
+        }
+        return render(request, 'client/settings.html', array_actions.add(self.configured_settings, data))
