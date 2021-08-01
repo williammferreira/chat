@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.urls import path, include
 from client import views as client
-from .views import ChatsView
+from .views import ChatsView, SettingsView
 
 urlpatterns = [
 	path('', client.main.as_view(), name="client"),
-	path('chats/<str:name>', ChatsView.as_view(), name="chats_view")
+	path('chats/<str:name>', ChatsView.as_view(), name="chats_view"),
+    path('settings', SettingsView.as_view(), name="settings_view"),
 ]
