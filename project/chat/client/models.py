@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 import random
 
 # Create your models here.
@@ -12,6 +13,9 @@ class chats(models.Model):
 	chatDateCreated = models.TextField()
 	locationUrl = models.TextField()
 	token = models.TextField(primary_key=True)
+
+	def get_absolute_url(self):
+		return reverse("client:detail", args=[self.locationUrl])
 
 	class Meta:
 		db_table = 'chats'

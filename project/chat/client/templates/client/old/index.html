@@ -73,7 +73,7 @@
 <!-- {{ i.chat_name }} -->
 <script>
 	function sub() {
-		location.replace('{% url "chats_view" i.location_url %}')
+		location.replace('{% url "client:detail" i.location_url %}')
 	}
 </script>
 {% endfor %}

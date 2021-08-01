@@ -9,5 +9,4 @@ def getdatenow():
 	d = int(c)
 	months = ["", "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
 	e = months[d] + " " + b[1] + " " + b[2]
-	print(e)
 	return e

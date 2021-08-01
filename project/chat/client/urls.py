@@ -17,7 +17,9 @@ from django.urls import path, include
 from client import views as client
 from .views import ChatsView
 
+app_name = "client"
+
 urlpatterns = [
-	path('', client.main.as_view(), name="client"),
-	path('chats/<str:name>', ChatsView.as_view(), name="chats_view")
+	path('', client.main.as_view(), name="home"),
+	path('chats/<str:name>', ChatsView.as_view(), name="detail"),
 ]

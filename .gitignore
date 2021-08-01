@@ -134,3 +134,7 @@ dump.rdb
 project/chat/.vscode
 
 .vscode/
+
+.vs/ProjectSettings.json
+
+.vs/slnx.sqlite
