@@ -23,7 +23,7 @@
       
     </div>
     <div class="top-nav">
-      <a href="{% url 'client' %}">Dashboard</a>
+      <a href="{% url 'client:home' %}">Dashboard</a>
     </div>
 		<div class="controls">
       {% block chat_name %}
@@ -39,14 +39,14 @@
         {% endif %}
         <div id="chat-messages">
           {% for chat in mychats %}
-            <div class="chat" onclick="replace(`{% url 'chats_view' chat.locationUrl %}`)">
+            <div class="chat" onclick="replace(`{% url 'client:detail' chat.locationUrl %}`)">
               <div class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</div><br>
               <div>{{ chat.chatDescription }}</div><br>
               <div>{{ chat.chatDateCreated }}</div><br><hr>
             </div>
           {% endfor %}
           {% for chat in otherchats %}
-            <div class="chat" onclick="replace(`{% url 'chats_view' chat.locationUrl %}`)">
+            <div class="chat" onclick="replace(`{% url 'client:detail' chat.locationUrl %}`)">
               <div class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</div><br>
               <div>{{ chat.chatDescription }}</div><br>
               <div>{{ chat.chatDateCreated }}</div><br><hr>
