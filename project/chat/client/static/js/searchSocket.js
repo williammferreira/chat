@@ -6,8 +6,6 @@ searchSocket.onopen = function () {
 
 searchSocket.onmessage = function (rawData) {
   var data = JSON.parse(rawData.data);
-  // console.log(data.output[2])
-  // console.log(data.output)
   var chats = ``;
   if ((data.output).length == 0) {
     chats = `<p class='no-chats-search' style='font-size: 15px;'><i>No chats match your search.</i></p>`;
