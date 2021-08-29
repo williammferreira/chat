@@ -13,3 +13,10 @@
 .top-nav a:hover {
   color: #4041a0;
 }
+
+.profile {
+  float: right;
+  height: 100%;
+  width: 200px;
+  background-color: blue;
+}
