@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
-import random
+import uuid
 
 # Create your models here.
 
@@ -35,7 +35,12 @@ class messages(models.Model):
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	id = models.AutoField(primary_key=True);
+	id = models.UUIDField(primary_key=True, editable=False, unique=True, default=uuid.uuid4)
+	theme = models.CharField(default="light", max_length=5)
+
+	class Meta:
+		db_table = 'profile'
+
 
 
 
