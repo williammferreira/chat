@@ -17,6 +17,7 @@ class main(LoginRequiredMixin, ListView):
             'username': request.user.username,
             'mychats': all_chats.objects.filter(chatCreator=request.user.username),
             'otherchats': all_chats.objects.filter(chatUsers__contains=request.user.username),
+            'profile': request.user.profile,
         }
         return render(request, "client/index.html", data)
 
@@ -75,5 +76,7 @@ class SettingsView(LoginRequiredMixin, DetailView):
             'username': request.user.username,
             'mychats': all_chats.objects.filter(chatCreator=request.user.username),
             'otherchats': all_chats.objects.filter(chatUsers__contains=request.user.username),
+            'profile': request.user.profile,
+            'auth_form': UserEditForm(instance=request.user),
         }
         return render(request, 'client/settings.html', array_actions.add(self.configured_settings, data))
