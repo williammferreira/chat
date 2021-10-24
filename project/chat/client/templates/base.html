@@ -4,16 +4,19 @@
   <head>
     <title>Chat</title>
     <meta charset="utf-8">
+    <meta name="content-type" content="utf-8">
     <meta name="description" content="A chat site"/>
     <meta name="keywords" content="chat, communication"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/nav-bar.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/chat-grid.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/controls.css' %}" type="text/css">
-    <script src="{% static 'js/jquery/jquery.js' %}" charset="utf-8"></script>
-    <script src="{% static 'js/base.js' %}" charset="utf-8"></script>
-    <script src="{% static 'js/notifications.js' %}" charset="utf-8"></script>
-    <script src="{% static 'js/searchSocket.js' %}" charset="utf-8"></script>
+    <script src="{% static 'js/jquery/jquery.js' %}" charset="utf-8" type="text/javascript"></script>
+    <script src="{% static 'js/base.js' %}" charset="utf-8" type="text/javascript"></script>
+    <script src="{% static 'js/notifications.js' %}" charset="utf-8" type="text/javascript"></script>
+    <script src="{% static 'js/searchSocket.js' %}" charset="utf-8" type="text/javascript"></script>
     {% block extra_scripts %}
 
     {% endblock %}
@@ -23,9 +26,21 @@
       
     </div>
     <div class="top-nav">
-      <a href="{% url 'client' %}">Dashboard</a>
+      <a href="{% url 'client:home' %}">Dashboard</a>
+      <div class="profile">
+        <div class="title" onclick="replace(`{% url 'client:settings_view' %}`);">
+          <p>
+            {{ username|truncatechars:15 }}
+          </p>
+        </div>
+      </div>
     </div>
 		<div class="controls">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="django-message {% if message.tags %}django-message-{{ message.tags }}{% endif %}"><span>{{ message }}</span></div>
+        {% endfor %}
+      {% endif %}
       {% block chat_name %}
 
       {% endblock %}
@@ -39,14 +54,14 @@
         {% endif %}
         <div id="chat-messages">
           {% for chat in mychats %}
-            <div class="chat" onclick="replace(`{% url 'chats_view' chat.locationUrl %}`)">
+            <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
               <div class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</div><br>
               <div>{{ chat.chatDescription }}</div><br>
               <div>{{ chat.chatDateCreated }}</div><br><hr>
             </div>
           {% endfor %}
           {% for chat in otherchats %}
-            <div class="chat" onclick="replace(`{% url 'chats_view' chat.locationUrl %}`)">
+            <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
               <div class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</div><br>
               <div>{{ chat.chatDescription }}</div><br>
               <div>{{ chat.chatDateCreated }}</div><br><hr>

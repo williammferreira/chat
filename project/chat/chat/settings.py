@@ -14,9 +14,12 @@ from pathlib import Path
 
 import os
 
+import dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+dotenv.load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -37,8 +40,9 @@ INSTALLED_APPS = [
 	'channels',
 	'rest_framework',
 	'clear_cache',
-	 'django_extensions',
+	'django_extensions',
 	'crispy_forms',
+	'widget_tweaks',
 	'new_chat.apps.NewChatConfig',
 	'sign_up.apps.SignUpConfig',
 	'login.apps.LoginConfig',
@@ -90,7 +94,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'chat_db',
-		'USER': 'william',
+		'USER': 'chat_db',
 		'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
     }
 }
@@ -153,6 +157,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 
 LOGIN_REDIRECT_URL = 'client'
+
 LOGIN_URL = 'login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -11,7 +11,7 @@ def main(request):
 			form.save()
 			username = form.cleaned_data.get('username')
 			messages.success(request, f'Account created for { username }! Please Log In.')
-			return redirect('client')
+			return redirect('client:home')
 		# else:
 		# 	return redirect('sign_up')
 	else:

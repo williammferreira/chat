@@ -36,7 +36,7 @@ def main(request):
 				token = token,
 				)
 			chat_1.save()
-			return redirect("client")
+			return redirect("client:home")
 
 	form = UserChatsForm()
 	UserChatsForm()

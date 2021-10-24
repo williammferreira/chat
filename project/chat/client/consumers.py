@@ -1,13 +1,13 @@
 import json
 from django.utils.crypto import get_random_string
-from channels.generic.websocket import AsyncWebsocketConsumer, WebsocketConsumer
-from channels.consumer import SyncConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
-from .models import chats, messages
+from .models import chats, messages, Profile
 
 class ChatConsumer(AsyncWebsocketConsumer):
     channel_layer_alias = "chatConsumer"
+
     async def connect(self):
         self.user = self.scope['user']
         # self.id = self.scope['url_route']['kwargs']['room']
@@ -64,6 +64,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 class SearchConsumer(AsyncWebsocketConsumer):
     channel_layer_alias = "searchConsumer"
+
     async def connect(self):
         self.user = self.scope["user"]
         await self.accept()
@@ -83,3 +84,23 @@ class SearchConsumer(AsyncWebsocketConsumer):
     def search(self, searchTerms):
         search = (list(chats.objects.filter(chatCreator = self.user.username, chatDescription__contains = searchTerms).values_list()) + list(chats.objects.filter(chatUsers__contains = self.user.username, chatDescription__contains = searchTerms).values_list()))
         return search
+
+class SettingsConsumer(AsyncWebsocketConsumer):
+    channel_layer_alias = "settingsConsumer"
+
+    async def connect(self):
+        self.user = self.scope["user"]
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        await self.close();
+
+    async def receive(self, text_data):
+        json_data = json.loads(text_data)
+        await self.setSetting(json_data["setting"], json_data["value"])
+    
+    @database_sync_to_async
+    def setSetting(self, setting, value):
+        if setting == "theme":
+            if value == "light" or value == "dark":
+                Profile.objects.filter(user=self.user).update(theme=value)
