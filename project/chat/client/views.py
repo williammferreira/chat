@@ -78,4 +78,10 @@ class SettingsView(LoginRequiredMixin, DetailView):
             'profile': request.user.profile,
             'auth_form': UserEditForm(instance=request.user),
         }
-        return render(request, 'client/settings.html', array_actions.add(self.configured_settings, data))
+        return render(request, 'client/settings.html', data)
+    def post(self, request):
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, "Account changed successfully!")
+            return redirect('client:settings_view')
