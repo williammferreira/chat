@@ -36,6 +36,11 @@
       </div>
     </div>
 		<div class="controls">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="django-message {% if message.tags %}django-message-{{ message.tags }}{% endif %}"><span>{{ message }}</span></div>
+        {% endfor %}
+      {% endif %}
       {% block chat_name %}
 
       {% endblock %}

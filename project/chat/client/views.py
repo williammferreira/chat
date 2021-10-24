@@ -1,9 +1,12 @@
 from client.extensions import *
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import chats as all_chats
-from .models import chats, messages
+from .models import chats
+from .models import messages as chatMessages
+from .forms import UserEditForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -58,17 +61,13 @@ class ChatsView(LoginRequiredMixin, DetailView):
             'chat_name': chat_name,
             'chat_token': token,
             'otherchats': all_chats.objects.filter(chatUsers__contains=request.user.username),
-            'messages': messages.objects.filter(chat=chat[0]),
+            'messages': chatMessages.objects.filter(chat=chat[0]),
         }
         return render(request, "client/client.html", data)
 
 
 class SettingsView(LoginRequiredMixin, DetailView):
-    configured_settings = {
-        
-    }
     def get(self, request):
-        array_actions = dicts()
         data = {
             'chat_number': chats.objects.filter(chatUsers__contains=request.user.username).count() + chats.objects.filter(chatCreator=request.user.username).count(),
             'first_name': request.user.first_name,
