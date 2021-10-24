@@ -15,9 +15,6 @@ window.cancelAnimFrame = (function () {
             window.setTimeout(callback, 1000 / 60);
         };
 })();
-
-
-
 var interval;
 
 function sendNotification(text, color = "#39FF14", width = "150px", interval = 1) {

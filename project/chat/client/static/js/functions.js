@@ -22,3 +22,7 @@ function searchChats() {
 		}
 	));
 }
+
+function executeAsync(func) {
+    setTimeout(func, 0);
+}

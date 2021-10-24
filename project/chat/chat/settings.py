@@ -40,8 +40,9 @@ INSTALLED_APPS = [
 	'channels',
 	'rest_framework',
 	'clear_cache',
-	 'django_extensions',
+	'django_extensions',
 	'crispy_forms',
+	'widget_tweaks',
 	'new_chat.apps.NewChatConfig',
 	'sign_up.apps.SignUpConfig',
 	'login.apps.LoginConfig',
@@ -156,6 +157,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 
 LOGIN_REDIRECT_URL = 'client'
+
 LOGIN_URL = 'login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
