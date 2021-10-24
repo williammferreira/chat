@@ -61,7 +61,7 @@ class ChatsView(LoginRequiredMixin, DetailView):
             'chat_name': chat_name,
             'chat_token': token,
             'otherchats': all_chats.objects.filter(chatUsers__contains=request.user.username),
-            'messages': chatMessages.objects.filter(chat=chat[0]),
+            'chatMessages': chatMessages.objects.filter(chat=chat[0]),
         }
         return render(request, "client/client.html", data)
 
