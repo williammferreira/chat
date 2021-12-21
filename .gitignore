@@ -138,3 +138,5 @@ project/chat/.vscode
 .vs/ProjectSettings.json
 
 .vs/slnx.sqlite
+
+project/chat/static/
