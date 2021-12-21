@@ -1,6 +1,0 @@
-To fix the django database error I tryed this:
-	I tryed clearing the django and browser cache.
-	I tryed taking out everything that isn't necessary.
-	I tryed clearing the database tabe and then clearing the cache.
-	
-	None of these work.
