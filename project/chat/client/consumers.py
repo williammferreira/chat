@@ -55,7 +55,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         chat = chats.objects.filter(token = text_data_json['token'])[0]
 
-        messages.objects.create(chat=chat, message=text_data_json['message'], id=get_random_string(length=1000), creator=self.user.username, date=timezone.now())
+        messages.objects.create(chat=chat, message=text_data_json['message'], id=get_random_string(length=1000), creator=self.user.username, date=timezone.now(), token = chat.token)
 
     @database_sync_to_async
     def numChats(self, text_data_json):
