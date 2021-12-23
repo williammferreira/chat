@@ -1,20 +1,20 @@
-const chatSocket = new WebSocket('ws://127.0.0.1:8000/ws/chat/' + document.getElementById('token').textContent.substring(1, (document.getElementById('token').textContent.length - 1)));
-username = document.getElementById('username').textContent.slice(1, -1);
+const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/' + $('#token').textContent.substring(1, ($('#token').textContent.length - 1)));
+username = $('#username').textContent.slice(1, -1);
 chatSocket.onopen = function () {
-  document.getElementById("message-area").scrollTop = document.getElementById("message-area").scrollHeight;
+  $("#message-area").scrollTop = $("#message-area").scrollHeight;
   sendNotification("connected!");
 }
 
 chatSocket.onmessage = function (rawData) {
   var data = JSON.parse(rawData.data);
   if (data.number == 0) {
-    document.getElementById('message-area').innerHTML = '';
+    $('#message-area').innerHTML = '';
   }
 
 
   if (data.creator == username) {
     var creator = 'Me';
-    document.getElementById('message-area').innerHTML += `
+    $('#message-area').innerHTML += `
       <div class='message mymessage'>
         <div class='message-info'>
           <em>` + creator + `</em><br>
@@ -23,10 +23,10 @@ chatSocket.onmessage = function (rawData) {
         <p>` + data.message + `</p>
       </div>
     `;
-    document.getElementById("message-area").scrollTop = document.getElementById("message-area").scrollHeight;
+    $("#message-area").scrollTop = $("#message-area").scrollHeight;
   } else {
     var creator = data.creator;
-    document.getElementById('message-area').innerHTML += `
+    $('#message-area').innerHTML += `
       <div class='message othermessage'>
         <div class='message-info-other'>
           <em>` + creator + `</em><br>
@@ -35,7 +35,7 @@ chatSocket.onmessage = function (rawData) {
         <p>` + data.message + `</p>
       </div>
     `;
-    document.getElementById("message-area").scrollTop = document.getElementById("message-area").scrollHeight;
+    $("#message-area").scrollTop = $("#message-area").scrollHeight;
   }
 
 }
@@ -47,7 +47,7 @@ chatSocket.onclose = function (closeCode) {
 
   else {
     sendNotification("The chat socket closed unexpectedly.", "red", "400px");
-    document.getElementById("message-area").innerHTML = "";
+    $("#message-area").innerHTML = "";
     console.log(closeCode.code, closeCode.reason);
   }
 }

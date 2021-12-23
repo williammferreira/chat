@@ -23,11 +23,12 @@ class chats(models.Model):
 		db_table = 'chats'
 
 class messages(models.Model):
-	chat = models.ForeignKey(chats, on_delete=models.CASCADE)
+	chat = models.ForeignKey(chats, on_delete=models.CASCADE, db_column="chat")
 	message = models.TextField()
 	creator = models.TextField()
 	date = models.DateTimeField()
 	id = models.TextField(primary_key=True)
+	token = models.TextField()
 	
 
 	class Meta:
