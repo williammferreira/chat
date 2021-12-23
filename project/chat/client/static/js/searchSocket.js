@@ -1,4 +1,4 @@
-const searchSocket = new WebSocket('ws://127.0.0.1:8000/ws/search');
+const searchSocket = new WebSocket('ws://' + window.location.host + '/ws/search');
 
 searchSocket.onopen = function () {
   sendNotification("connected!");
@@ -21,5 +21,5 @@ searchSocket.onmessage = function (rawData) {
     `;
     }
   }
-  document.getElementById('chat-messages').innerHTML = chats;
+  $('#chat-messages').innerHTML = chats;
 }

@@ -21,7 +21,7 @@ function sendNotification(text, color = "#39FF14", width = "150px", interval = 1
     var element = document.createElement("SPAN");
     var div = document.createElement("div");
     div.appendChild(element);
-    document.getElementById("notifacations-container").appendChild(div);
+    $("#notifacations-container").appendChild(div);
     div.style.width = width;
     div.style.height = "40px";
     div.style.color = "white";

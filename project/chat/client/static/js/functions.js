@@ -4,21 +4,21 @@ function HTMLDecode(input) {
 }
 
 function sendMessage() {
-	if (document.getElementById('chat-input').value != '') {
+	if ($('#chat-input').value != '') {
 		chatSocket.send(JSON.stringify(
 			{
-				'message': document.getElementById('chat-input').value,
-				'token': document.getElementById('token').textContent.substring(1, (document.getElementById('token').textContent.length - 1)),
+				'message': $('#chat-input').value,
+				'token': $('#token').textContent.substring(1, ($('#token').textContent.length - 1)),
 			}
 		));
-		document.getElementById('chat-input').value = '';
+		$('#chat-input').value = '';
 	}
 }
 
 function searchChats() {
 	searchSocket.send(JSON.stringify(
 		{
-			"input": document.getElementById('searchInput').value,
+			"input": $('#searchInput').value,
 		}
 	));
 }

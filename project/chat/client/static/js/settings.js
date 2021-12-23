@@ -6,7 +6,7 @@ function themeSlider(theme) {
         // themeLabelDark
         executeAsync(function() {
             var animationId;
-            var label = document.getElementById("themeLabelDark");
+            var label = $("#themeLabelDark");
             var rgb = 0;
             function fade() {
                 if (window.getComputedStyle(label, null).color == "rgb(255, 255, 255)") {
@@ -24,7 +24,7 @@ function themeSlider(theme) {
         // themeLabelLight
         executeAsync(function() {
             var animationId;
-            var label = document.getElementById("themeLabelLight");
+            var label = $("#themeLabelLight");
             var rgb = 255;
             function fade() {
                 if (window.getComputedStyle(label, null).color == "rgb(0, 0, 0)") {
@@ -41,10 +41,10 @@ function themeSlider(theme) {
         
         // themeSlider
         executeAsync(function() {
-            var speed = 10;
-            node = document.getElementById("themeSlider");
+            var speed = 20;
+            node = $("#themeSlider");
             var pos = parseInt(String(window.getComputedStyle(node, null).marginRight).slice(0, -2));
-            var endPos = document.getElementById("themeLabel").offsetWidth;
+            var endPos = $("#themeLabel").offsetWidth;
             var animationId;
             function animate() {
                 if (pos >= (endPos / 2)) {
@@ -66,7 +66,7 @@ function themeSlider(theme) {
         // themeLabelDark
         executeAsync(function() {
             var animationId;
-            var label = document.getElementById("themeLabelDark");
+            var label = $("#themeLabelDark");
             var rgb = 255;
             function fade() {
                 if (window.getComputedStyle(label, null).color == "rgb(0, 0, 0)") {
@@ -84,7 +84,7 @@ function themeSlider(theme) {
         // themeLabelLight
         executeAsync(function() {
             var animationId;
-            var label = document.getElementById("themeLabelLight");
+            var label = $("#themeLabelLight");
             var rgb = 0;
             function fade() {
                 if (window.getComputedStyle(label, null).color == "rgb(255, 255, 255)") {
@@ -101,10 +101,10 @@ function themeSlider(theme) {
         
         // themeSlider
         executeAsync(function() {
-            var speed = 10;
-            node = document.getElementById("themeSlider");
+            var speed = 20;
+            node = $("#themeSlider");
             var pos = 0;
-            var endPos = document.getElementById("themeLabel").offsetWidth;
+            var endPos = $("#themeLabel").offsetWidth;
             var animationId;
             function animate() {
                 if (pos >= (endPos / 2)) {
