@@ -23,7 +23,7 @@ class Chats(models.Model):
 		db_table = 'chats'
 
 class messages(models.Model):
-	chat = models.ForeignKey(chats, on_delete=models.CASCADE, db_column="chat")
+	chat = models.ForeignKey(Chats, on_delete=models.CASCADE, db_column="chat")
 	message = models.TextField()
 	creator = models.TextField()
 	date = models.DateTimeField()
