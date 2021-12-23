@@ -1,4 +1,9 @@
-const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/' + $('#token').textContent.substring(1, ($('#token').textContent.length - 1)));
+if (window.location.protocol === "https") {
+  const searchSocket = new WebSocket('wss://' + window.location.host + '/ws/chat/' + $('#token').textContent.substring(1, ($('#token').textContent.length - 1)));
+} else {
+  const searchSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/' + $('#token').textContent.substring(1, ($('#token').textContent.length - 1)));
+}
+
 username = $('#username').textContent.slice(1, -1);
 chatSocket.onopen = function () {
   $("#message-area").scrollTop = $("#message-area").scrollHeight;
