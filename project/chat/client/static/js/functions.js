@@ -26,3 +26,13 @@ function searchChats() {
 function executeAsync(func) {
     setTimeout(func, 0);
 }
+
+function fitText(element, space) {
+	var parent = element.parentNode;
+
+	element.style.fontSize = parseInt(parent.offsetHeight - space) + "px";
+}
+
+function $(name) {
+	return document.querySelector(name);
+}
