@@ -1,4 +1,9 @@
-var settingSocket = new WebSocket("ws://" + window.location.host + "/ws/settings");
+if (window.location.protocol === "https") {
+    const searchSocket = new WebSocket('wss://' + window.location.host + '/ws/search');
+} else {
+    const searchSocket = new WebSocket('ws://' + window.location.host + '/ws/settings');
+}
+
 var theme = "";
 
 function themeSlider(theme) {
