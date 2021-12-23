@@ -2,8 +2,8 @@ import random
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from client.models import chats as all_chats
-from client.models import chats
+from client.models import Chats as all_chats
+from client.models import Chats
 from .forms import UserChatsForm
 from .dates import getdatenow
 from django.utils import timezone
