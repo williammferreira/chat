@@ -140,3 +140,5 @@ project/chat/.vscode
 .vs/slnx.sqlite
 
 project/chat/static/
+
+Pipfile.lock
