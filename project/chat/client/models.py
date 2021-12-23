@@ -8,7 +8,7 @@ import uuid
 
 # Create your models here.
 
-class chats(models.Model):
+class Chats(models.Model):
 	chatCreator = models.TextField()
 	chatUsers = models.TextField()
 	chatDescription = models.TextField()

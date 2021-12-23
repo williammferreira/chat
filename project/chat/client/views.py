@@ -2,8 +2,8 @@ from client.extensions import *
 from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import chats as all_chats
-from .models import chats
+from .models import Chats as all_chats
+from .models import Chats
 from .models import messages as chatMessages
 from .forms import UserEditForm
 from django.contrib import messages
