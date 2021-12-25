@@ -2,8 +2,8 @@ import random
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from client.models import chats as all_chats
-from client.models import chats
+from client.models import Chats as all_chats
+from client.models import Chats as chats
 from .forms import UserChatsForm
 from .dates import getdatenow
 from django.utils import timezone
@@ -24,7 +24,7 @@ def main(request):
 			for i in range(0, 100):
 				url = url + characters[random.randint(0,len(characters)-1)]
 
-			token = '';
+			token = ''
 			for i in range(0, 200):
 				token = token + characters[random.randint(0,len(characters)-1)]
 			chat_1 = chats(
