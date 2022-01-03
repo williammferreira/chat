@@ -138,3 +138,15 @@ project/chat/.vscode
 .vs/ProjectSettings.json
 
 .vs/slnx.sqlite
+
+project/chat/static/
+
+Pipfile.lock
+
+project/chat/nohup.out
+
+project/chat/ssl/chat.crt
+
+project/chat/ssl/chat.key
+
+supervisord.conf

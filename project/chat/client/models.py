@@ -8,7 +8,7 @@ import uuid
 
 # Create your models here.
 
-class chats(models.Model):
+class Chats(models.Model):
 	chatCreator = models.TextField()
 	chatUsers = models.TextField()
 	chatDescription = models.TextField()
@@ -23,11 +23,12 @@ class chats(models.Model):
 		db_table = 'chats'
 
 class messages(models.Model):
-	chat = models.ForeignKey(chats, on_delete=models.CASCADE)
+	chat = models.ForeignKey(Chats, on_delete=models.CASCADE, db_column="chat")
 	message = models.TextField()
 	creator = models.TextField()
 	date = models.DateTimeField()
 	id = models.TextField(primary_key=True)
+	token = models.TextField()
 	
 
 	class Meta:

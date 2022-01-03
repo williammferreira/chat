@@ -26,10 +26,10 @@
       
     </div>
     <div class="top-nav">
-      <a href="{% url 'client:home' %}">Dashboard</a>
+      <a href="{% url 'client:home' %}" id="dashboardLink">Dashboard</a>
       <div class="profile">
         <div class="title" onclick="replace(`{% url 'client:settings_view' %}`);">
-          <p>
+          <p id="settingsUsername">
             {{ username|truncatechars:15 }}
           </p>
         </div>
@@ -76,5 +76,6 @@
         </div>
       </div>
       <script src="{% static 'js/functions.js' %}" charset="utf-8"></script>
+      <script src="{% static 'js/onLoad.js' %}" charset="utf-8"></script>
   </body>
 </html>
