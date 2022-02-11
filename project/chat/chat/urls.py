@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from home import views as home
-from sign_up import views as sign_up
 from new_chat import views as new_chat
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.auth import views as auth_views
@@ -25,9 +24,8 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     path("favicon.ico", RedirectView.as_view(url=staticfiles_storage.url("media/favicon.jpg"))),
     path('admin/', admin.site.urls),
-	path('', home.main, name="home"),
+	path('', include('home.urls', namespace="home")),
 	path('~/', include('client.urls', namespace='client')),
-	path('login/', auth_views.LoginView.as_view(template_name='login/index.html'), name='login'),
-	path('signup', sign_up.main, name="sign_up"),
+	path('account/', include('account.urls', namespace="account")),
 	path('newchat', new_chat.main, name="new_chat"),
 ]

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 	'widget_tweaks',
 	'new_chat.apps.NewChatConfig',
 	'client.apps.clientConfig',
+	'home.apps.HomeConfig',
 	'account.apps.AccountConfig',
 	'django.contrib.postgres',
 	'django.contrib.admin',
@@ -139,7 +140,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-LOGIN_REDIRECT_URL = 'client'
+LOGIN_REDIRECT_URL = 'client:home'
 
 LOGIN_URL = 'account:login'
 

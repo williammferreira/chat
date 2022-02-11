@@ -70,7 +70,7 @@ class SearchConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
-        await self.close();
+        await self.close()
 
     async def receive(self, text_data):
         searchOutput = await self.search(json.loads(text_data)['input'])
