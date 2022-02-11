@@ -38,9 +38,8 @@ INSTALLED_APPS = [
 	'crispy_forms',
 	'widget_tweaks',
 	'new_chat.apps.NewChatConfig',
-	'sign_up.apps.SignUpConfig',
-	'login.apps.LoginConfig',
 	'client.apps.clientConfig',
+	'account.apps.AccountConfig',
 	'django.contrib.postgres',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -142,7 +141,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 LOGIN_REDIRECT_URL = 'client'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'account:login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
