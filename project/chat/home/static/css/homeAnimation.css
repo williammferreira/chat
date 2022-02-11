@@ -1,0 +1,119 @@
+.beginningAnimationContainer {
+    font-weight: 500;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    background-color: black;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+    display: table;
+    z-index: 10;
+    animation-name: fadeOut;
+    animation-fill-mode: forwards;
+    animation-duration: 3s;
+}
+
+body {
+    overflow: hidden;
+}
+
+.beginningAnimation {
+    background: url("/static/images/logo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation-name: fadeInAndOut;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    -webkit-animation-name: fadeInAndOut;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-fill-mode: forwards;
+    text-align: center;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+/* .circle {
+    background: radial-gradient(circle at calc(50%), #06e1f536 0%, #004cff15 40%, #002e9907 65%, #002e9907 ,  black 80%);
+    background: -webkit-radial-gradient(ellipse at center, #06e1f536 0%, #004cff15 40%, black 60%);
+    background: -moz-radial-gradient(ellipse at center, #06e1f536 0%, #004cff15 40%, black 60%);
+    background: -o-radial-gradient(ellipse at center, #06e1f536 0%, #004cff15 40%, black 60%);
+    width: 50%;
+    color: #2600ff;
+    height: 50%;
+    margin: 0 auto;
+    z-index: 0;
+    display: flex;
+    display: -ms-flexbox;
+    /* border-radius: 50%; *
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    shape-outside: circle();
+    clip-path: circle();
+} */
+
+.beginningAnimationContainer span {
+    /* background: #004dff; */
+    /* text-shadow: 2px 2px 20px #06e1f5; */
+    vertical-align: middle;
+    display: table-cell;
+    text-shadow: 1px 1px 1px black, 0 0 25px #0066ff, 0 0 25px #0066ff, 0 0 25px #0066ff, 0 0 25px #0066ff;
+    color: #008cff;
+    opacity: 1;
+    /* background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 1;
+    position: absolute; */
+    animation-name: fadeLogo;
+    animation-duration: 3s;
+}
+
+@keyframes fadeLogo {
+    0% {
+        opacity: 0;
+        font-size: 6em;
+    }
+
+    50% {
+        opacity: 1;
+        font-size: 8em;
+    }
+
+    100% {
+        opacity: 0;
+        font-size: 10em;
+    }
+}
+
+@keyframes fadeInAndOut {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        z-index: -1;
+    }
+}
+
+@keyframes fadeOut {
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        z-index: -1;
+    }
+}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block extra_scripts %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+    <script src="{% static 'js/settings.js' %}" charset="utf-8" type="text/javascript"></script>
+{% endblock extra_scripts %}
+
+{% block content %}
+    <div class="settings">
+        <div class="auth">
+            <form action="" method="post" class="auth-form">
+                {% csrf_token %}
+                {% for field in auth_form.visible_fields %}
+                    <div class="field">
+                        <label for="{{ field.name }}">{{ field.label_tag }}</label>
+                        {% if field == auth_form.email %}
+                            {% render_field field spellcheck="false" class="auth-form-field auth-form-email-field" %}
+                        {% else %}
+                            {% render_field field spellcheck="false" class="auth-form-field" %}
+                        {% endif %}
+                    </div>
+                    <br>
+                    <br>
+                {% endfor %}
+                <input type="submit" value="change" class="submit-user">
+            </form>
+        </div>
+        <br><br>
+        <hr style="width: 90%;">
+        <div class="theme">
+            <p class="theme-name">Theme</p>
+            <input id="theme-checkbox" onclick="setTheme('theme', '{{ profile.theme }}')" style="display: none;" type="button" />
+            <label for="theme-checkbox" class="theme-label" id="themeLabel">
+                <span class="theme-slider" id="themeSlider" {% if profile.theme == 'dark' %} style="left: 50%;" {% else %} style="left: 0;" {% endif %}></span>
+                <span class="theme-label-light" id="themeLabelLight" {% if profile.theme == 'dark' %} style="color: black;" {% else %} style="color: white;" {% endif %}>Light</span>
+                <span class="theme-label-dark" id="themeLabelDark" {% if profile.theme == 'dark' %} style="color: white;" {% else %} style="color: black;" {% endif %}>Dark</span>
+            </label>
+        </div>
+    </div>
+{% endblock content %}
