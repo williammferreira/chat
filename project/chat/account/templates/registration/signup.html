@@ -1,0 +1,26 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+<!--Add form in views-->
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
+{% block title %}
+	Create Account
+{% endblock title %}
+{% block content %}
+	{% comment %} <!-- crispy form form.helper -->
+	<div class="signup">
+		<form method="POST" action="">
+			{% csrf_token %}
+			<fieldset>
+				<legend>Sign Up</legend>
+				{{ form|linebreaks }}
+				<!-- crispy form -->
+			</fieldset>
+			<div>
+				<button type="submit">Sign Up</button>
+			</div>
+		</form>
+		</div> {% endcomment %}
+	{{ form.as_p }}
+{% endblock content %}
