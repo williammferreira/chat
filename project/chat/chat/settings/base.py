@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 	'sign_up.apps.SignUpConfig',
 	'login.apps.LoginConfig',
 	'client.apps.clientConfig',
+	'home.apps.HomeConfig',
 	'django.contrib.postgres',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -140,7 +141,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-LOGIN_REDIRECT_URL = 'client'
+LOGIN_REDIRECT_URL = 'client:home'
 
 LOGIN_URL = 'login'
 

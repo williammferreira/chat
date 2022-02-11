@@ -1,4 +1,4 @@
-"""chat URL Configuration
+"""home URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -21,11 +21,8 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
 
+app_name = 'home'
+
 urlpatterns = [
-    path("favicon.ico", RedirectView.as_view(url=staticfiles_storage.url("media/favicon.jpg"))),
-    path('admin/', admin.site.urls),
-	path('', include('home.urls', namespace="home")),
-	path('~/', include('client.urls', namespace='client')),
-	path('account/', include('account.urls', namespace="account")),
-	path('newchat', new_chat.main, name="new_chat"),
+    path("", home.Main.as_view(), name="main"),
 ]
