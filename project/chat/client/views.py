@@ -6,7 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Chats as all_chats
 from .models import Chats as chats
 from .models import messages as chatMessages
-from .forms import UserEditForm
 from django.contrib import messages
 
 # Create your views here.
@@ -42,17 +41,3 @@ class ChatsView(LoginRequiredMixin, View):
             'chatMessages': chatMessages.objects.filter(chat=chat[0]),
         }
         return render(request, "client/client.html", data)
-
-
-class SettingsView(LoginRequiredMixin, View):
-    def get(self, request):
-        data = {
-            'auth_form': UserEditForm(instance=request.user),
-        }
-        return render(request, 'client/settings.html', data)
-    def post(self, request):
-        user_form = UserEditForm(instance=request.user, data=request.POST)
-        if user_form.is_valid():
-            user_form.save()
-            messages.success(request, "Account changed successfully!")
-            return redirect('client:settings_view')

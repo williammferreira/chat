@@ -1,4 +1,4 @@
-"""chat URL Configuration
+"""home URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -13,13 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib import admin
 from django.urls import path, include
-from client import views as client
-from .views import ChatsView
+from home import views as home
+from new_chat import views as new_chat
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.contrib.auth import views as auth_views
+from django.views.generic.base import RedirectView
 
-app_name = "client"
+app_name = 'home'
 
 urlpatterns = [
-	path('', client.Main.as_view(), name="home"),
-	path('chats/<str:name>', ChatsView.as_view(), name="detail"),
+    path("", home.Main.as_view(), name="main"),
 ]
