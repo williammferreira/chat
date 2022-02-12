@@ -150,3 +150,5 @@ project/chat/ssl/chat.crt
 project/chat/ssl/chat.key
 
 supervisord.conf
+
+chat.pyproj.user
