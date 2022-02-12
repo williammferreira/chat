@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "chat", "chat.pyproj", "{F0877829-683E-4E7B-B0A6-2278561AA86B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0877829-683E-4E7B-B0A6-2278561AA86B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0877829-683E-4E7B-B0A6-2278561AA86B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0877829-683E-4E7B-B0A6-2278561AA86B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0877829-683E-4E7B-B0A6-2278561AA86B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7C1BFF5-E94C-450D-96D5-EDAFD108190B}
+	EndGlobalSection
+EndGlobal
