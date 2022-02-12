@@ -154,3 +154,5 @@ supervisord.conf
 chat.pyproj.user
 
 obj/
+
+static/
