@@ -134,3 +134,19 @@ dump.rdb
 project/chat/.vscode
 
 .vscode/
+
+.vs/
+
+.idea/
+
+project/chat/static/
+
+Pipfile.lock
+
+project/chat/nohup.out
+
+project/chat/ssl/chat.crt
+
+project/chat/ssl/chat.key
+
+supervisord.conf

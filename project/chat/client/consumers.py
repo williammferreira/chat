@@ -1,13 +1,13 @@
 import json
 from django.utils.crypto import get_random_string
-from channels.generic.websocket import AsyncWebsocketConsumer, WebsocketConsumer
-from channels.consumer import SyncConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
-from .models import chats, messages
+from .models import Chats, messages, Profile
 
 class ChatConsumer(AsyncWebsocketConsumer):
     channel_layer_alias = "chatConsumer"
+
     async def connect(self):
         self.user = self.scope['user']
         # self.id = self.scope['url_route']['kwargs']['room']
@@ -53,26 +53,26 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def updateArea(self, text_data_json):
 
-        chat = chats.objects.filter(token = text_data_json['token'])[0]
+        chat = Chats.objects.filter(token = text_data_json['token'])[0]
 
-        messages.objects.create(chat=chat, message=text_data_json['message'], id=get_random_string(length=1000), creator=self.user.username, date=timezone.now())
+        messages.objects.create(chat=chat, message=text_data_json['message'], id=get_random_string(length=1000), creator=self.user.username, date=timezone.now(), token = chat.token)
 
     @database_sync_to_async
     def numChats(self, text_data_json):
-        chat = chats.objects.filter(token = text_data_json['token'])[0]
+        chat = Chats.objects.filter(token = text_data_json['token'])[0]
         return messages.objects.filter(chat=chat).count()
 
 class SearchConsumer(AsyncWebsocketConsumer):
     channel_layer_alias = "searchConsumer"
+
     async def connect(self):
         self.user = self.scope["user"]
         await self.accept()
 
     async def disconnect(self, close_code):
-        await self.close();
+        await self.close()
 
     async def receive(self, text_data):
-        print(text_data)
         searchOutput = await self.search(json.loads(text_data)['input'])
         await self.send(text_data=json.dumps(
             {
@@ -82,5 +82,25 @@ class SearchConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def search(self, searchTerms):
-        search = (list(chats.objects.filter(chatCreator = self.user.username, chatDescription__contains = searchTerms).values_list()) + list(chats.objects.filter(chatUsers__contains = self.user.username, chatDescription__contains = searchTerms).values_list()))
+        search = (list(Chats.objects.filter(chatCreator = self.user.username, chatDescription__contains = searchTerms).values_list()) + list(Chats.objects.filter(chatUsers__contains = self.user.username, chatDescription__contains = searchTerms).values_list()))
         return search
+
+class SettingsConsumer(AsyncWebsocketConsumer):
+    channel_layer_alias = "settingsConsumer"
+
+    async def connect(self):
+        self.user = self.scope["user"]
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        await self.close();
+
+    async def receive(self, text_data):
+        json_data = json.loads(text_data)
+        await self.setSetting(json_data["setting"], json_data["value"])
+    
+    @database_sync_to_async
+    def setSetting(self, setting, value):
+        if setting == "theme":
+            if value == "light" or value == "dark":
+                Profile.objects.filter(user=self.user).update(theme=value)

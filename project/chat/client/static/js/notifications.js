@@ -15,16 +15,13 @@ window.cancelAnimFrame = (function () {
             window.setTimeout(callback, 1000 / 60);
         };
 })();
-
-
-
 var interval;
 
 function sendNotification(text, color = "#39FF14", width = "150px", interval = 1) {
     var element = document.createElement("SPAN");
     var div = document.createElement("div");
     div.appendChild(element);
-    document.getElementById("notifacations-container").appendChild(div);
+    $("#notifacations-container").appendChild(div);
     div.style.width = width;
     div.style.height = "40px";
     div.style.color = "white";
@@ -47,11 +44,9 @@ function sendNotification(text, color = "#39FF14", width = "150px", interval = 1
 }
 
 function moveNotification(div, intervalTime) {
-    // var interval = setTimeout(window.requestAnimationFrameequestAnimationFrame(animate), intervalTime);
     var pos = 0;
     var animationId;
     function animate() {
-        // console.log(pos);
         if (pos > 10) {
             cancelAnimFrame(animationId);
             return;
@@ -66,28 +61,4 @@ function moveNotification(div, intervalTime) {
     setTimeout(function () {
         div.remove();
     }, 2000);
-
-    // pos = 50;
-
-    // removeId = requestAnimFrame(function () {
-    //     if (pos > 10) {
-    //         cancelAnimFrame(removeId);
-    //         return;
-    //     }
-
-    //     pos--;
-    //     div.style.right = pos + "px";
-    // })
-    // cancelAnimFrame(animationId);
-
-    // element.animate([
-    //     // keyframes
-    //     { transform: 'translateY(0px)' },
-    //     { transform: 'translateY(-300px)' }
-    // ], {
-    //     // timing options
-    //     duration: 1000,
-    //     iterations: Infinity
-    // });
-
 }

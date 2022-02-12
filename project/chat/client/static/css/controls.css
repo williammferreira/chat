@@ -1,14 +1,20 @@
 .controls {
 	height: 5%;
-	background-color: #00019f;
+	/* background-color: #00019f; */
+	background-color: black;
 	text-align: right;
 	padding-right: 10px;
 	display: grid;
-	grid-template-columns: 25% auto;
+	grid-template-columns: 0% auto;
 	grid-template-areas: 'left right';
+	color: blue;
+	border: 1px solid blue;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
 
-.controls>.new-chat-plus {
+.controls > .new-chat-plus {
 	background-color: white;
 	border-radius: 100%;
 	text-align: center;
@@ -22,10 +28,52 @@
 
 .controls > .chat-name {
 	font-size: 25px;
-	color: white;
 	margin-right: 0px;
 	text-align: center;
 	margin: auto;
 	overflow: hidden;
 	grid-area: right;
+}
+
+.django-message {
+	color: white;
+	text-decoration: none;
+	font-size: 15px;
+	margin: auto auto;
+	padding: 0 20px;
+	height: 80%;
+	display: inline-block;
+	border-radius: 10px;
+	border-color: black;
+	border-width: 2px;
+	text-align: center;
+  }
+
+.django-message span {
+	display: block;
+	transform: translateY(30%);
+	grid-area: right;
+}
+  
+.django-message-success {
+	background-color: green;
+}
+
+.apps-link {
+	display: flex;
+	-webkit-flex-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 100%;
+	border: 1px solid blue;
+	cursor: pointer;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin-top: -1px;
 }

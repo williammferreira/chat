@@ -6,7 +6,7 @@
   {{ chat_token|json_script:"token" }}
   {{ username|json_script:"user_username" }}
   {{ username|json_script:"username" }}
-  <script src="{% static 'js/websocket.js' %}" charset="utf-8"></script>
+  <script src="{% static 'js/websocket.js' %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
 {% block chat_name %}
   <p class="chat-name"><b>{{ chat_name }}</b></p>
@@ -14,19 +14,19 @@
 {% block content %}
   <div class="messages">
     <div class="message-area" id="message-area">
-      {% for message in messages %}
-          <div class='message {% if message.creator == username %}mymessage{% else %}othermessage{% endif %}' id='message'>
-            <div class='{% if message.creator == username %}message-info{% else %}message-info-other{% endif %}'>
+      {% for chatMessage in chatMessages %}
+          <div class='message {% if chatMessage.creator == username %}mymessage{% else %}othermessage{% endif %}' id='message'>
+            <div class='{% if chatMessage.creator == username %}message-info{% else %}message-info-other{% endif %}'>
               <em>
-                {% if message.creator == username %}
+                {% if chatMessage.creator == username %}
                   Me
                 {% else %}
-                  {{ message.creator }}
+                  {{ chatMessage.creator }}
                 {% endif %}
               </em><br>
-              <em>{{ message.date }}</em>
+              <em>{{ chatMessage.date }}</em>
             </div>
-            <p>{{ message.message }}</p>
+            <p>{{ chatMessage.message }}</p>
           </div>
       {% empty %}
         <p><center><i>Type a message to start</i></center></p>
