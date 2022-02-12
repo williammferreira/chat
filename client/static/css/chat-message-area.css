@@ -1,0 +1,49 @@
+.messages {
+  height: 100%;
+  background-color: black;
+}
+
+.message-area {
+  height: 100%;
+  overflow: auto;
+  height: 90%;
+}
+.message {
+  border: 2px solid #dedede;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px auto;
+  word-break: break-all;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.mymessage {
+  background-color: rgba(0, 247, 255, 0.753);
+  text-align: left;
+  width: 90%;
+  color: #000160;
+}
+
+.othermessage {
+  background-color: #009a9f;
+  text-align: right;
+  width: 90%;
+  color: white;
+}
+
+.message-info {
+  font-size: 10px;
+  color: gray;
+  line-height: 10px;
+}
+
+.message-info-other {
+  font-size: 10px;
+  color: white;
+  line-height: 10px;
+}
+
+.chat-label {
+  font-size: 25px;
+}
