@@ -135,9 +135,9 @@ project/chat/.vscode
 
 .vscode/
 
-.vs/ProjectSettings.json
+.vs/
 
-.vs/slnx.sqlite
+.idea/
 
 project/chat/static/
 
