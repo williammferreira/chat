@@ -37,10 +37,12 @@ INSTALLED_APPS = [
 	'django_extensions',
 	'crispy_forms',
 	'widget_tweaks',
+	'django_summernote',
 	'new_chat.apps.NewChatConfig',
 	'client.apps.clientConfig',
 	'home.apps.HomeConfig',
 	'account.apps.AccountConfig',
+    'docs.apps.DocsConfig',
 	'django.contrib.postgres',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -84,18 +86,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'chat.wsgi.application'
 
 CHANNEL_LAYERS = {
-	'chatConsumer': {
-		'BACKEND': 'channels_redis.core.RedisChannelLayer',
-		'CONFIG': {
-			'hosts': [('127.0.0.1', '6379')],
-		},
+	'default': {
+		'BACKEND': 'channels.layers.InMemoryChannelLayer',
 	},
 
 	'searchConsumer': {
-		'BACKEND': 'channels_redis.core.RedisChannelLayer',
-		'CONFIG': {
-			'hosts': [('127.0.0.1', '6379')],
-		}
+		'BACKEND': 'channels.layers.InMemoryChannelLayer',
 	}
 }
 
@@ -140,6 +136,9 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 LOGIN_REDIRECT_URL = 'client:home'
 
 LOGIN_URL = 'account:login'
@@ -147,3 +146,5 @@ LOGIN_URL = 'account:login'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ASGI_APPLICATION = 'chat.routing.application'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
