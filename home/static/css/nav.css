@@ -1,46 +1,118 @@
-.nav {
-    position: fixed;
-    border: 2px solid blue;
-    width: 250px;
-    border-radius: 20px;
-    margin-left: 20px;
-    border-top: 0px;
-    border-bottom: 0px;
-    top: 40px;
-}
-
-.nav div {
+nav {
+    position: sticky;
+	background-color: black;
     width: 100%;
-    text-align: center;
-    border: 2px solid blue;
-    border-radius: 10px;
-    margin-bottom: -2px;
-    margin-left: -2px;
-    cursor: pointer;
+	height: 80px;
+    top: 0;
 }
 
-.nav div:hover {
+nav .links {
+	position: absolute;
+	left: 30%;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	transform: translateY(25%);
+}
+
+nav a:hover {
     animation-name: fadeNavText;
     animation-duration: 300ms;
     animation-fill-mode: forwards;
 }
 
-.nav div a {
+nav a {
     color: blue;
     text-decoration: none;
     font-size: 26px;
     border-radius: 20px;
+	margin-left: 20px;
+}
+
+nav .logo {
+	position: absolute;
+	top: 0;
+	left: 20px;
+	right: 0;
+	bottom: 0;
+	transform: translateY(25%);
+}
+
+nav .logo a {
+	font-size: 25px;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	font-family: "Centauri";
+	cursor: pointer;
+}
+
+nav .auth {
+	float: right;
+	position: absolute;
+	top: 0;
+	right: 20px;
+	bottom: 0;
+	transform: translateY(25%);
+}
+
+nav .auth a {
+	border: 2px solid blue;
+	text-decoration: none;
+	border-radius: 0px;
+	padding: 10px;
+	font-size: 25px;
+	margin-left: 10px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+nav .auth a:hover {
+	animation-name: fadeNavButton;
+	animation-fill-mode: forwards;
+	animation-duration: 500ms;
+}
+
+nav .products-dropdown {
+	display: inline-block;
+}
+
+nav .products-dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: black;
+	min-width: 160px;
+	text-align: center;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+}
+
+nav .products-dropdown-content a {
+	margin-left: 0;
+	left: 0;
+}
+
+.products-dropdown:hover .products-dropdown-content {
+	display: block;
+}
+
+nav .nav-separator {
+	position: absolute;
+	bottom: 0;
+	width: 98%;
+	left: 0;
+	right: 0;
+	border-color: #242424;
 }
 
 @keyframes fadeNavText {
-    100% {
-        background-color: darkblue;
+    to {
+        color: darkblue;
     }
 }
 
-/* @keyframes slideIn {
-    100% {
-        content: "hello";
-        opacity: 0;
-    }
-} */
+@keyframes fadeNavButton {
+	to {
+		color: white;
+		background-color: blue;
+	}
+}
