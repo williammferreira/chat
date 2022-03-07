@@ -1,11 +1,12 @@
-git add --interactive{% load static %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{% block title %}bla bla{% endblock title %}</title>
+        <title>{% block title %}Digital Core{% endblock title %}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
         <link rel="stylesheet" href="{% static 'css/nav.css' %}" type="text/css">
         <link rel="stylesheet" type="text/css" href="{% static 'css/body.css' %}">
@@ -17,7 +18,7 @@ git add --interactive{% load static %}
 	<nav class="nav" id="nav">
 		<div class="logo">
 			<a href="{% url 'home:main' %}">
-				bla bla
+				Digital Core
 			</a>
 		</div>
 		<div class="links">
@@ -52,7 +53,7 @@ git add --interactive{% load static %}
         <p style="top: 0; margin-top: 0; opacity: 0;">Some random text that will not show up on the page, but is here to keep the body element at the top of the page</p>
         <div class="beginningAnimationContainer" id="beginningAnimationContainer" hidden>
             <div class="beginningAnimation">
-                <span id="logo_text">Digital Quasar</span>
+                <span id="logo_text">Digital Core</span>
             </div>
         </div>
 
