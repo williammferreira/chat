@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block static %}
+	<link rel="stylesheet" href="{% static 'css/docs-sidebar.css' %}">
+{% endblock static %}
+
+{% block content %}
+	<div class="sidebar">
+		{% for group in groups %}
+			<div class="group" id="{{ group.id }}"><img src="{% static 'images/chevron-right-blue.png' %}" alt="Cheveron Right" height="20px" class="chevron-right" /><span> {{ group.title }}</span></div>
+		{% endfor %}
+		<div>
+			
+		</div>
+	</div>
+	{% block document %}
+	{% endblock document %}
+
+	{% block scripts %}
+		<script src="{% static 'js/docs.js' %}"></script>
+	{% endblock scripts %}
+{% endblock content %}
