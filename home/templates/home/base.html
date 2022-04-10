@@ -39,7 +39,8 @@
 		<hr class="nav-separator">
     </nav>
     <body>
-		{% if request.user.is_authenticated %}
+
+		{% if request.user.is_authenticated and request.resolver_match.app_name == 'home' %}
 			<script>
 				location.replace("{% url 'client:home' %}");
 			</script>
