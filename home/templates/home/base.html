@@ -1,4 +1,4 @@
-git add --interactive{% load static %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,13 +6,13 @@ git add --interactive{% load static %}
         <title>{% block title %}bla bla{% endblock title %}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
         <link rel="stylesheet" href="{% static 'css/nav.css' %}" type="text/css">
         <link rel="stylesheet" type="text/css" href="{% static 'css/body.css' %}">
         <script src="{% static 'js/functions.js' %}"></script>
-        {% block stylesheets %}
+        {% block static %}
 
-        {% endblock stylesheets %}
+        {% endblock static %}
     </head>
 	<nav class="nav" id="nav">
 		<div class="logo">
@@ -52,7 +52,7 @@ git add --interactive{% load static %}
         <p style="top: 0; margin-top: 0; opacity: 0;">Some random text that will not show up on the page, but is here to keep the body element at the top of the page</p>
         <div class="beginningAnimationContainer" id="beginningAnimationContainer" hidden>
             <div class="beginningAnimation">
-                <span id="logo_text">Digital Quasar</span>
+                <span id="logo_text">bla bla</span>
             </div>
         </div>
 
@@ -66,5 +66,8 @@ git add --interactive{% load static %}
             {% endblock content %}
         </div>
         <p style="bottom: 0; margin-bottom: 0; opacity: 0;">Some random text that will not show up on the page, but is here to keep the body at the top of the page</p>
+        {% block scripts %}
+            
+        {% endblock scripts %}
     </body>
 </html>

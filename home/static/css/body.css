@@ -8,7 +8,7 @@
 body,html {
     margin: 0;
     font-family: Calibri;
-    background-color: black/* #242424 */;
+    background-color: black;
     color: white;
     scroll-behavior: smooth;
     scrollbar-color: blue black;
@@ -52,7 +52,7 @@ noscript {
     position: fixed;
     background-color: black;
     margin: 0;
-		z-index: 99999;
+	z-index: 1;
     text-align: center;
     top: 0;
 }
@@ -70,6 +70,5 @@ body .title {
 	text-align: center;
 	font-weight: 100;
 	margin-top: 10%;
-/* 	margin-top: 12%; */
 	line-height: 1.5;
 }
