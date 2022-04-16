@@ -18,6 +18,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(os.path.join(__file__, os.pardir)).resolve().parent.parent
 
@@ -37,10 +39,13 @@ INSTALLED_APPS = [
 	'django_extensions',
 	'crispy_forms',
 	'widget_tweaks',
+	'django_summernote',
+	'rosetta',
 	'new_chat.apps.NewChatConfig',
 	'client.apps.clientConfig',
 	'home.apps.HomeConfig',
 	'account.apps.AccountConfig',
+    'docs.apps.DocsConfig',
 	'django.contrib.postgres',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -53,6 +58,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.locale.LocaleMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -84,18 +90,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'chat.wsgi.application'
 
 CHANNEL_LAYERS = {
-	'chatConsumer': {
-		'BACKEND': 'channels_redis.core.RedisChannelLayer',
-		'CONFIG': {
-			'hosts': [('127.0.0.1', '6379')],
-		},
+	'default': {
+		'BACKEND': 'channels.layers.InMemoryChannelLayer',
 	},
 
 	'searchConsumer': {
-		'BACKEND': 'channels_redis.core.RedisChannelLayer',
-		'CONFIG': {
-			'hosts': [('127.0.0.1', '6379')],
-		}
+		'BACKEND': 'channels.layers.InMemoryChannelLayer',
 	}
 }
 
@@ -118,17 +118,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = (
+	('en', _("English")),
+	('es', _("Spanish"))
+)
+
+LOCALE_PATHS = (
+	os.path.join(BASE_DIR, 'locale'),
+)
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
@@ -140,6 +148,9 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 LOGIN_REDIRECT_URL = 'client:home'
 
 LOGIN_URL = 'account:login'
@@ -147,3 +158,5 @@ LOGIN_URL = 'account:login'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ASGI_APPLICATION = 'chat.routing.application'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

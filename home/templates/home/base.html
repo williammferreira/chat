@@ -3,41 +3,57 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{% block title %}bla{% endblock title %}</title>
+        <title>{% block title %}bla bla{% endblock title %}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
         <link rel="stylesheet" href="{% static 'css/nav.css' %}" type="text/css">
         <link rel="stylesheet" type="text/css" href="{% static 'css/body.css' %}">
-        <script>
-            var importAnimationUrl = '{% static "css/homeAnimation.css" %}';
-        </script>
         <script src="{% static 'js/functions.js' %}"></script>
-        {% block stylesheets %}
+        {% block static %}
 
-        {% endblock stylesheets %}
+        {% endblock static %}
     </head>
+	<nav class="nav" id="nav">
+		<div class="logo">
+			<a href="{% url 'home:main' %}">
+				bla bla
+			</a>
+		</div>
+		<div class="links">
+			<a href="#">Getting Started</a>
+			<a href="{% url 'docs:start' %}">Documentation</a>
+			<div class="products-dropdown">
+				<a href="javascript: void(0);">Products</a>
+				<div class="products-dropdown-content">
+					<a href="#">Chat</a>
+				</div>
+			</div>
+			<a href="#">Pricing</a>
+<!-- 			<a href="#">Our Mission</a> -->
+		</div>
+		<div class="auth">
+        	<a href="{% url 'account:login' %}">Log In</a>
+			<a href="{% url 'account:signup' %}">Sign Up</a>
+		</div>
+		<hr class="nav-separator">
+    </nav>
     <body>
+
+		{% if request.user.is_authenticated and request.resolver_match.app_name == 'home' %}
+			<script>
+				location.replace("{% url 'client:home' %}");
+			</script>
+		{% endif %}
         <noscript>
             <div>
                 You need to enable javascript to use this page. Please enable it for this site in your browser settings.
             </div>
         </noscript>
-        <p style="top: 0; margin-top: 0; opacity: 0;">Some random text that will not show up on the page, but is here to keep the body at the top of the page</p>
+        <p style="top: 0; margin-top: 0; opacity: 0;">Some random text that will not show up on the page, but is here to keep the body element at the top of the page</p>
         <div class="beginningAnimationContainer" id="beginningAnimationContainer" hidden>
             <div class="beginningAnimation">
-                <span id="logo_text">Digital Quasar</span>
-            </div>
-        </div>
-
-        <div class="nav" id="nav">
-            <div onclick="location.replace('{% url 'home:main' %}')">
-                <a href="{% url 'home:main' %}">Home</a>
-            </div>
-            <div onclick="location.replace('{% url 'account:signup' %}')">
-                <a href="{% url 'account:signup' %}">Create account</a>
-            </div>
-            <div onclick="location.replace('{% url 'account:login' %}')">
-                <a href="{% url 'account:login' %}">Log In</a>
+                <span id="logo_text">bla bla</span>
             </div>
         </div>
 
@@ -51,6 +67,8 @@
             {% endblock content %}
         </div>
         <p style="bottom: 0; margin-bottom: 0; opacity: 0;">Some random text that will not show up on the page, but is here to keep the body at the top of the page</p>
+        {% block scripts %}
+            
+        {% endblock scripts %}
     </body>
-    <script src="{% static 'js/beginningAnimation.js' %}"></script>
 </html>
