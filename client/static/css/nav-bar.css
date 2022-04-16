@@ -1,39 +1,40 @@
 .top-nav {
-  background-color: #000160;
-  height: 10%;
-  position: relative;
+    background-color: #000160;
+    height: 10%;
+    position: relative;
 }
 
 .top-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 20px;
-  font-size: 20px;
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 20px;
 }
 
 .top-nav a:hover {
-  color: #4041a0;
+    color: #4041a0;
 }
 
 .profile {
-  float: right;
-  height: 100%;
-  width: 15%;
-  width: -moz-fit-content;
-  background-color: blue;
+    float: right;
+    height: 100%;
+    width: 15%;
+    width: -moz-fit-content;
+    width: fit-content;
+    background-color: blue;
 }
 
 .profile .title {
-  height: 100%;
-  display: flex;
-  -webkit-flex-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+    height: 100%;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .profile .title p {
-  font-size: 15px;
+    font-size: 15px;
 }
