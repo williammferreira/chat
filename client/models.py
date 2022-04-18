@@ -40,11 +40,13 @@ class Profile(models.Model):
     DARK = 'dark'
     BLACK = 'black'
     LIGHT = 'light'
+    BLUE_LINES = 'bluelines'
 
     THEME_CHOICES = (
         # Dark
         (DARK, 'Dark'),
         (BLACK, 'Black'),
+        (BLUE_LINES, 'Blue_Lines'),
 
         # Light
         (LIGHT, 'Light'),
@@ -54,7 +56,7 @@ class Profile(models.Model):
     id = models.UUIDField(primary_key=True, editable=False,
                           unique=True, default=uuid.uuid4)
     theme = models.CharField(choices=THEME_CHOICES,
-                             default="light", max_length=5)
+                             default=BLACK, max_length=10)
 
     class Meta:
         db_table = 'profile'
