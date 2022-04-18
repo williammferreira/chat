@@ -1,0 +1,36 @@
+.sidebar {
+	height: 100%;
+	min-width: 100px;
+	max-width: 350px;
+	width: 500px;
+	position: fixed;
+	left: 30px;
+	overflow: auto;
+	/* background: #242424; */
+}
+
+.group {
+	border-radius: 5px;
+	padding: 5px 10px;
+	background-color: #242424;
+	font-weight: 300;
+	margin-bottom: 15px;
+	font-size: 30px;
+	display: block;
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-width: 100px;
+	max-width: 100%;
+}
+
+.chevron-right {
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.group:hover {
+	font-weight: normal;
+}

@@ -1,4 +1,6 @@
 {% load static %}
+{% load theme_tags %}
+
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
   <head>
@@ -9,10 +11,10 @@
     <meta name="keywords" content="chat, communication"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/nav-bar.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/chat-grid.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/controls.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% theme 'base.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% theme 'nav-bar.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% theme 'chat-grid.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% theme 'controls.css' %}" type="text/css">
     <script src="{% static 'js/jquery/jquery.js' %}" charset="utf-8" type="text/javascript"></script>
     <script src="{% static 'js/base.js' %}" charset="utf-8" type="text/javascript"></script>
     <script src="{% static 'js/notifications.js' %}" charset="utf-8" type="text/javascript"></script>
