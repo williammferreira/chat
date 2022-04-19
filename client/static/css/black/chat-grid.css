@@ -1,14 +1,20 @@
+.chat-grid-container {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
 .chat-grid {
-    float: right;
+    float: left;
+    display: -ms-grid;
     display: grid;
     grid-template-columns: 25% auto;
     height: 100%;
-    width: 97%;
+    width: 100%;
     position: relative;
 }
 
 .chats {
-    /* background-color: #000160; */
     background-color: black;
     height: 100%;
     color: blue;
@@ -16,10 +22,9 @@
     font-size: 1.3rem;
     line-height: 13px;
     overflow: auto;
-    box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    /* border-width: 2px; */
+    box-sizing: border-box;
 }
 
 .chats hr {
