@@ -3,7 +3,8 @@ from django.utils.crypto import get_random_string
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
-from .models import Chats, messages, Profile
+from .models import Chats, messages
+from account.models import Profile
 
 class ChatConsumer(AsyncWebsocketConsumer):
     channel_layer_alias = "chatConsumer"
