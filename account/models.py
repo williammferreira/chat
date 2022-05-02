@@ -13,6 +13,7 @@ class Profile(models.Model):
 	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	id = models.UUIDField(primary_key=True, editable=False, unique=True, default=uuid.uuid4)
 	theme = models.CharField(default="light", max_length=5)
+	apps = models.ManyToManyField('management.App', related_name="users")
 
 	class Meta:
 		verbose_name = _("Profile")
