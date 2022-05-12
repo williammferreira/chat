@@ -1,31 +1,29 @@
 {% load static %}
+{% load theme_tags %}
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-  <head>
-    <title>Chat</title>
-    <meta charset="utf-8">
-    <meta name="content-type" content="utf-8">
-    <meta name="description" content="A chat site"/>
-    <meta name="keywords" content="chat, communication"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/nav-bar.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/chat-grid.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/controls.css' %}" type="text/css">
-    <script src="{% static 'js/jquery/jquery.js' %}" charset="utf-8" type="text/javascript"></script>
-    <script src="{% static 'js/base.js' %}" charset="utf-8" type="text/javascript"></script>
-    <script src="{% static 'js/notifications.js' %}" charset="utf-8" type="text/javascript"></script>
-    <script src="{% static 'js/searchSocket.js' %}" charset="utf-8" type="text/javascript"></script>
-    {% block extra_scripts %}
-
-    {% endblock extra_scripts %}
-  </head>
-  <body>
-    <div id="notifacations-container">
-      
-    </div>
-    {% comment %} <div class="top-nav">
+    <head>
+        <title>Chat</title>
+        <meta charset="utf-8">
+        <meta name="content-type" content="utf-8">
+        <meta name="description" content="A chat site"/>
+        <meta name="keywords" content="chat, communication"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% theme 'base.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% theme 'nav-bar.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% theme 'chat-grid.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% theme 'controls.css' %}" type="text/css">
+        <script src="{% static 'js/jquery/jquery.js' %}" charset="utf-8" type="text/javascript"></script>
+        <script src="{% static 'js/base.js' %}" charset="utf-8" type="text/javascript"></script>
+        <script src="{% static 'js/notifications.js' %}" charset="utf-8" type="text/javascript"></script>
+        <script src="{% static 'js/searchSocket.js' %}" charset="utf-8" type="text/javascript"></script>
+        {% block extra_scripts %}
+        {% endblock extra_scripts %}
+    </head>
+    <body>
+        <div id="notifacations-container"></div>
+        {% comment %} <div class="top-nav">
       <a href="{% url 'client:home' %}" id="dashboardLink">Home</a>
       <div class="profile">
         <div class="title" onclick="replace(`{% url 'account:settings_view' %}`);">
@@ -34,49 +32,71 @@
           </p>
         </div>
       </div>
-    </div> {% endcomment %}
-		<div class="controls">
-      <span class="apps-link">Apps</span>
-      {% if messages %}
-        {% for message in messages %}
-          <div class="django-message {% if message.tags %}django-message-{{ message.tags }}{% endif %}"><span>{{ message }}</span></div>
-        {% endfor %}
-      {% endif %}
-      {% block chat_name %}
-
-      {% endblock %}
-			<span class="new-chat-plus" onclick="location.replace(`{% url 'new_chat' %}`)">+<span>
-		</div>
-    <div class="chat-grid">
-      <div class="chats chat-grid-object" id="chats">
-        <input type="text" name="" value="" class="search-input" placeholder="search by description" id="searchInput" autocomplete='off' onkeyup="searchChats()"><hr>
-        {% if chat_number == 0 %}
-          <p><i><center>You don't have any chats yet.</center></i></p>
-        {% endif %}
-        <div id="chat-messages">
-          {% for chat in mychats %}
-            <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
-              <span class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</span><br>
-              <span>{{ chat.chatDescription }}</span><br>
-              <span>{{ chat.chatDateCreated }}</span><br>
+        </div> {% endcomment %}
+        <div class="controls">
+            <span class="apps-link sidelink">Apps</span>
+            <span class="new-chat-plus sidelink"
+                  onclick="location.replace(`{% url 'new_chat' %}`)">+<span>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="django-message {% if message.tags %}django-message-{{ message.tags }}{% endif %}">
+                            <span>{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% comment %} {% block chat_name %}{% endblock %} {% endcomment %}
             </div>
-          {% endfor %}
-          {% for chat in otherchats %}
-            <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
-              <span class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</span><br>
-              <span>{{ chat.chatDescription }}</span><br>
-              <span>{{ chat.chatDateCreated }}</span><br>
+            <div class="chat-grid-container">
+                <div class="chat-grid">
+                    <div class="chats chat-grid-object" id="chats">
+                        <input type="text"
+                               name=""
+                               value=""
+                               class="search-input"
+                               placeholder="search by description"
+                               id="searchInput"
+                               autocomplete='off'
+                               onkeyup="searchChats()">
+                        <hr>
+                        {% if chat_number == 0 %}
+                            <p>
+                                <i><center>You don't have any chats yet.</center></i>
+                            </p>
+                        {% endif %}
+                        <div id="chat-messages">
+                            {% for chat in mychats %}
+                                <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
+                                    <span class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</span>
+                                    <br>
+                                    <span>{{ chat.chatDescription }}</span>
+                                    <br>
+                                    <span>{{ chat.chatDateCreated }}</span>
+                                    <br>
+                                </div>
+                            {% endfor %}
+                            {% for chat in otherchats %}
+                                <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
+                                    <span class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</span>
+                                    <br>
+                                    <span>{{ chat.chatDescription }}</span>
+                                    <br>
+                                    <span>{{ chat.chatDateCreated }}</span>
+                                    <br>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="chat-grid-space chat-grid-object">
+                        {% block content %}
+                        {% endblock content %}
+                    </div>
+                </div>
             </div>
-          {% endfor %}
-        </div>
-      </div>
-        <div class="chat-grid-space chat-grid-object">
-          {% block content %}
-
-          {% endblock content %}
-        </div>
-      </div>
-      <script src="{% static 'js/functions.js' %}" charset="utf-8" type="text/javascript"></script>
-      <script src="{% static 'js/onLoad.js' %}" charset="utf-8" type="text/javascript"></script>
-  </body>
-</html>
+            <script src="{% static 'js/functions.js' %}"
+                    charset="utf-8"
+                    type="text/javascript"></script>
+            <script src="{% static 'js/onLoad.js' %}"
+                    charset="utf-8"
+                    type="text/javascript"></script>
+        </body>
+    </html>
