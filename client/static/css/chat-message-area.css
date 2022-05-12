@@ -1,0 +1,77 @@
+body {
+    overflow: hidden;
+}
+
+.messages {
+    height: 100%;
+    width: 100%;
+    /* padding-top: 20px; */
+    position: relative;
+}
+
+.message-area {
+    height: 87%;
+    overflow: auto;
+}
+
+.message-wrapper {
+    display: block;
+    margin: 20px auto;
+    width: 90%;
+    padding: 1px 0;
+}
+
+.message-wrapper-self {
+
+    background: linear-gradient(to right, blue, black);
+}
+
+.message-wrapper-other {
+    background: linear-gradient(to right, red, black);
+}
+
+.message {
+    margin: auto;
+    padding-bottom: 1px;
+    padding-left: 10px;
+    background-color: black;
+    word-break: break-all;
+    font-size: 20px;
+}
+
+.margin-fix {
+    visibility: hidden;
+    position: absolute;
+    margin-top: 0;
+    font-size: 13px;
+    color: white;
+    line-height: 20px;
+}
+
+.mymessage {
+    text-align: left;
+    width: 100%;
+    color: #ffffff;
+}
+
+.othermessage {
+    width: 100%;
+    color: white;
+}
+
+.message-info {
+    padding-top: 10px;
+    font-size: 10px;
+    color: gray;
+}
+
+.message-info-other {
+    padding-top: 5px;
+    font-size: 13px;
+    color: white;
+    line-height: 20px;
+}
+
+.chat-label {
+    font-size: 25px;
+}
