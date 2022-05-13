@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head>
@@ -23,6 +24,8 @@
         <script src="{% static 'js/base.js' %}" charset="utf-8" type="text/javascript"></script>
         <script src="{% static 'js/notifications.js' %}" charset="utf-8" type="text/javascript"></script>
         <script src="{% static 'js/searchSocket.js' %}" charset="utf-8" type="text/javascript"></script>
+        {% block extrastyle %}
+        {% endblock extrastyle %}
         {% block extra_scripts %}
         {% endblock extra_scripts %}
     </head>
@@ -38,70 +41,90 @@
         </div>
       </div>
         </div> {% endcomment %}
-        <div class="controls">
-            <span class="apps-link sidelink">Apps</span>
-            <span class="new-chat-plus sidelink"
-                  onclick="location.replace(`{% url 'new_chat' %}`)">+<span>
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="django-message {% if message.tags %}django-message-{{ message.tags }}{% endif %}">
-                            <span>{{ message }}</span>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-                {% comment %} {% block chat_name %}{% endblock %} {% endcomment %}
+        <div class="controlsSpace"></div>
+        <div class="controls" id="controls">
+            <div class="controls-top">
+                <span class="time controls-top-item detail-only" id='time'></span>
+                <span class="controls-top-right">
+                    <span class="detail-only notifications">
+                        <img src="{% static 'images/bell.png' %}"
+                             alt="Notification Bell"
+                             width="20px"
+                             height="20px"
+                             class="controls-top-item">
+                    </span>
+                </span>
             </div>
-            <div class="chat-grid-container">
-                <div class="chat-grid">
-                    <div class="chats chat-grid-object" id="chats">
-                        <input type="text"
-                               name=""
-                               value=""
-                               class="search-input"
-                               placeholder="search by description"
-                               id="searchInput"
-                               autocomplete='off'
-                               onkeyup="searchChats()">
-                        <hr>
-                        {% if chat_number == 0 %}
-                            <p>
-                                <i><center>You don't have any chats yet.</center></i>
-                            </p>
-                        {% endif %}
-                        <div id="chat-messages">
-                            {% for chat in mychats %}
-                                <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
-                                    <span class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</span>
-                                    <br>
-                                    <span>{{ chat.chatDescription }}</span>
-                                    <br>
-                                    <span>{{ chat.chatDateCreated }}</span>
-                                    <br>
-                                </div>
-                            {% endfor %}
-                            {% for chat in otherchats %}
-                                <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
-                                    <span class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</span>
-                                    <br>
-                                    <span>{{ chat.chatDescription }}</span>
-                                    <br>
-                                    <span>{{ chat.chatDateCreated }}</span>
-                                    <br>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="chat-grid-space chat-grid-object">
-                        {% block content %}
-                        {% endblock content %}
-                    </div>
+            <div class="apps">
+                <a class="sidelink" href="{% url 'client:home' %}">
+                    <img src="{% static 'images/home_icon.png' %}"
+                         alt="Home Icon"
+                         width="30px"
+                         height="30px">
+                <span class="sidelink-label">{% trans 'Home' %}</a>
+            </a>
+        </div>
+        {% comment %} <span class="apps-link sidelink">Apps</span> {% endcomment %}
+        {% comment %} <span class="new-chat-plus sidelink" onclick="location.replace(`{% url 'new_chat' %}`)">+<span> {% endcomment %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="django-message {% if message.tags %}django-message-{{ message.tags }}{% endif %}">
+                    <span>{{ message }}</span>
                 </div>
+            {% endfor %}
+        {% endif %}
+        {% comment %} {% block chat_name %}{% endblock %} {% endcomment %}
+    </div>
+    <div class="chat-grid-container" id="chat-grid-container">
+        <div class="chat-grid">
+            <div class="chats chat-grid-object" id="chats">
+                <div class="filters">
+                    <a href="{% url 'client:allchats' %}">All Chats</a>
+                    <a>{% trans "Invited" %}</a>
+                    <a>{% trans "Recent" %}</a>
+                    <a>{% trans 'Pinned' %}</a>
+                </div>
+                <a href="{% url 'new_chat' %}" class="chat-create-btn">{% trans 'New' %}</a>
+                {% comment %} <input type="text" name="" value="" class="search-input" placeholder="search by description" id="searchInput" autocomplete='off' onkeyup="searchChats()">
+                    <hr>
+                    {% if chat_number == 0 %}
+                        <p>
+                            <i><center>You don't have any chats yet.</center></i>
+                        </p>
+                    {% endif %}
+                    <div id="chat-messages">
+                        {% for chat in mychats %}
+                            <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
+                                <span class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</span>
+                                <br>
+                                <span>{{ chat.chatDescription }}</span>
+                                <br>
+                                <span>{{ chat.chatDateCreated }}</span>
+                                <br>
+                            </div>
+                        {% endfor %}
+                        {% for chat in otherchats %}
+                            <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
+                                <span class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</span>
+                                <br>
+                                <span>{{ chat.chatDescription }}</span>
+                                <br>
+                                <span>{{ chat.chatDateCreated }}</span>
+                                <br>
+                            </div>
+                        {% endfor %}
+                </div> {% endcomment %}
             </div>
-            <script src="{% static 'js/functions.js' %}"
-                    charset="utf-8"
-                    type="text/javascript"></script>
-            <script src="{% static 'js/onLoad.js' %}"
-                    charset="utf-8"
-                    type="text/javascript"></script>
-        </body>
-    </html>
+            <div class="chat-grid-space chat-grid-object">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/functions.js' %}" charset="utf-8" type="text/javascript"></script>
+    <script src="{% static 'js/onLoad.js' %}" charset="utf-8" type="text/javascript"></script>
+    <script src="{% static 'js/controls.js' %}" charset="utf-8" type="text/javascript"></script>
+    {% block extrascripts %}
+    {% endblock extrascripts %}
+</body>
+</html>
