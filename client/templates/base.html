@@ -82,7 +82,7 @@
                     <a href="{% url 'client:allchats' %}">All Chats</a>
                     <a>{% trans "Invited" %}</a>
                     <a href="{% url 'client:recent' %}">{% trans "Recent" %}</a>
-                    <a>{% trans 'Pinned' %}</a>
+                    <a href="{% url 'client:pinned' %}">{% trans 'Pinned' %}</a>
                 </div>
                 <a href="{% url 'new_chat' %}" class="chat-create-btn">{% trans 'New' %}</a>
                 {% comment %} <input type="text" name="" value="" class="search-input" placeholder="search by description" id="searchInput" autocomplete='off' onkeyup="searchChats()">
