@@ -41,13 +41,15 @@ class RecentChatsListView(ChatsListMixin):
 
 
 class PinnedChatsListView(ChatsListMixin):
+    template_name_suffix = '_list_pinned'
+
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(pinned=True)
 
 
 class ChatsView(LoginRequiredMixin, View):
-    def get(self, request, name, *args, **krargs):
+    def get(self, request, name, *args, **kwargs):
         try:
             chat = Chats.objects.get(locationUrl=name)
         except Chats.DoesNotExist:
