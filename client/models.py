@@ -21,7 +21,7 @@ class Chats(models.Model):
                              unique=True, default=uuid.uuid4)
 
     def get_absolute_url(self):
-        return reverse("client:detail", args=[self.locationUrl])
+        return reverse_lazy("client:detail", args=[self.locationUrl])
 
     class Meta:
         verbose_name = _('Chat')
