@@ -41,6 +41,8 @@ class RecentChatsListView(ChatsListMixin):
 
 
 class PinnedChatsListView(ChatsListMixin):
+    template_name_suffix = '_list_pinned'
+
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(pinned=True)
