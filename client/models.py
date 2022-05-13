@@ -19,6 +19,7 @@ class Chats(models.Model):
     locationUrl = models.UUIDField(_('Location URL'), default=uuid.uuid4)
     token = models.UUIDField(_('token'), null=False, editable=False,
                              unique=True, default=uuid.uuid4)
+    pinned = models.BooleanField(_('Pinned'), default=False)
 
     def get_absolute_url(self):
         return reverse_lazy("client:detail", args=[self.locationUrl])
