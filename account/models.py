@@ -8,9 +8,9 @@ import uuid
 
 # Create your models here.
 
+
 class Profile(models.Model):
     DARK = 'dark'
-	id = models.UUIDField(primary_key=True, editable=False, unique=True, default=uuid.uuid4)
 
     LIGHT = 'light'
 
