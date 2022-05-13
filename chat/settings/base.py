@@ -94,9 +94,6 @@ CHANNEL_LAYERS = {
 		'BACKEND': 'channels.layers.InMemoryChannelLayer',
 	},
 
-	'searchConsumer': {
-		'BACKEND': 'channels.layers.InMemoryChannelLayer',
-	}
 }
 
 
