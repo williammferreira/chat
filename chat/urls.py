@@ -29,7 +29,7 @@ urlpatterns = [
 	path('~/', include('client.urls', namespace='client')),
 	path('docs/', include('docs.urls', namespace='docs')),
 	path('account/', include('account.urls', namespace="account")),
-	path('newchat', new_chat.main, name="new_chat"),
+    path('newchat', new_chat.ChatCreateView.as_view(), name="new_chat"),
 
     path('admin/', admin.site.urls),
 	path('summernote/', include('django_summernote.urls')),

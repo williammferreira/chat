@@ -7,7 +7,7 @@ from .models import Chats, messages
 from account.models import Profile
 
 class ChatConsumer(AsyncWebsocketConsumer):
-    channel_layer_alias = "chatConsumer"
+
 
     async def connect(self):
         self.user = self.scope['user']
@@ -64,7 +64,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         return messages.objects.filter(chat=chat).count()
 
 class SearchConsumer(AsyncWebsocketConsumer):
-    channel_layer_alias = "searchConsumer"
+
 
     async def connect(self):
         self.user = self.scope["user"]
@@ -87,7 +87,7 @@ class SearchConsumer(AsyncWebsocketConsumer):
         return search
 
 class SettingsConsumer(AsyncWebsocketConsumer):
-    channel_layer_alias = "settingsConsumer"
+
 
     async def connect(self):
         self.user = self.scope["user"]
