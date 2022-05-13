@@ -1,25 +1,35 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from django.utils.translation import gettext as _
 from django.conf import settings
-
+from django.utils.translation import gettext_lazy as _
 import uuid
 
 
 # Create your models here.
 
+
 class Profile(models.Model):
-	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-	id = models.UUIDField(primary_key=True, editable=False, unique=True, default=uuid.uuid4)
-	theme = models.CharField(default="light", max_length=5)
+    DARK = 'dark'
 
-	class Meta:
-		verbose_name = _("Profile")
-		verbose_name_plural = _("Profiles")
+    LIGHT = 'light'
 
+    THEME_CHOICES = (
+        # Dark Theme
+        (DARK, 'Dark'),
 
+        # Light Theme
+        (LIGHT, 'Light'),
+    )
 
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, verbose_name=_('User'), on_delete=models.CASCADE)
+    theme = models.CharField(
+        _('Theme'), choices=THEME_CHOICES, default="black", max_length=10)
+
+    class Meta:
+        verbose_name = _('Profile')
+        verbose_name_plural = _('Profiles')
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
