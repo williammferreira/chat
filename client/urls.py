@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.urls import path, include
 from . import views as client
-from .views import AllChatsListView, RecentChatsListView, ChatsView
+from .views import AllChatsListView, RecentChatsListView, PinnedChatsListView, ChatsView
 
 app_name = "client"
 
 urlpatterns = [
-	path('', client.Main.as_view(), name="home"),
-	path('chats/<str:name>', ChatsView.as_view(), name="detail"),
+    path('', client.Main.as_view(), name="home"),
+    path('chats/<str:name>', ChatsView.as_view(), name="detail"),
     path('chats/', AllChatsListView.as_view(), name='allchats'),
-    path("chats/recent/", RecentChatsListView.as_view(), name="recent")
+    path("chats/recent/", RecentChatsListView.as_view(), name="recent"),
+    path('chats/pinned/', PinnedChatsListView.as_view(), name="pinned"),
 ]

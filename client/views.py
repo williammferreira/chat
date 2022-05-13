@@ -40,6 +40,12 @@ class RecentChatsListView(ChatsListMixin):
         return queryset
 
 
+class PinnedChatsListView(ChatsListMixin):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(pinned=True)
+
+
 class ChatsView(LoginRequiredMixin, View):
     def get(self, request, name, *args, **krargs):
         try:
