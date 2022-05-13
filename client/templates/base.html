@@ -81,7 +81,7 @@
                 <div class="filters">
                     <a href="{% url 'client:allchats' %}">All Chats</a>
                     <a>{% trans "Invited" %}</a>
-                    <a>{% trans "Recent" %}</a>
+                    <a href="{% url 'client:recent' %}">{% trans "Recent" %}</a>
                     <a>{% trans 'Pinned' %}</a>
                 </div>
                 <a href="{% url 'new_chat' %}" class="chat-create-btn">{% trans 'New' %}</a>
