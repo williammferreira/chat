@@ -1,40 +1,61 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block extra_scripts %}
-  <link rel="stylesheet" href="{% static 'css/chat-input.css' %}">
-  <link rel="stylesheet" href="{% static 'css/chat-message-area.css' %}">
-  {{ chat_token|json_script:"token" }}
-  {{ username|json_script:"user_username" }}
-  {{ username|json_script:"username" }}
-  <script src="{% static 'js/websocket.js' %}" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="{% static 'css/chat-input.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat-message-area.css' %}">
+    {{ chat_token|json_script:"token" }}
+    {{ username|json_script:"user_username" }}
+    {{ username|json_script:"username" }}
+    <script src="{% static 'js/websocket.js' %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
 {% block chat_name %}
-  <p class="chat-name"><b>{{ chat_name }}</b></p>
+    <p class="chat-name">
+        <b>{{ chat_name }}</b>
+    </p>
 {% endblock %}
 {% block content %}
-  <div class="messages">
-    <div class="message-area" id="message-area">
-      {% for chatMessage in chatMessages %}
-          <div class='message {% if chatMessage.creator == username %}mymessage{% else %}othermessage{% endif %}' id='message'>
-            <div class='{% if chatMessage.creator == username %}message-info{% else %}message-info-other{% endif %}'>
-              <em>
-                {% if chatMessage.creator == username %}
-                  Me
-                {% else %}
-                  {{ chatMessage.creator }}
-                {% endif %}
-              </em><br>
-              <em>{{ chatMessage.date }}</em>
-            </div>
-            <p>{{ chatMessage.message }}</p>
-          </div>
-      {% empty %}
-        <p><center><i>Type a message to start</i></center></p>
-      {% endfor %}
+    <div class="messages">
+        <div class="message-area" id="message-area">
+            {% for chatMessage in chatMessages %}
+                <div class="message-wrapper {% if chatMessage.creator == request.user.username %}message-wrapper-self{% else %}message-wrapper-other{% endif %}">
+                    <div class='message {% if chatMessage.creator == request.user.username %}mymessage{% else %}othermessage{% endif %}'
+                         id='message'>
+                        <div class='{% if chatMessage.creator == request.user.username %}message-info{% else %}message-info-other{% endif %}'>
+                            <em>
+                                {% if chatMessage.creator == request.user.username %}
+                                    {% trans 'Me' %}
+                                {% else %}
+                                    {{ chatMessage.creator }}
+                                {% endif %}
+                            </em>
+                            <br>
+                            <em>{{ chatMessage.date }}</em>
+                        </div>
+                        <p>
+                            {{ chatMessage.message }}
+                        </p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>
+                    <center><i>{% trans "Type a message to start" %}</i></center>
+                </p>
+            {% endfor %}
+        </div>
+        <div class="input-area">
+            <input type="text"
+                   name="chat-input"
+                   id="chat-input"
+                   class="chat-input"
+                   placeholder="Type Here"
+                   value=""
+                   onkeypress="if(event.key == 'Enter') sendMessage()">
+            <input type="submit"
+                   name="chat-send"
+                   value="{% trans 'Send' %}"
+                   class="chat-send"
+                   onclick="sendMessage()">
+        </div>
     </div>
-      <div class="input-area">
-        <input type="text" name="chat-input" id="chat-input" class="chat-input" placeholder="Type Here" value="" onkeypress="if(event.key == 'Enter') sendMessage()">
-        <input type="submit" name="chat-send" value="send" class="chat-send" onclick="sendMessage()">
-      </div>
-  </div>
 {% endblock %}
