@@ -1,0 +1,22 @@
+.chats-detail {
+    padding-top: 20px;
+    height: 95%;
+    overflow: auto;
+}
+
+.chat {
+    text-decoration: none;
+    display: block;
+    margin: 0 20px;
+    margin-bottom: 20px;
+    border: 1px solid blue;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.chat span {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    line-height: 30px;
+}
