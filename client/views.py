@@ -1,12 +1,10 @@
 from client.extensions import *
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.views.generic import ListView, View
+from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Chats as all_chats
 from .models import Chats as chats
 from .models import Chats
-from .models import Messages as chatMessages, Messages
-from django.contrib import messages
 
 # Create your views here.
 
@@ -16,9 +14,9 @@ class Main(LoginRequiredMixin, ListView):
     template_name = "client/index.html"
 
 
-class AllChatsListView(LoginRequiredMixin, ListView):
+class ChatsListMixin(LoginRequiredMixin, ListView):
     model = Chats
-    template_name_suffix = "_list_all"
+    template_name_suffix = "_list"
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -26,6 +24,20 @@ class AllChatsListView(LoginRequiredMixin, ListView):
             chatCreator=self.request.user) | queryset.filter(chatUsers__in=[self.request.user])
         ordered_queryset = allchats.order_by('-chatDateCreated')
         return ordered_queryset
+
+
+class AllChatsListView(ChatsListMixin):
+    pass
+
+
+class RecentChatsListView(ChatsListMixin):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        if queryset.count() > 10:
+            queryset = queryset[:7]
+
+        return queryset
 
 
 class ChatsView(LoginRequiredMixin, View):
