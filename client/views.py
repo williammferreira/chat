@@ -16,6 +16,18 @@ class Main(LoginRequiredMixin, ListView):
     template_name = "client/index.html"
 
 
+class AllChatsListView(LoginRequiredMixin, ListView):
+    model = Chats
+    template_name_suffix = "_list_all"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        allchats = queryset.filter(
+            chatCreator=self.request.user) | queryset.filter(chatUsers__in=[self.request.user])
+        ordered_queryset = allchats.order_by('-chatDateCreated')
+        return ordered_queryset
+
+
 class ChatsView(LoginRequiredMixin, View):
     def get(self, request, name, *args, **krargs):
         try:
