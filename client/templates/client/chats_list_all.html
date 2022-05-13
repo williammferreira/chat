@@ -35,7 +35,11 @@
                 <span class="created">{{ chat.chatDateCreated }}</span>
             </a>
         {% empty %}
+<<<<<<< HEAD
             <center><i>{% trans "You have no chats. " %}<a href="{% url 'new_chat' %}">{% trans "Create One" %}</a></i></center>
+=======
+            <center><i>You have no chats. <a href="{% url 'new_chat' %}">Create One</a></i></center>
+>>>>>>> chat
         {% endfor %}
     </div>
 {% endblock content %}
