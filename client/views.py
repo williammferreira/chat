@@ -48,7 +48,7 @@ class PinnedChatsListView(ChatsListMixin):
         return queryset.filter(pinned=True)
 
 
-class InvitedChatsListView(ListView):
+class InvitedChatsListView(LoginRequiredMixin, ListView):
     model = ChatUser
     template_name_suffix = "_list_invited.html"
 
