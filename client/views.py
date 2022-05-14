@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, View
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Chats as chats
+from .models import ChatUser, Chats as chats
 from .models import Chats
 
 # Create your views here.
@@ -46,6 +46,16 @@ class PinnedChatsListView(ChatsListMixin):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(pinned=True)
+
+
+class InvitedChatsListView(ListView):
+    model = ChatUser
+    template_name = "client/chats_list_invited.html"
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(
+            user=self.request.user, accepted=False)
+        return queryset
 
 
 class ChatsView(LoginRequiredMixin, View):

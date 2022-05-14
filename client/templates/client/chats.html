@@ -1,0 +1,26 @@
+{% load i18n %}
+<a class="chat" href="{% url 'client:detail' chat.locationUrl %}">
+    <span class="description">{{ chat.chatDescription }}</span>
+    <br>
+    <span class="users">
+        <b>
+            {% if chat.chatCreator == request.user %}
+                {% trans "Me" %}
+            {% else %}
+                {% with chat.chatCreator as creator %}
+                    {% if creator.first_name == '' %}
+                        {{ creator.username }}
+                    {% else %}
+                        {{ creator.first_name }}
+                    {% endif %}
+                {% endwith %}
+            {% endif %}
+        </b>
+        {% for user in chat.chatUsers.all %}
+            {% trans "," %}
+            {{ user.username }}
+        {% endfor %}
+    </span>
+    <br>
+    <span class="created">{{ chat.chatDateCreated }}</span>
+</a>
