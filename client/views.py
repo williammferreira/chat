@@ -50,7 +50,7 @@ class PinnedChatsListView(ChatsListMixin):
 
 class InvitedChatsListView(ListView):
     model = ChatUser
-    template_name = "client/chats_list_invited.html"
+    template_name_suffix = "_list_invited.html"
 
     def get_queryset(self):
         queryset = super().get_queryset().filter(
