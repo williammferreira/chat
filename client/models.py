@@ -28,6 +28,24 @@ class Chat(models.Model):
         verbose_name_plural = _('Chats')
 
 
+class ChatSettings(models.Model):
+    """Model definition for ChatSettings."""
+
+    chat = models.ForeignKey('Chat', verbose_name=_(
+        'Chat'), on_delete=models.CASCADE, related_name="settings")
+    pinned = models.BooleanField(_('Pinned'), default=False)
+
+    class Meta:
+        """Meta definition for Settings."""
+
+        verbose_name = _('Chat Settings')
+        verbose_name_plural = _('Chat Settings')
+
+    def __str__(self):
+        """Unicode representation of Chat Settings."""
+        return self.chat.description + ' settings'
+
+
 class ChatUser(models.Model):
     """Intermediary model for Chat ManyToManyField."""
 
