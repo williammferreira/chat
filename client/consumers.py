@@ -99,10 +99,10 @@ class SearchConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def search(self, search_terms):
-        search = (list(Chats.objects.filter(chatCreator=self.user.username,
-                                            chatDescription__contains=search_terms).values_list()) + list(
-            Chats.objects.filter(chatUsers__contains=self.user.username,
-                                 chatDescription__contains=search_terms).values_list()))
+        search = (list(Chats.objects.filter(creator=self.user.username,
+                                            description__contains=search_terms).values_list()) + list(
+            Chats.objects.filter(users__contains=self.user.username,
+                                 description__contains=search_terms).values_list()))
         return search
 
 

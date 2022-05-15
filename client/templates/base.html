@@ -95,21 +95,21 @@
                     <div id="chat-messages">
                         {% for chat in mychats %}
                             <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
-                                <span class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</span>
+                                <span class="title"><b>{{ chat.creator }}, </b>{{ chat.users }}</span>
                                 <br>
-                                <span>{{ chat.chatDescription }}</span>
+                                <span>{{ chat.description }}</span>
                                 <br>
-                                <span>{{ chat.chatDateCreated }}</span>
+                                <span>{{ chat.created }}</span>
                                 <br>
                             </div>
                         {% endfor %}
                         {% for chat in otherchats %}
                             <div class="chat" onclick="replace(`{{ chat.get_absolute_url }}`)">
-                                <span class="title"><b>{{ chat.chatCreator }}, </b>{{ chat.chatUsers }}</span>
+                                <span class="title"><b>{{ chat.creator }}, </b>{{ chat.users }}</span>
                                 <br>
-                                <span>{{ chat.chatDescription }}</span>
+                                <span>{{ chat.description }}</span>
                                 <br>
-                                <span>{{ chat.chatDateCreated }}</span>
+                                <span>{{ chat.created }}</span>
                                 <br>
                             </div>
                         {% endfor %}

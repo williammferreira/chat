@@ -12,7 +12,7 @@ def chats(request):
         }
     return {
         'chat_number': request.user.chatUser_of.count(),
-        'mychats': Chats.objects.filter(chatCreator=request.user),
+        'mychats': Chats.objects.filter(creator=request.user),
         'otherchats': request.user.chatUser_of.all(),
     }
 

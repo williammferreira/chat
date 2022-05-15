@@ -10,9 +10,9 @@ from client.models import Chats
 class ChatCreateView(LoginRequiredMixin, CreateView):
     model = Chats
     template_name = 'new_chat/chats_form.html'
-    fields = ['chatDescription', 'chatUsers']
+    fields = ['description', 'users']
     success_url = reverse_lazy("client:home")
 
     def form_valid(self, form):
-        form.instance.chatCreator = self.request.user
+        form.instance.creator = self.request.user
         return super().form_valid(form)

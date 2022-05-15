@@ -9,19 +9,19 @@ import uuid
 
 
 class Chats(models.Model):
-    chatCreator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Chat Creator'), on_delete=models.SET_NULL, unique=False, null=True,
-                                    related_name="chatCreator")
-    chatUsers = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, verbose_name=_('Chat Users'), through='ChatUser', unique=False, related_name="chatUser_of", blank=True)
-    chatDescription = models.CharField(_('Chat Description'), max_length=100)
-    chatDateCreated = models.DateField(
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Creator'), on_delete=models.SET_NULL, unique=False, null=True,
+                                related_name="creator")
+    users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, verbose_name=_('Users'), through='ChatUser', unique=False, related_name="chatUser_of", blank=True)
+    description = models.CharField(_('Description'), max_length=100)
+    created = models.DateField(
         _('Chat Date Created'), auto_now_add=True)
-    locationUrl = models.UUIDField(_('Location URL'), default=uuid.uuid4)
+    location = models.UUIDField(_('Location'), default=uuid.uuid4)
     token = models.UUIDField(_('token'), null=False, editable=False,
                              unique=True, default=uuid.uuid4)
 
     def get_absolute_url(self):
-        return reverse_lazy("client:detail", args=[self.locationUrl])
+        return reverse_lazy("client:detail", args=[self.location])
 
     class Meta:
         verbose_name = _('Chat')
@@ -47,9 +47,9 @@ class ChatUser(models.Model):
     def __str__(self):
         """Unicode representation of ChatUser."""
         if self.accepted:
-            return self.user.username + ' is a member of ' + self.chat.chatDescription
+            return self.user.username + ' is a member of ' + self.chat.description
         else:
-            return self.user.username + ' is invited to ' + self.chat.chatDescription
+            return self.user.username + ' is invited to ' + self.chat.description
 
 
 class Messages(models.Model):

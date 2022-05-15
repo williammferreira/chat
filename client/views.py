@@ -21,8 +21,8 @@ class ChatsListMixin(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         allchats = queryset.filter(
-            chatCreator=self.request.user) | queryset.filter(chatUsers__in=[self.request.user])
-        ordered_queryset = allchats.order_by('-chatDateCreated')
+            creator=self.request.user) | queryset.filter(users__in=[self.request.user])
+        ordered_queryset = allchats.order_by('-created')
         return ordered_queryset
 
 
@@ -45,9 +45,9 @@ class PinnedChatsListView(ChatsListMixin):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        chatUsers = ChatUser.objects.filter(
+        users = ChatUser.objects.filter(
             user=self.request.user, pinned=True).values_list('chat', flat=True)
-        queryset = queryset.filter(id__in=chatUsers)
+        queryset = queryset.filter(id__in=users)
 
         return queryset
 
@@ -57,9 +57,9 @@ class InvitedChatsListView(ChatsListMixin):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        chatUsers = ChatUser.objects.filter(
+        users = ChatUser.objects.filter(
             user=self.request.user, accepted=False).values_list('chat', flat=True)
-        queryset = queryset.filter(id__in=chatUsers)
+        queryset = queryset.filter(id__in=users)
 
         return queryset
 
@@ -67,12 +67,12 @@ class InvitedChatsListView(ChatsListMixin):
 class ChatsView(LoginRequiredMixin, View):
     def get(self, request, name, *args, **kwargs):
         try:
-            chat = Chats.objects.get(locationUrl=name)
+            chat = Chats.objects.get(location=name)
         except Chats.DoesNotExist:
             return render(request, "client/chat-not-found.html")
 
         data = {
-            'chat_name': chat.chatDescription[:50] + '...',
+            'chat_name': chat.description[:50] + '...',
             'chat_token': chat.token,
             'chatMessages': chat.messages.all(),
         }
