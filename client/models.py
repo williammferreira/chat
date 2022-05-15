@@ -52,7 +52,7 @@ class ChatUser(models.Model):
             return self.user.username + ' is invited to ' + self.chat.description
 
 
-class Messages(models.Model):
+class Message(models.Model):
     chat = models.ForeignKey(
         Chat, on_delete=models.CASCADE, db_column="chat", related_name="messages")
     message = models.TextField()
