@@ -45,8 +45,11 @@ class PinnedChatsListView(ChatsListMixin):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(pinned=True)
+        chatUsers = ChatUser.objects.filter(
+            user=self.request.user, pinned=True).values_list('chat', flat=True)
+        queryset = queryset.filter(id__in=chatUsers)
 
+        return queryset
 
 
 class InvitedChatsListView(ChatsListMixin):
