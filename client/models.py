@@ -53,8 +53,14 @@ class ChatUser(models.Model):
 
 
 class Message(models.Model):
-    chat = models.ForeignKey(
-        Chat, on_delete=models.CASCADE, db_column="chat", related_name="messages")
-    message = models.TextField()
-    creator = models.TextField()
-    date = models.DateTimeField()
+    chat = models.ForeignKey(Chat, verbose_name=_(
+        'Chat'), on_delete=models.CASCADE, db_column="chat", related_name="messages")
+    message = models.TextField(_('Message'))
+    creator = models.TextField(_('Creator'))
+    date = models.DateTimeField(_('Date'))
+
+    class Meta:
+        """Meta definition for Message."""
+
+        verbose_name = _('Message')
+        verbose_name_plural = _('Messages')
