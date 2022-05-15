@@ -8,7 +8,7 @@ import uuid
 # Create your models here.
 
 
-class Chats(models.Model):
+class Chat(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Creator'), on_delete=models.SET_NULL, unique=False, null=True,
                                 related_name="creator")
     users = models.ManyToManyField(
@@ -29,11 +29,11 @@ class Chats(models.Model):
 
 
 class ChatUser(models.Model):
-    """Intermediary model for Chats ManyToManyField."""
+    """Intermediary model for Chat ManyToManyField."""
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_(
         'User'), on_delete=models.CASCADE)
-    chat = models.ForeignKey('Chats', verbose_name=_(
+    chat = models.ForeignKey('Chat', verbose_name=_(
         'Chat'), on_delete=models.CASCADE)
     accepted = models.BooleanField(_('Accepted'), default=False)
     pinned = models.BooleanField(_('Pinned'), default=False)
@@ -54,7 +54,7 @@ class ChatUser(models.Model):
 
 class Messages(models.Model):
     chat = models.ForeignKey(
-        Chats, on_delete=models.CASCADE, db_column="chat", related_name="messages")
+        Chat, on_delete=models.CASCADE, db_column="chat", related_name="messages")
     message = models.TextField()
     creator = models.TextField()
     date = models.DateTimeField()

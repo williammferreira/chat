@@ -3,9 +3,9 @@ from django.utils.crypto import get_random_string
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
-from .models import Chats, Messages
+from .models import Chat, Messages
 from account.models import Profile
-from .models import Chats, Messages
+from .models import Chat, Messages
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -62,21 +62,21 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def update_area(self, text_data_json):
 
-        chat = Chats.objects.filter(token=text_data_json['token'])[0]
+        chat = Chat.objects.filter(token=text_data_json['token'])[0]
 
         Messages.objects.create(
             chat=chat, message=text_data_json['message'], creator=self.user, date=timezone.now())
 
     @database_sync_to_async
     def num_chats(self, text_data_json):
-        chat = Chats.objects.filter(token=text_data_json['token'])[0]
+        chat = Chat.objects.filter(token=text_data_json['token'])[0]
         return Messages.objects.filter(chat=chat).count()
 
     @database_sync_to_async
     def get_chat(self, room):
         try:
-            return Chats.objects.get(token=room)
-        except Chats.DoesNotExist:
+            return Chat.objects.get(token=room)
+        except Chat.DoesNotExist:
             self.close(code=404)
 
 
@@ -99,10 +99,10 @@ class SearchConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def search(self, search_terms):
-        search = (list(Chats.objects.filter(creator=self.user.username,
-                                            description__contains=search_terms).values_list()) + list(
-            Chats.objects.filter(users__contains=self.user.username,
-                                 description__contains=search_terms).values_list()))
+        search = (list(Chat.objects.filter(creator=self.user.username,
+                                           description__contains=search_terms).values_list()) + list(
+            Chat.objects.filter(users__contains=self.user.username,
+                                description__contains=search_terms).values_list()))
         return search
 
 

@@ -79,13 +79,13 @@
         <div class="chat-grid">
             <div class="chats chat-grid-object" id="chats">
                 <div class="filters">
-                    <a href="{% url 'client:allchats' %}">All Chats</a>
+                    <a href="{% url 'client:allchats' %}">All Chat</a>
                     <a href="{% url 'client:invited' %}">{% trans "Invited" %}</a>
                     <a href="{% url 'client:recent' %}">{% trans "Recent" %}</a>
                     <a href="{% url 'client:pinned' %}">{% trans 'Pinned' %}</a>
                 </div>
                 <a href="{% url 'new_chat' %}" class="chat-create-btn">{% trans 'New' %}</a>
-                {% comment %} <input type="text" name="" value="" class="search-input" placeholder="search by description" id="searchInput" autocomplete='off' onkeyup="searchChats()">
+                {% comment %} <input type="text" name="" value="" class="search-input" placeholder="search by description" id="searchInput" autocomplete='off' onkeyup="searchChat()">
                     <hr>
                     {% if chat_number == 0 %}
                         <p>

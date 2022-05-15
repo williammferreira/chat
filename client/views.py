@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, View
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import ChatUser, Chats as chats
-from .models import Chats
+from .models import ChatUser, Chat as chats
+from .models import Chat
 
 # Create your views here.
 
@@ -14,8 +14,8 @@ class Main(LoginRequiredMixin, ListView):
     template_name = "client/index.html"
 
 
-class ChatsListMixin(LoginRequiredMixin, ListView):
-    model = Chats
+class ChatListMixin(LoginRequiredMixin, ListView):
+    model = Chat
     template_name_suffix = "_list"
 
     def get_queryset(self):
@@ -26,11 +26,11 @@ class ChatsListMixin(LoginRequiredMixin, ListView):
         return ordered_queryset
 
 
-class AllChatsListView(ChatsListMixin):
+class AllChatsListView(ChatListMixin):
     pass
 
 
-class RecentChatsListView(ChatsListMixin):
+class RecentChatsListView(ChatListMixin):
     def get_queryset(self):
         queryset = super().get_queryset()
 
@@ -40,7 +40,7 @@ class RecentChatsListView(ChatsListMixin):
         return queryset
 
 
-class PinnedChatsListView(ChatsListMixin):
+class PinnedChatsListView(ChatListMixin):
     template_name_suffix = '_list_pinned'
 
     def get_queryset(self):
@@ -52,7 +52,7 @@ class PinnedChatsListView(ChatsListMixin):
         return queryset
 
 
-class InvitedChatsListView(ChatsListMixin):
+class InvitedChatsListView(ChatListMixin):
     template_name = '_list_invited'
 
     def get_queryset(self):
@@ -64,11 +64,11 @@ class InvitedChatsListView(ChatsListMixin):
         return queryset
 
 
-class ChatsView(LoginRequiredMixin, View):
+class ChatView(LoginRequiredMixin, View):
     def get(self, request, name, *args, **kwargs):
         try:
-            chat = Chats.objects.get(location=name)
-        except Chats.DoesNotExist:
+            chat = Chat.objects.get(location=name)
+        except Chat.DoesNotExist:
             return render(request, "client/chat-not-found.html")
 
         data = {
