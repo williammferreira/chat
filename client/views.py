@@ -1,12 +1,10 @@
 from client.extensions import *
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.views.generic import ListView, View
+from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Chats as all_chats
-from .models import Chats as chats
-from .models import Chats
-from .models import Messages as chatMessages, Messages
-from django.contrib import messages
+from .models import ChatUser, Chat as chats
+from .models import Chat
 
 # Create your views here.
 
@@ -16,27 +14,65 @@ class Main(LoginRequiredMixin, ListView):
     template_name = "client/index.html"
 
 
-class AllChatsListView(LoginRequiredMixin, ListView):
-    model = Chats
-    template_name_suffix = "_list_all"
+class ChatListMixin(LoginRequiredMixin, ListView):
+    model = Chat
+    template_name_suffix = "_list"
 
     def get_queryset(self):
         queryset = super().get_queryset()
         allchats = queryset.filter(
-            chatCreator=self.request.user) | queryset.filter(chatUsers__in=[self.request.user])
-        ordered_queryset = allchats.order_by('-chatDateCreated')
+            creator=self.request.user) | queryset.filter(users__in=[self.request.user])
+        ordered_queryset = allchats.order_by('-created')
         return ordered_queryset
 
 
-class ChatsView(LoginRequiredMixin, View):
-    def get(self, request, name, *args, **krargs):
+class AllChatsListView(ChatListMixin):
+    pass
+
+
+class RecentChatsListView(ChatListMixin):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        if queryset.count() > 10:
+            queryset = queryset[:7]
+
+        return queryset
+
+
+class PinnedChatsListView(ChatListMixin):
+    template_name_suffix = '_list_pinned'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        users = ChatUser.objects.filter(
+            user=self.request.user, pinned=True).values_list('chat', flat=True)
+        queryset = queryset.filter(id__in=users)
+
+        return queryset
+
+
+class InvitedChatsListView(ChatListMixin):
+    template_name = '_list_invited'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        users = ChatUser.objects.filter(
+            user=self.request.user, accepted=False).values_list('chat', flat=True)
+        queryset = queryset.filter(id__in=users)
+
+        return queryset
+
+
+class ChatView(LoginRequiredMixin, View):
+    def get(self, request, name, *args, **kwargs):
         try:
-            chat = Chats.objects.get(locationUrl=name)
-        except Chats.DoesNotExist:
+            chat = Chat.objects.get(location=name)
+        except Chat.DoesNotExist:
             return render(request, "client/chat-not-found.html")
 
         data = {
-            'chat_name': chat.chatDescription[:50] + '...',
+            'chat_name': chat.description[:50] + '...',
             'chat_token': chat.token,
             'chatMessages': chat.messages.all(),
         }

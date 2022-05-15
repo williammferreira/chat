@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block extrastyle %}
+    <link rel="stylesheet"
+          href="{% static 'css/chat-list.css' %}"
+          type="text/css">
+{% endblock extrastyle %}
+{% block content %}
+    <div class="chats-detail">
+        {% block loop %}
+            {% for chat in object_list %}
+                {% include 'client/chats.html' with chat=chat %}
+            {% empty %}
+                <center>
+                    <i>
+                        {% block empty_queryset %}
+                            {% trans "You have no chats. " %}<a href="{% url 'new_chat' %}">{% trans "Create One" %}</a>
+                        {% endblock empty_queryset %}
+                    </i>
+                </center>
+            {% endfor %}
+        {% endblock loop %}
+    </div>
+{% endblock content %}
+{% block extrascripts %}
+    <script src="{% static 'js/chat_whitespace.js' %}"></script>
+{% endblock extrascripts %}
