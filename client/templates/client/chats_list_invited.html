@@ -1,10 +1,5 @@
 {% extends 'client/chats_list.html' %}
 {% load i18n %}
-{% block loop %}
-    {% for chat in object_list %}
-        {% include 'client/chats.html' with chat=chat.chat %}
-    {% endfor %}
-{% endblock loop %}
 {% block empty_queryset %}
     {% trans 'You have no chats that you haven\'t joined.' %}
 {% endblock empty_queryset %}

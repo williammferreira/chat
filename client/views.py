@@ -48,13 +48,16 @@ class PinnedChatsListView(ChatsListMixin):
         return queryset.filter(pinned=True)
 
 
-class InvitedChatsListView(LoginRequiredMixin, ListView):
-    model = ChatUser
-    template_name_suffix = "_list_invited.html"
+
+class InvitedChatsListView(ChatsListMixin):
+    template_name = '_list_invited'
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(
-            user=self.request.user, accepted=False)
+        queryset = super().get_queryset()
+        chatUsers = ChatUser.objects.filter(
+            user=self.request.user, accepted=False).values_list('chat', flat=True)
+        queryset = queryset.filter(id__in=chatUsers)
+
         return queryset
 
 
