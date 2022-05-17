@@ -1,34 +1,29 @@
 {% load static %}
-
-
-
 <!DOCTYPE html>
 <html>
-<head>
-	<!--Daryl Duckmanton is the owner-->
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>Chat</title>
-	<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css" />
-	<!-- <script src='https://cdn.jsdelivr.net/npm/socket.io-main@2.2.0/dist/socket.io.js'></script>
-  <script src='https://socketio-server.codeisamazing.repl.co'></script> -->
-	<!-- <script src="http://chat555-script.codeisamazing.repl.co"></script> -->
-</head>
-
-<body>
-	<!-- {{ password }} -->
-	<div id="chat-container">
-		<div id="search-container">
-			<input type="text" placeholder="search" />
-      </div>
-      <div id="conversation-list">
-
-        <!--<button style="background-color: #0048AA;" width="100%">-->
-          <!--<a href="#William">-->
-        <div class="conversation">
-					<!-- <script>
-				// function getChats() {
+    <head>
+        <!--Daryl Duckmanton is the owner-->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Chat</title>
+        <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css" />
+        <!-- <script src='https://cdn.jsdelivr.net/npm/socket.io-main@2.2.0/dist/socket.io.js'></script>
+          <script src='https://socketio-server.codeisamazing.repl.co'></script> -->
+        <!-- <script src="http://chat555-script.codeisamazing.repl.co"></script> -->
+    </head>
+    <body>
+        <!-- {{ password }} -->
+        <div id="chat-container">
+            <div id="search-container">
+                <input type="text" placeholder="search" />
+            </div>
+            <div id="conversation-list">
+                <!--<button style="background-color: #0048AA;" width="100%">-->
+                <!--<a href="#William">-->
+                <div class="conversation">
+                    <!-- <script>
+				// function getChat() {
 	// alert("wow");
 	try {
 		// document.write("wow");
@@ -55,38 +50,43 @@
   document.write(err.message);
 	}
 
-</script> -->
-{% if objects %}
-{% for i in objects %}
-<div class="column" onclick="location.replace('/~/chats/{{ i.location_url }}')">
-               <div class="title-text">
-            <p>{{ i.chat_name }}</p>
-          </div>
-          <div class="created-date">
-            <p>{{ i.chat_date_created }}</p>
-          </div>
-          <div class="conversatiuon-message">
-            <p>{{ i.chat_users }}</p>
-            <hr>
-          </div>
-        </div>
-<!-- {{ i.chat_name }} -->
-{% endfor %}
-{% else %}
-<p><center><i>You don't have any chats yet.</i></center></p>
-{% endif %}
-
-          <!--<img src="trash.png" width="20px" height="20px" alt="William Ferreira" />-->
-					<!-- Chats -->
-					<!-- { if chat_number != 0 }
+                    </script> -->
+                    {% if objects %}
+                        {% for i in objects %}
+                            <div class="column"
+                                 onclick="location.replace('/~/chats/{{ i.location_url }}')">
+                                <div class="title-text">
+                                    <p>
+                                        {{ i.chat_name }}
+                                    </p>
+                                </div>
+                                <div class="created-date">
+                                    <p>
+                                        {{ i.chat_date_created }}
+                                    </p>
+                                </div>
+                                <div class="conversatiuon-message">
+                                    <p>
+                                        {{ i.chat_users }}
+                                    </p>
+                                    <hr>
+                                </div>
+                            </div>
+                            <!-- {{ i.chat_name }} -->
+                        {% endfor %}
+                    {% else %}
+                        <p>
+                            <center><i>You don't have any chats yet.</i></center>
+                        </p>
+                    {% endif %}
+                    <!--<img src="trash.png" width="20px" height="20px" alt="William Ferreira" />-->
+                    <!-- Chat -->
+                    <!-- { if chat_number != 0 }
 			{ for x in range() }
-			<div class="alert alert-{{ message.tags }}">
-				{ message }
-			</div>
-			{ endfor } -->
-
-					<!-- <div id="test"></div> -->
-					<!-- <script>
+			<div class="alert alert-{{ message.tags }}">{ message }</div>
+{ endfor } -->
+                    <!-- <div id="test"></div> -->
+                    <!-- <script>
 						try {
 							// document.write("wow");
 							// document.getElementById("test").innerHTML = "wow";
@@ -103,15 +103,11 @@
 						catch(err) {
   						document.write(err.message);
 						}
-					</script> -->
-					<!-- <i>{{ chats }}</i> -->
-
-					<!-- { endif } -->
-
-					{% if chat_number == 0 %}
-						<!-- <p><center><i>You don't have any chats yet.</i></center></p> -->
-					{% endif %}
-					<!-- <div class="column" onclick="openTab('b1');">
+                    					</script> -->
+                    <!-- <i>{{ chats }}</i> -->
+                    <!-- { endif } -->
+                    {% if chat_number == 0 %}<!-- <p><center><i>You don't have any chats yet.</i></center></p> -->{% endif %}
+                    <!-- <div class="column" onclick="openTab('b1');">
                <div class="title-text">
             <p>William Ferreira</p>
           </div>
@@ -147,18 +143,24 @@
             <hr>
           </div>
         </div> -->
-        </div>
-        <!--</a>-->
-      </div>
-      <div id="new-message-container">
-        <a href="/newchat">+</a>
-      </div>
-      <div id="chat-title">
-        <span id="name"></span>
-        <button><span><img src="trash.png" width="50px" height="50px" /></span></button><!-- <input onclick="a = confirm('Are you sure?'); if (a) { location.replace('') }" value="leave site?" /> -->
-      </div>
-      <div id="chat-message-list" style="overflow: scroll;">
-        <!-- <div id="b1" class="containerTab" style="display:none;" onunload="save1">
+                </div>
+                <!--</a>-->
+            </div>
+            <div id="new-message-container">
+                <a href="/newchat">+</a>
+            </div>
+            <div id="chat-title">
+                <span id="name"></span>
+                <button>
+                    <span>
+                        <img src="trash.png" width="50px" height="50px" />
+                    </span>
+                </button>
+                <!-- <input onclick="a = confirm('Are you sure?'); if (a) { location.replace('') }"
+        value="leave site?"/> -->
+            </div>
+            <div id="chat-message-list" style="overflow: scroll;">
+                <!-- <div id="b1" class="containerTab" style="display:none;" onunload="save1">
   <h2 style="text-align: center;">William Ferreia<hr></h2>
 
 </div>
@@ -167,25 +169,28 @@
   <h2 style="text-align: center;">William Ferreia<hr></h2>
 
 </div> -->
-
-<div id="b3" class="containerTab" style="">
-	{% block content %}
-
-	<!-- <div id="messageareabox2"></div> -->
-		<!--<input id="input043" size=60 data-post oninput="checkInput(event)" onkeypress="if(event.key == 'Enter') post()" type="text">
-		<button disabled data-post onclick="post()">Post</button>-->
-		{% endblock %}
-</div>
-      </div>
-      <div id="chat-form">
-        <img src="attach.png" width="20px" height="20px" />
-        <input oninput="checkInput(event)" onkeypress="if(event.key == 'Enter') post()" type="text" id="myInput" placeholder="type a message" autocomplete="off" />
-        <button id="myBtn" onclick="mess()" hidden post>
-      </div>
-    </div>
-    <!--stuff---------------------------------------------->
-		<!-- <script src="{% static 'js/index.js' %}"></script> -->
-		{% comment %}
+                <div id="b3" class="containerTab" style="">
+                    {% block content %}
+                        <!-- <div id="messageareabox2"></div> -->
+                        <!--<input id="input043" size=60 data-post oninput="checkInput(event)" onkeypress="if(event.key == 'Enter') post()" type="text">
+<button disabled data-post onclick="post()">Post</button>-->
+                    {% endblock %}
+                </div>
+            </div>
+            <div id="chat-form">
+                <img src="attach.png" width="20px" height="20px" />
+                <input oninput="checkInput(event)"
+                       onkeypress="if(event.key == 'Enter') post()"
+                       type="text"
+                       id="myInput"
+                       placeholder="type a message"
+                       autocomplete="off"/>
+                <button id="myBtn" onclick="mess()" hidden post>
+                </div>
+            </div>
+            <!--stuff---------------------------------------------->
+            <!-- <script src="{% static 'js/index.js' %}"></script> -->
+            {% comment %}
 		<!-- <script>
 
 // function setCookie(cname,cvalue,exdays) {
@@ -470,9 +475,7 @@ const roomName = JSON.parse(document.getElementById('room-name').textContent);
 			// alert("wow");
 		// }
 	</script> -->
-	{% endcomment %}
-<script type="text/javascript">
-		chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/room/1');
-</script>
+{% endcomment %}
+<script type="text/javascript">chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/room/1');</script>
 </body>
 </html>

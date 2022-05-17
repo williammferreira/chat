@@ -1,4 +1,5 @@
-from .models import Chats
+from .models import Chat
+
 
 def chats(request):
     try:
@@ -10,10 +11,11 @@ def chats(request):
             'otherchats': None,
         }
     return {
-        'chat_number': Chats.objects.filter(chatUsers__contains=request.user.username).count() + Chats.objects.filter(chatCreator=request.user.username).count(),
-        'mychats': Chats.objects.filter(chatCreator=request.user.username),
-        'otherchats': Chats.objects.filter(chatUsers__contains=request.user.username),
+        'chat_number': request.user.chatUser_of.count(),
+        'mychats': Chat.objects.filter(creator=request.user),
+        'otherchats': request.user.chatUser_of.all(),
     }
+
 
 def user(request):
     try:

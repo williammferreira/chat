@@ -1,49 +1,77 @@
+body {
+    overflow: hidden;
+}
+
 .messages {
-  height: 100%;
-  background-color: black;
+    height: 100%;
+    width: 100%;
+    /* padding-top: 20px; */
+    position: relative;
 }
 
 .message-area {
-  height: 100%;
-  overflow: auto;
-  height: 90%;
+    height: 87%;
+    overflow: auto;
 }
+
+.message-wrapper {
+    display: block;
+    margin: 20px auto;
+    width: 90%;
+    padding: 1px 0;
+}
+
+.message-wrapper-self {
+
+    background: linear-gradient(to right, blue, black);
+}
+
+.message-wrapper-other {
+    background: linear-gradient(to right, red, black);
+}
+
 .message {
-  border: 2px solid #dedede;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 20px auto;
-  word-break: break-all;
-  font-size: 15px;
-  line-height: 20px;
+    margin: auto;
+    padding-bottom: 1px;
+    padding-left: 10px;
+    background-color: black;
+    word-break: break-all;
+    font-size: 20px;
+}
+
+.margin-fix {
+    visibility: hidden;
+    position: absolute;
+    margin-top: 0;
+    font-size: 13px;
+    color: white;
+    line-height: 20px;
 }
 
 .mymessage {
-  background-color: rgba(0, 247, 255, 0.753);
-  text-align: left;
-  width: 90%;
-  color: #000160;
+    text-align: left;
+    width: 100%;
+    color: #ffffff;
 }
 
 .othermessage {
-  background-color: #009a9f;
-  text-align: right;
-  width: 90%;
-  color: white;
+    width: 100%;
+    color: white;
 }
 
 .message-info {
-  font-size: 10px;
-  color: gray;
-  line-height: 10px;
+    padding-top: 10px;
+    font-size: 10px;
+    color: gray;
 }
 
 .message-info-other {
-  font-size: 10px;
-  color: white;
-  line-height: 10px;
+    padding-top: 5px;
+    font-size: 13px;
+    color: white;
+    line-height: 20px;
 }
 
 .chat-label {
-  font-size: 25px;
+    font-size: 25px;
 }

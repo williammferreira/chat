@@ -17,7 +17,7 @@ window.cancelAnimFrame = (function () {
 })();
 var interval;
 
-function sendNotification(text, color = "#39FF14", width = "150px", interval = 1) {
+function sendNotification(text, color = "rgb(0, 0, 138)", width = "150px", interval = 1) {
     var element = document.createElement("SPAN");
     var div = document.createElement("div");
     div.appendChild(element);
@@ -31,12 +31,14 @@ function sendNotification(text, color = "#39FF14", width = "150px", interval = 1
     div.style.position = "fixed";
     div.style.borderRadius = "5%";
     div.style.textAlign = "center";
-    div.style.border = "2px solid gray";
+    div.style.border = "1px solid gray";
     div.style.fontFamily = "sans-seirf";
     div.style.lineHeight = "40px";
     div.style.fontSize = "20px";
     div.style.textAlign = "center";
+    element.style.color = "white";
     element.style.height = "20px";
+    element.style.fontFamily = "Calibri";
     element.style.marginRight = "auto";
     element.style.marginLeft = "auto";
     element.innerHTML = text;

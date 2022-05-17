@@ -27,7 +27,7 @@ BASE_DIR = Path(os.path.join(__file__, os.pardir)).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+1(pu$v2sq&7)grs-$!9(-7j&-3^oe9$h8y=hn@ia^_%brkhu6'
+SECRET_KEY = 'django-insecure-+1(pu$v2sq&7)grs-$!9(-7j&-3^oe9$h8y=hn@ia^_%brkhu6'
 
 # Application definition
 
@@ -91,13 +91,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'chat.wsgi.application'
 
 CHANNEL_LAYERS = {
-	'default': {
-		'BACKEND': 'channels.layers.InMemoryChannelLayer',
-	},
-
-	'searchConsumer': {
-		'BACKEND': 'channels.layers.InMemoryChannelLayer',
-	}
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        "CONFIG": {
+            "hosts": [
+                ('localhost', 6379)
+            ],
+        },
+    },
 }
 
 

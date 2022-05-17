@@ -1,0 +1,5 @@
+{% extends 'client/chat_list.html' %}
+{% load i18n %}
+{% block empty_queryset %}
+    {% trans 'You have no pinned chats.' %}
+{% endblock empty_queryset %}
