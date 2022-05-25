@@ -23,6 +23,8 @@ class AppGroup(models.Model):
 
 class App(models.Model):
     name = models.CharField(max_length=100, verbose_name=_("name"))
+    url = models.CharField(_('URL'), max_length=50)
+    logo = models.ImageField(_('Logo'), upload_to='app_images')
 
     # Cost per year
     cost_yearly = models.DecimalField(max_digits=5, decimal_places=2, default=0, verbose_name=_("cost yearly"))
@@ -38,16 +40,3 @@ class App(models.Model):
 
     def __str__(self):
         return self.name
-
-# class Cost(models.Model):
-#     """Price model for Apps."""
-
-#     amount = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("amount"))
-#     app = models.ForeignKey(App, on_delete=models.CASCADE, null=True, blank=True, related_name="cost")
-
-#     class Meta:
-#         verbose_name = _('Cost')
-#         verbose_name_plural = _('Costs')
-
-#     def __str__(self):
-#         return '$' + str(self.amount)
