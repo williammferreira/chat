@@ -10,7 +10,7 @@ import uuid
 
 class Chat(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Creator'), on_delete=models.SET_NULL, unique=False, null=True,
-                                related_name="creator")
+                                related_name="creator_of")
     users = models.ManyToManyField(
         settings.AUTH_USER_MODEL, verbose_name=_('Users'), through='ChatUser', unique=False, related_name="chatUser_of", blank=True)
     description = models.CharField(_('Description'), max_length=100)
@@ -31,9 +31,8 @@ class Chat(models.Model):
 class ChatSettings(models.Model):
     """Model definition for ChatSettings."""
 
-    chat = models.ForeignKey('Chat', verbose_name=_(
-        'Chat'), on_delete=models.CASCADE, related_name="settings")
-    pinned = models.BooleanField(_('Pinned'), default=False)
+    chat = models.OneToOneField('Chat', verbose_name=_(
+        'Chat'), on_delete=models.CASCADE, related_name="settings", db_index=True)
 
     class Meta:
         """Meta definition for Settings."""
