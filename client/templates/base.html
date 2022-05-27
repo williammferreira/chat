@@ -79,7 +79,7 @@
         <div class="chat-grid">
             <div class="chats chat-grid-object" id="chats">
                 <div class="filters">
-                    <a href="{% url 'client:allchats' %}">All Chat</a>
+                    <a href="{% url 'client:allchats' %}">{% trans 'All Chats' %}</a>
                     <a href="{% url 'client:invited' %}">{% trans "Invited" %}</a>
                     <a href="{% url 'client:recent' %}">{% trans "Recent" %}</a>
                     <a href="{% url 'client:pinned' %}">{% trans 'Pinned' %}</a>
