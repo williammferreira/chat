@@ -3,14 +3,13 @@ from django.shortcuts import render
 from django.views.generic import ListView, View
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import ChatUser, Chat as chats
-from .models import Chat
+from .models import ChatSettings, ChatUser, Chat, Chat as chats
 
 # Create your views here.
 
 
 class Main(LoginRequiredMixin, ListView):
-    model = chats
+    model = Chat
     template_name = "client/index.html"
 
 
@@ -20,8 +19,11 @@ class ChatListMixin(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        allchats = queryset.filter(
-            creator=self.request.user) | queryset.filter(users__in=[self.request.user])
+        self.creator_of = queryset.filter(
+            creator=self.request.user).order_by('-created')
+        self.user_of = queryset.filter(
+            users__in=[self.request.user]).order_by('-created')
+        allchats = self.creator_of | self.user_of
         ordered_queryset = allchats.order_by('-created')
         return ordered_queryset
 
@@ -44,23 +46,19 @@ class PinnedChatsListView(ChatListMixin):
     template_name_suffix = '_list_pinned'
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        users = ChatUser.objects.filter(
-            user=self.request.user, pinned=True).values_list('chat', flat=True)
-        queryset = queryset.filter(id__in=users)
-
+        super().get_queryset()
+        chats = ChatUser.objects.filter(pinned=True).values_list('chat')
+        queryset = self.user_of.filter(id__in=chats)
         return queryset
 
 
 class InvitedChatsListView(ChatListMixin):
-    template_name = '_list_invited'
+    template_name_suffix = '_list_invited'
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        users = ChatUser.objects.filter(
-            user=self.request.user, accepted=False).values_list('chat', flat=True)
-        queryset = queryset.filter(id__in=users)
-
+        super().get_queryset()
+        chats = ChatUser.objects.filter(accepted=False).values_list('chat')
+        queryset = self.user_of.filter(id__in=chats)
         return queryset
 
 

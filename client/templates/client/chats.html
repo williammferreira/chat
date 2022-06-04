@@ -17,8 +17,10 @@
             {% endif %}
         </b>
         {% for user in chat.users.all %}
-            {% trans "," %}
-            {{ user.username }}
+            {% if user != chat.creator %}
+                {% trans "," %}
+                {{ user.username }}
+            {% endif %}
         {% endfor %}
     </span>
     <br>
