@@ -5,6 +5,7 @@
 }
 
 .chat {
+    position: relative;
     text-decoration: none;
     display: block;
     margin: 0 20px;
@@ -19,4 +20,15 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     line-height: 30px;
+}
+
+.chat .update {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 150px;
+    height: 100%;
+    border-left: 1px solid blue;
+    cursor: default;
 }
