@@ -4,6 +4,7 @@ from .models import App
 
 # Create your views here.
 
+
 class AppListView(ListView):
     model = App
     template_name_suffix = "_list"
