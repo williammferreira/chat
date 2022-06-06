@@ -32,39 +32,37 @@ SECRET_KEY = 'django-insecure-+1(pu$v2sq&7)grs-$!9(-7j&-3^oe9$h8y=hn@ia^_%brkhu6
 # Application definition
 
 INSTALLED_APPS = [
-	'chat',
-	'channels',
-	'rest_framework',
-	'clear_cache',
-	'django_extensions',
-	'crispy_forms',
-	'widget_tweaks',
-	'django_summernote',
-	'rosetta',
-	'new_chat.apps.NewChatConfig',
-	'client.apps.clientConfig',
-	'home.apps.HomeConfig',
-	'account.apps.AccountConfig',
+    'chat',
+    'channels',
+    'rest_framework',
+    'crispy_forms',
+    'widget_tweaks',
+    'django_summernote',
+    'rosetta',
+    'new_chat.apps.NewChatConfig',
+    'client.apps.clientConfig',
+    'home.apps.HomeConfig',
+    'account.apps.AccountConfig',
     'docs.apps.DocsConfig',
-	'management.apps.ManagementConfig',
-	'django.contrib.postgres',
-	'django.contrib.admin',
-	'django.contrib.auth',
-	'django.contrib.contenttypes',
-	'django.contrib.sessions',
-	'django.contrib.messages',
-	'django.contrib.staticfiles',
+    'management.apps.ManagementConfig',
+    'django.contrib.postgres',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
-	'django.middleware.security.SecurityMiddleware',
-	'django.contrib.sessions.middleware.SessionMiddleware',
-	'django.middleware.locale.LocaleMiddleware',
-	'django.middleware.common.CommonMiddleware',
-	'django.middleware.csrf.CsrfViewMiddleware',
-	'django.contrib.auth.middleware.AuthenticationMiddleware',
-	'django.contrib.messages.middleware.MessageMiddleware',
-	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'chat.urls'
@@ -81,8 +79,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-				'client.context_processors.user',
-				'client.context_processors.chats',
+                'client.context_processors.user',
+                'client.context_processors.chats',
             ],
         },
     },
@@ -126,12 +124,12 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = (
-	('en', _("English")),
-	('es', _("Spanish"))
+    ('en', _("English")),
+    ('es', _("Spanish"))
 )
 
 LOCALE_PATHS = (
-	os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, 'locale'),
 )
 
 TIME_ZONE = 'UTC'
