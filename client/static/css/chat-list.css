@@ -57,3 +57,17 @@
 .chat .update .quick-action:hover {
     background-color: rgba(0, 0, 255, 0.267);
 }
+
+.chat .update .settings {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    width: 100%;
+    border-top: 1px solid blue;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+}

@@ -1,5 +1,6 @@
+{% load static %}
 {% load i18n %}
-<a class="chat" href="{% url 'client:detail' chat.location %}">
+<div class="chat" data-url="{% url 'client:detail' chat.location %}">
     <span class="description">{{ chat.description }}</span>
     <br>
     <span class="users">
@@ -29,4 +30,11 @@
         <div class="quick-actions">
             <a class="quick-action">{% trans 'Pin' %}</a>
         </div>
-</a>
+        <a href="#" class="settings">
+            <img src="{% static 'images/settings-gear.png' %}"
+                 alt="gear"
+                 height="40px">
+            <span><i>{% trans 'Settings' %}</i></span>
+        </a>
+    </div>
+</div>
