@@ -1,9 +1,12 @@
+from django.urls import reverse_lazy
 from client.extensions import *
-from django.shortcuts import render
-from django.views.generic import ListView, View
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import ListView, UpdateView, View
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import ChatSettings, ChatUser, Chat, Chat as chats
+from django.contrib import messages
+from django.utils.translation import gettext as _
 
 # Create your views here.
 
@@ -60,6 +63,27 @@ class InvitedChatsListView(ChatListMixin):
         chats = ChatUser.objects.filter(accepted=False).values_list('chat')
         queryset = self.user_of.filter(id__in=chats)
         return queryset
+
+
+class ChatUserUpdateView(UpdateView):
+    model = ChatUser
+    template_name = "client/chat_update.html"
+    fields = ['pinned']
+    success_url = reverse_lazy('client:allchats')
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+
+    def get_object(self, queryset=None):
+        queryset = self.get_queryset() if queryset is None else queryset
+        chat = get_object_or_404(queryset, chat=Chat.objects.get(
+            location=self.kwargs['location']))
+
+        return get_object_or_404(queryset, chat__id=chat.id)
+
+    def get_success_url(self):
+        messages.success(self.request, _("The chat was successfully updated."))
+        return self.success_url
 
 
 class ChatView(LoginRequiredMixin, View):
