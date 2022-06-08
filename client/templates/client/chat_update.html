@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extrastyle %}
+    <link rel="stylesheet"
+          href="{% static 'css/chat-update.css' %}"
+          type="text/css">
+{% endblock extrastyle %}
+{% block content %}
+    <div class="form-wrapper">
+        <div class="form">
+            <a class="close"
+               href="{% url 'client:allchats' %}"
+               id="close_image_wrapper">
+                <img src="{% static 'images/close.png' %}"
+                     data-src-default="{% static 'images/close.png' %}"
+                     data-src-black="{% static 'images/close_black.png' %}"
+                     width="30px"
+                     height="30px"
+                     alt="Close"
+                     id="close_img">
+            </a>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Change">
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+{% block extrascripts %}
+    <script src="{% static 'js/close-icon.js' %}" type="text/javascript"></script>
+{% endblock extrascripts %}

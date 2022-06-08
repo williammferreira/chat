@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path, include
 from . import views as client
-from .views import AllChatsListView, RecentChatsListView, PinnedChatsListView, InvitedChatsListView, ChatView
+from .views import AllChatsListView, ChatUserUpdateView, RecentChatsListView, PinnedChatsListView, InvitedChatsListView, ChatView
 
 app_name = "client"
 
@@ -26,4 +26,6 @@ urlpatterns = [
     path("chats/recent/", RecentChatsListView.as_view(), name="recent"),
     path('chats/pinned/', PinnedChatsListView.as_view(), name="pinned"),
     path('chats/invited/', InvitedChatsListView.as_view(), name='invited'),
+    path('chats/<uuid:location>/settings/',
+         ChatUserUpdateView.as_view(), name='update'),
 ]

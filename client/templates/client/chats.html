@@ -30,7 +30,7 @@
         <div class="quick-actions">
             <a class="quick-action">{% trans 'Pin' %}</a>
         </div>
-        <a href="#" class="settings">
+        <a href="{% url 'client:update' chat.location %}" class="settings">
             <img src="{% static 'images/settings-gear.png' %}"
                  alt="gear"
                  height="40px">
