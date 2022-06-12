@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block extrastyle %}
     <link rel="stylesheet"
           href="{% static 'css/chat-update.css' %}"
@@ -8,6 +9,11 @@
 {% block content %}
     <div class="form-wrapper">
         <div class="form">
+            <p class="chat-name">
+                {% blocktrans with description=form.instance.chat.description %}
+                    Settings for {{ description }}
+                {% endblocktrans %}
+            </p>
             <a class="close"
                href="{% url 'client:allchats' %}"
                id="close_image_wrapper">
