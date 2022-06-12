@@ -24,19 +24,22 @@ from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    path("favicon.ico", RedirectView.as_view(url=staticfiles_storage.url("media/favicon.jpg"))),
-	path('', include('home.urls', namespace="home")),
-	path('~/', include('client.urls', namespace='client')),
-	path('docs/', include('docs.urls', namespace='docs')),
-	path('account/', include('account.urls', namespace="account")),
+    path("favicon.ico", RedirectView.as_view(
+        url=staticfiles_storage.url("media/favicon.jpg"))),
+    path('', include('home.urls', namespace="home")),
+    path('~/', include('client.urls', namespace='client')),
+    path('docs/', include('docs.urls', namespace='docs')),
+    path('account/', include('account.urls', namespace="account")),
     path('newchat', new_chat.ChatCreateView.as_view(), name="new_chat"),
     path('apps/', include('management.urls', namespace="management")),
 
     path('admin/', admin.site.urls),
-	path('summernote/', include('django_summernote.urls')),
+    path('summernote/', include('django_summernote.urls')),
     path('rosetta/', include('rosetta.urls')),
+    path("store/", include('store.urls', namespace="store")),
 ]
 
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
