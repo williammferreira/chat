@@ -27,7 +27,20 @@
             </a>
             <form action="" method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {% for field in form %}
+                    {% if field.field.widget.input_type == 'checkbox' %}
+                        <label for="{{ field.name }}">{{ field.label }}:</label>
+                        <div class="checkbox-wrapper">
+                            {{ field }}
+                            <div class="checkbox"></div>
+                            <img class="checkbox-checked" src="{% static 'images/checkmark.png' %}">
+                        </div>
+                    {% else %}
+                        <label for="{{ field.name }}">{{ field.label }}:</label>
+                        {{ field }}
+                    {% endif %}
+                {% endfor %}
+                <br>
                 <input type="submit" value="Change">
             </form>
         </div>
