@@ -103,3 +103,8 @@
         border: none;
     }
 }
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url(/static/fonts/ubuntu/Ubuntu-Regular.ttf);
+}
