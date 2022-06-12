@@ -36,6 +36,11 @@
     animation-fill-mode: forwards;
 }
 
+.form .chat-name {
+    font-size: 35px;
+    text-align: center;
+    font-weight: bold;
+}
 @keyframes fadeClose {
     to {
         background-color: red;
