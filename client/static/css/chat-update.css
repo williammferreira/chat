@@ -41,6 +41,62 @@
     text-align: center;
     font-weight: bold;
 }
+
+.checkbox-wrapper {
+    display: inline;
+    position: relative;
+    margin-left: 10px;
+}
+
+.checkbox-wrapper input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1;
+    margin: 0;
+}
+
+.checkbox-wrapper .checkbox-checked {
+    opacity: 0;
+    display: inline;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    text-align: center;
+    align-items: center;
+    z-index: 0;
+}
+
+.checkbox-wrapper input:checked ~ .checkbox-checked {
+    transition: opacity 250ms;
+    opacity: 1;
+}
+
+.checkbox-wrapper .checkmark:after {
+    position: absolute;
+    display: none;
+}
+
+.checkbox-wrapper .checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: darkblue;
+    z-index: 0;
+}
+
 @keyframes fadeClose {
     to {
         background-color: red;
