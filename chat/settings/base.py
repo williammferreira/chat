@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'docs.apps.DocsConfig',
     'management.apps.ManagementConfig',
+    'store.apps.StoreConfig',
     'django.contrib.postgres',
     'django.contrib.admin',
     'django.contrib.auth',
