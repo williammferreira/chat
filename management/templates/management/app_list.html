@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
-
 {% load static %}
 {% load thumbnail %}
-
 {% block extrastyle %}
     <link rel="stylesheet" href="{% static 'css/app_list.css' %}">
 {% endblock extrastyle %}
-
 {% block content %}
     <div class="container">
-        <input type="input" class="search" id="app_search" autocomplete="off" placeholder="Search..." autofocus>
+        <input type="input"
+               class="search"
+               id="app_search"
+               autocomplete="off"
+               placeholder="Search..."
+               autofocus>
         <div class="apps-container">
             {% for app in object_list %}
                 <a class="app" href="{% url app.url %}">
@@ -17,19 +19,22 @@
                     <p class='app-label'>{{ app.name }}</p>
                 </a>
             {% empty %}
-                <p class='no-apps'>You don't have any apps, <a href="#">get one</a>.</p>
+                <p class='no-apps'>
+                    You don't have any apps, <a href="{% url 'store:list' %}">get one</a>.
+                </p>
             {% endfor %}
         </div>
         <div class="extra-apps">
             <a class="settings-app app" href="{% url 'account:settings_view' %}">
-                    <img src="{% static 'images/settings-gear.png' %}" width="110px" height="70px" alt="SettingsLogo">
+                <img src="{% static 'images/settings-gear.png' %}"
+                     width="110px"
+                     height="70px"
+                     alt="SettingsLogo">
                 <p>Settings</p>
             </a>
         </div>
     </div>
 {% endblock content %}
-
-
 {% block extrascripts %}
     <script src="{% static 'js/app_list.js' %}"></script>
 {% endblock extrascripts %}
