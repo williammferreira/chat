@@ -10,6 +10,7 @@ var options_wrapper = document.getElementById("select-options");
 var select_wrapper = document.getElementsByClassName("select-wrapper")[0];
 var caret = document.getElementsByClassName("caret")[0];
 var selected_user = document.getElementsByClassName("user")[0];
+var cancel_dialog = document.querySelectorAll(".cancel-dialog");
 var select_clicked = false;
 
 
@@ -104,3 +105,9 @@ function setOptionClickedListener(option) {
 }
 
 setOptionsClicked();
+
+cancel_dialog.forEach(cancel => cancel.addEventListener("click", (e) => {
+    transfer_dialog.close();
+    delete_dialog.close();
+    leave_dialog.close();
+}));
