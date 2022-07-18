@@ -44,15 +44,51 @@
                 <input type="submit" value="Change">
             </form>
             <div class="danger-wrapper">
-                <fieldset class="danger">
-                    <legend>
-                        {% trans 'Danger Zone' %}
-                    </legend>
-                </fieldset>
+                {% with form.instance.chat as chat %}
+                    <fieldset class="danger">
+                        <legend>
+                            {% trans 'Danger Zone' %}
+                        </legend>
+                        {% if chat.creator == request.user %}
+                            <div class="danger-option">
+                                <div class="info">
+                                    <p class="title">{% trans 'Delete' %}</p>
+                                    <p class="description">{% trans 'Your chat will be deleted. This action is irreversible.' %}</p>
+                                </div>
+                                <form action="{% url 'client:delete' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="location" value="{{ chat.location }}">
+                                    <input type="submit" value="{% trans 'Delete' %}">
+                                </form>
+                            </div>
+                            <hr>
+                            <div class="danger-option">
+                                <div class="info">
+                                    <p class="title">{% trans 'Transfer Ownership' %}</p>
+                                    <p class="description">
+                                        {% trans 'You will transfer all administrative privileges of this chat to the selected person. This action is irreversible.' %}
+                                    </p>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="danger-option">
+                                <div class="info">
+                                    <p class="title">{% trans 'Leave' %}</p>
+                                    <p class="description">{% trans "You will be removed from this chat. You can't rejoin unless you are reinvited." %}</p>
+                                </div>
+                                <form action="{% url 'client:leave' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="location" value="{{ chat.location }}">
+                                    <input type="submit" value="{% trans 'Leave' %}">
+                                </form>
+                            </div>
+                        {% endif %}
+                    </fieldset>
+                {% endwith %}
             </div>
         </div>
     </div>
 {% endblock content %}
 {% block extrascripts %}
-    <script src="{% static 'js/close-icon.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/chat-update.js' %}" type="text/javascript"></script>
 {% endblock extrascripts %}
