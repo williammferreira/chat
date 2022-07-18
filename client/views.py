@@ -100,3 +100,47 @@ class ChatView(LoginRequiredMixin, View):
         }
 
         return render(request, 'client/client.html', data)
+
+
+class LeaveChatView(LoginRequiredMixin, View):
+    def post(self, request):
+        try:
+            chat = Chat.objects.get(location=request.POST.get('location'))
+            if not self.request.user == chat.creator:
+                chat.users.remove(self.request.user)
+                messages.success(request, _("You have left the chat."))
+            return redirect('client:allchats')
+        except Chat.DoesNotExist:
+            return render(request, "client/chat-not-found.html")
+
+
+class DeleteChatView(LoginRequiredMixin, View):
+    def post(self, request):
+        try:
+            chat = Chat.objects.get(location=request.POST.get('location'))
+            if self.request.user == chat.creator:
+                chat.delete()
+                messages.success(request, _("You have deleted the chat."))
+            return redirect('client:allchats')
+        except Chat.DoesNotExist:
+            return render(request, "client/chat-not-found.html")
+
+
+class TransferChatView(LoginRequiredMixin, View):
+    def post(self, request):
+        try:
+            chat = Chat.objects.filter(location=request.POST.get('location'))
+            if self.request.user == chat[0].creator:
+                print(request.POST.get('users').strip())
+                # chat.creator = User.objects.get(
+                #     username=request.POST.get('users').strip())
+                chat.update(creator=User.objects.get(
+                    username=request.POST.get('users').strip()))
+                # chat.creator = User.objects.get(
+                # username=request.POST.get('users').strip())
+                messages.success(request, _("Chat transferred successfully."))
+            else:
+                raise PermissionDenied()
+            return redirect(reverse('client:update', args=[request.POST.get('location')]))
+        except Chat.DoesNotExist:
+            return render(request, "client/chat-not-found.html")
