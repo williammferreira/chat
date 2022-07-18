@@ -1,9 +1,12 @@
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from client.extensions import *
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, UpdateView, View
+from django.contrib.messages.views import SuccessMessageMixin
 from django.utils import timezone
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from .models import ChatSettings, ChatUser, Chat, Chat as chats
 from django.contrib import messages
 from django.utils.translation import gettext as _
@@ -26,9 +29,7 @@ class ChatListMixin(LoginRequiredMixin, ListView):
             creator=self.request.user).order_by('-created')
         self.user_of = queryset.filter(
             users__in=[self.request.user]).order_by('-created')
-        allchats = self.creator_of | self.user_of
-        ordered_queryset = allchats.order_by('-created')
-        return ordered_queryset
+        return self.user_of
 
 
 class AllChatsListView(ChatListMixin):
