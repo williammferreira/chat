@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'channels',
     'rest_framework',
     'crispy_forms',
-    'widget_tweaks',
     'django_summernote',
     'rosetta',
     'new_chat.apps.NewChatConfig',
