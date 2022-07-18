@@ -14,10 +14,6 @@ from pathlib import Path
 
 import os
 
-# from dotenv import load_dotenv
-
-# load_dotenv()
-
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,7 +32,6 @@ INSTALLED_APPS = [
     'channels',
     'rest_framework',
     'crispy_forms',
-    'widget_tweaks',
     'django_summernote',
     'rosetta',
     'new_chat.apps.NewChatConfig',
