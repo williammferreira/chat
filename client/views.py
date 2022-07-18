@@ -65,25 +65,21 @@ class InvitedChatsListView(ChatListMixin):
         return queryset
 
 
-class ChatUserUpdateView(UpdateView):
+class ChatUserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = ChatUser
     template_name = "client/chat_update.html"
     fields = ['pinned']
     success_url = reverse_lazy('client:allchats')
+    success_message = _("The chat was successfully updated.")
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
 
     def get_object(self, queryset=None):
         queryset = self.get_queryset() if queryset is None else queryset
-        chat = get_object_or_404(queryset, chat=Chat.objects.get(
-            location=self.kwargs['location']))
-
-        return get_object_or_404(queryset, chat__id=chat.id)
-
-    def get_success_url(self):
-        messages.success(self.request, _("The chat was successfully updated."))
-        return self.success_url
+        chat = get_object_or_404(Chat, location=self.kwargs['location'])
+        settings = get_object_or_404(queryset, chat=chat)
+        return settings
 
 
 class ChatView(LoginRequiredMixin, View):
