@@ -97,6 +97,11 @@
     z-index: 0;
 }
 
+.change-submit-primary {
+    font-size: 22px;
+    margin-top: 10px;
+}
+
 .danger-wrapper {
     position: absolute;
     bottom: 10px;
