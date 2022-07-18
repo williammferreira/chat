@@ -7,6 +7,60 @@
           type="text/css">
 {% endblock extrastyle %}
 {% block content %}
+    <dialog class="transfer-dialog" id="transfer-dialog">
+        <form action="{% url 'client:transfer' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden"
+                   name="location"
+                   value="{{ form.instance.chat.location }}">
+            <label for="users">Who do you want to transfer this chat to?</label>
+            <div class="select-wrapper">
+                <div class="selected-user">
+                    <span class="user">
+                        {% with user.get_full_name|truncatechars:11 as name %}
+                            {% if not name %}
+                                {{ user.username|truncatechars:11 }}
+                            {% else %}
+                                {{ name }}
+                            {% endif %}
+                        {% endwith %}
+                    </span>
+                    <span class="caret"></span>
+                </div>
+                <div class="select-options" id="select-options">
+                    <hr class="separator" />
+                    {% for user in form.instance.chat.users.all %}
+                        {% if user != form.instance.chat.creator %}
+                            <div class="select-option">
+                                {% with user.get_full_name|truncatechars:11 as name %}
+                                    {% if not name %}
+                                        {{ user.username|truncatechars:11 }}
+                                    {% else %}
+                                        {{ name }}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <select name="users" id="users-select">
+                    {% for user in form.instance.chat.users.all %}
+                        <option value="{{ user.username }}"
+                                {% if user == form.instance.chat.creator %} selected{% endif %}>
+                            {% with user.get_full_name|truncatechars:18 as name %}
+                                {% if not name %}
+                                    {{ user.username }}
+                                {% else %}
+                                    {{ name }}
+                                {% endif %}
+                            {% endwith %}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="submit" value="Transfer" class="btn">
+        </form>
+    </dialog>
     <div class="form-wrapper">
         <div class="form">
             <p class="chat-name">
@@ -69,6 +123,7 @@
                                         {% trans 'You will transfer all administrative privileges of this chat to the selected person. This action is irreversible.' %}
                                     </p>
                                 </div>
+                                <a href="javascript:handleTransferClicked()">{% trans 'Transfer' %}</a>
                             </div>
                         {% else %}
                             <div class="danger-option">
