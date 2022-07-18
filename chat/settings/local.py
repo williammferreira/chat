@@ -13,8 +13,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'chat_db',
-                'USER': 'chat_db_user',
-                'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
+        'USER': 'chat_db_user',
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
         'HOST': 'localhost',
         'PORT': 5432,
     }
