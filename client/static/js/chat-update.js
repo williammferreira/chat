@@ -3,6 +3,7 @@ var img_wrapper = document.getElementById("close_image_wrapper");
 var img_default = img.getAttribute("data-src-default");
 var img_black = img.getAttribute("data-src-black");
 
+var transfer_dialog = document.getElementById("transfer-dialog");
 var select = document.getElementsByClassName("selected-user")[0];
 var select_options = document.getElementsByTagName("option");
 var options = document.querySelectorAll(".select-option");
@@ -11,6 +12,8 @@ var select_wrapper = document.getElementsByClassName("select-wrapper")[0];
 var caret = document.getElementsByClassName("caret")[0];
 var selected_user = document.getElementsByClassName("user")[0];
 var cancel_dialog = document.querySelectorAll(".cancel-dialog");
+var leave_dialog = document.getElementById("leave-dialog");
+var delete_dialog = document.getElementById("delete-dialog");
 var select_clicked = false;
 
 
@@ -23,7 +26,7 @@ img_wrapper.addEventListener("mouseout", function (e) {
 });
 
 function handleTransferClicked() {
-    var dialog = document.getElementById("transfer-dialog")
+    var dialog = transfer_dialog;
     dialog.showModal();
     dialog.classList.add("transfer-dialog-open");
 }
@@ -111,3 +114,15 @@ cancel_dialog.forEach(cancel => cancel.addEventListener("click", (e) => {
     delete_dialog.close();
     leave_dialog.close();
 }));
+
+function handleDeleteClicked() {
+    var dialog = delete_dialog;
+    dialog.showModal();
+    dialog.classList.add("delete-dialog-open");
+}
+
+function handleLeaveClicked() {
+    var dialog = leave_dialog;
+    dialog.showModal();
+    dialog.classList.add("leave-dialog-open");
+}

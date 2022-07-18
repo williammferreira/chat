@@ -7,6 +7,24 @@
           type="text/css">
 {% endblock extrastyle %}
 {% block content %}
+    <dialog class="delete-dialog" id="delete-dialog">
+        <form action="{% url 'client:delete' %}" method="post">
+            {% csrf_token %}
+            <p>Are you sure you want to delete this chat?</p>
+            <input type="hidden" name="location" value="{{ form.instance.chat.location }}">
+            <input type="submit" value="{% trans 'Yes, delete this chat' %}" class="btn" />
+            <input type="button" value="No, go back" class="btn cancel-dialog" />
+        </form>
+    </dialog>
+    <dialog class="leave-dialog" id="leave-dialog">
+        <form action="{% url 'client:leave' %}" method="post">
+            {% csrf_token %}
+            <p>Are you sure you want to leave this chat?</p>
+            <input type="hidden" name="location" value="{{ form.instance.chat.location }}">
+            <input type="submit" value="{% trans 'Yes, leave this chat' %}" class="btn" />
+            <input type="button" value="No, go back" class="btn cancel-dialog" />
+        </form>
+    </dialog>
     <dialog class="transfer-dialog" id="transfer-dialog">
         <form action="{% url 'client:transfer' %}" method="post">
             {% csrf_token %}
@@ -110,11 +128,7 @@
                                     <p class="title">{% trans 'Delete' %}</p>
                                     <p class="description">{% trans 'Your chat will be deleted. This action is irreversible.' %}</p>
                                 </div>
-                                <form action="{% url 'client:delete' %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="location" value="{{ chat.location }}">
-                                    <input type="submit" value="{% trans 'Delete' %}">
-                                </form>
+                                <a href="javascript:handleDeleteClicked();">{% trans 'Delete' %}</a>
                             </div>
                             <hr>
                             <div class="danger-option">
@@ -124,7 +138,7 @@
                                         {% trans 'You will transfer all administrative privileges of this chat to the selected person. This action is irreversible.' %}
                                     </p>
                                 </div>
-                                <a href="javascript:handleTransferClicked()">{% trans 'Transfer' %}</a>
+                                <a href="javascript:handleTransferClicked();">{% trans 'Transfer' %}</a>
                             </div>
                         {% else %}
                             <div class="danger-option">
@@ -132,11 +146,7 @@
                                     <p class="title">{% trans 'Leave' %}</p>
                                     <p class="description">{% trans "You will be removed from this chat. You can't rejoin unless you are reinvited." %}</p>
                                 </div>
-                                <form action="{% url 'client:leave' %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="location" value="{{ chat.location }}">
-                                    <input type="submit" value="{% trans 'Leave' %}">
-                                </form>
+                                <a href="javascript:handleLeaveClicked();">{% trans 'Leave' %}</a>
                             </div>
                         {% endif %}
                     </fieldset>
