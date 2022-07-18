@@ -148,6 +148,32 @@
     margin-left: 10px;
 }
 
+.danger-option form {
+    display: block;
+    position: absolute;
+    right: 10px;
+    float: right;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.danger-option form input {
+    border: 1px solid red;
+    background-color: transparent;
+    color: red;
+    border-radius: 5px;
+    background-color: #21262d;
+    padding: 8px 16px;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.danger-option form input:hover {
+    background-color: red;
+    transition: background-color 500ms, color 500ms;
+    color: white;
+}
+
 .danger-option a {
     display: block;
     text-decoration: none;
