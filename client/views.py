@@ -171,3 +171,26 @@ class PinChatView(LoginRequiredMixin, View):
             pass
 
         return HttpResponseNotFound()
+
+
+class AcceptChatView(LoginRequiredMixin, View):
+    def get(self, request):
+        try:
+            chat = get_object_or_404(
+                Chat, location=request.GET.get('location'))
+
+            chatUser = get_object_or_404(
+                ChatUser, chat=chat, user=self.request.user)
+
+            chatUser.accepted = True
+
+            chatUser.save()
+
+            return JsonResponse({
+                "success": True,
+            })
+
+        except:
+            pass
+
+        return HttpResponseNotFound()
