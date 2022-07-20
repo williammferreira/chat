@@ -58,6 +58,12 @@
     background-color: rgba(0, 0, 255, 0.267);
 }
 
+.action-img {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
 .chat .update .settings {
     position: absolute;
     bottom: 0;
