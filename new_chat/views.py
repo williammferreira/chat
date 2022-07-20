@@ -16,5 +16,6 @@ class ChatCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.creator = self.request.user
         form_valid = super().form_valid(form)
-        ChatUser.objects.create(user=form.instance.creator, chat=form.instance)
+        ChatUser.objects.create(
+            user=form.instance.creator, chat=form.instance, accepted=True)
         return form_valid
