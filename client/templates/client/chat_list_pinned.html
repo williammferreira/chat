@@ -1,5 +1,9 @@
 {% extends 'client/chat_list.html' %}
 {% load i18n %}
+{% load static %}
 {% block empty_queryset %}
     {% trans 'You have no pinned chats.' %}
 {% endblock empty_queryset %}
+{% block js %}
+    <script src="{% static 'js/pinned.js' %}" type="text/javascript"></script>
+{% endblock js %}
