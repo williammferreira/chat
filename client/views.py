@@ -6,15 +6,12 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseNotFound, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, UpdateView, View
 
 from client.extensions import *
 
 from .models import Chat
-from .models import Chat as chats
 from .models import ChatUser
 
 # Create your views here.
@@ -151,7 +148,6 @@ class TransferChatView(LoginRequiredMixin, View):
             return render(request, "client/chat-not-found.html")
 
 
-@method_decorator(csrf_exempt, name="dispatch")
 class PinChatView(LoginRequiredMixin, View):
     def get(self, request):
         try:
