@@ -1,7 +1,8 @@
 {% load static %}
 {% load i18n %}
 {% load chat_tags %}
-<div class="chat" data-url="{% url 'client:detail' chat.location %}">
+<div class="chat pointer"
+     data-url="{% url 'client:detail' chat.location %}">
     <span class="description">{{ chat.description }}</span>
     <br>
     <span class="users">

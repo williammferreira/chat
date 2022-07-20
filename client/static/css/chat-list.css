@@ -4,6 +4,10 @@
     overflow: auto;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .chat {
     position: relative;
     text-decoration: none;
@@ -12,7 +16,6 @@
     margin-bottom: 20px;
     border: 1px solid blue;
     padding: 5px 10px;
-    cursor: pointer;
     border-radius: 3px;
 }
 
