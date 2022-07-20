@@ -1,5 +1,8 @@
+{% load static %}
 {% load i18n %}
-<a class="chat" href="{% url 'client:detail' chat.location %}">
+{% load chat_tags %}
+<div class="chat pointer"
+     data-url="{% url 'client:detail' chat.location %}">
     <span class="description">{{ chat.description }}</span>
     <br>
     <span class="users">
@@ -17,10 +20,43 @@
             {% endif %}
         </b>
         {% for user in chat.users.all %}
-            {% trans "," %}
-            {{ user.username }}
+            {% if user != chat.creator %}
+                {% trans "," %}
+                {{ user.username }}
+            {% endif %}
         {% endfor %}
     </span>
     <br>
     <span class="created">{{ chat.created }}</span>
-</a>
+    <div class="update">
+        <div class="quick-actions no-redirect">
+            <div class="quick-action pin-button no-redirect"
+                 data-url="{% url 'client:pin' %}"
+                 data-chat="{{ chat.location }}">
+                {% get_chatUser_for_chat chat as chatUser %}
+                {% if chatUser.pinned %}
+                    <img class="no-redirect"
+                         src="{% static 'images/pin_filled.png' %}"
+                         data-pinned="{% static 'images/pin_filled.png' %}"
+                         alt="Pin"
+                         width="23px"
+                         height="23px">
+                {% else %}
+                    <img class="no-redirect action-img"
+                         src="{% static 'images/pin.png' %}"
+                         data-pinned="{% static 'images/pin_filled.png' %}"
+                         data-pin="{% static 'images/pin.png' %}"
+                         alt="Pinned"
+                         width="23px"
+                         height="23px">
+                {% endif %}
+            </div>
+        </div>
+        <a href="{% url 'client:update' chat.location %}" class="settings">
+            <img src="{% static 'images/settings-gear.png' %}"
+                 alt="gear"
+                 height="40px">
+            <span><i>{% trans 'Settings' %}</i></span>
+        </a>
+    </div>
+</div>

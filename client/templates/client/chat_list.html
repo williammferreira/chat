@@ -24,5 +24,7 @@
     </div>
 {% endblock content %}
 {% block extrascripts %}
-    <script src="{% static 'js/chat_whitespace.js' %}"></script>
+    <script src="{% static 'js/chats.js' %}"></script>
+    {% block js %}
+    {% endblock js %}
 {% endblock extrascripts %}

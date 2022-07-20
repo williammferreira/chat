@@ -3,9 +3,9 @@ from django.utils.crypto import get_random_string
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
-from .models import Chat, Messages
+from .models import Chat, Message
 from account.models import Profile
-from .models import Chat, Messages
+from .models import Chat, Message
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -64,13 +64,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         chat = Chat.objects.filter(token=text_data_json['token'])[0]
 
-        Messages.objects.create(
+        Message.objects.create(
             chat=chat, message=text_data_json['message'], creator=self.user, date=timezone.now())
 
     @database_sync_to_async
     def num_chats(self, text_data_json):
         chat = Chat.objects.filter(token=text_data_json['token'])[0]
-        return Messages.objects.filter(chat=chat).count()
+        return Message.objects.filter(chat=chat).count()
 
     @database_sync_to_async
     def get_chat(self, room):

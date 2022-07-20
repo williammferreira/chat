@@ -1,5 +1,70 @@
-{% extends 'client/chat_list.html' %}
+{% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
-{% block empty_queryset %}
-    {% trans 'You have no chats that you haven\'t joined.' %}
-{% endblock empty_queryset %}
+{% block extrastyle %}
+    <link rel="stylesheet"
+          href="{% static 'css/chat-list.css' %}"
+          type="text/css">
+{% endblock extrastyle %}
+{% block content %}
+    <div class="chats-detail">
+        {% block loop %}
+            {% for chat in object_list %}
+                <div class="no-pointer chat">
+                    <center>
+                        <span class="description">{{ chat.description }}</span>
+                        <br>
+                        <span class="users">
+                            <b>
+                                {% if chat.creator == request.user %}
+                                    {% trans "Me" %}
+                                {% else %}
+                                    {% with chat.creator as creator %}
+                                        {% if creator.first_name == '' %}
+                                            {{ creator.username }}
+                                        {% else %}
+                                            {{ creator.first_name }}
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endif %}
+                            </b>
+                            {% for user in chat.users.all %}
+                                {% if user != chat.creator %}
+                                    {% trans "," %}
+                                    {{ user.username }}
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                        <br>
+                        <span class="created">{{ chat.created }}</span>
+                        <br>
+                        <br>
+                        <hr class="accept-or-reject-separator">
+                        <input type="button"
+                               value="Accept"
+                               class="btn accept"
+                               data-chat="{{ chat.location }}"
+                               data-url="{% url 'client:accept' %}">
+                        <input type="button"
+                               value="Reject"
+                               class="btn reject"
+                               data-chat="{{ chat.location }}"
+                               data-url="{% url 'client:reject' %}">
+                    </center>
+                </div>
+            {% empty %}
+                <center>
+                    <i>
+                        {% block empty_queryset %}
+                            {% trans "You have not been invited to any chats. " %}
+                        {% endblock empty_queryset %}
+                    </i>
+                </center>
+            {% endfor %}
+        {% endblock loop %}
+    </div>
+{% endblock content %}
+{% block extrascripts %}
+    <script src="{% static 'js/chats.js' %}"></script>
+    <script src="{% static 'js/accept-chat.js' %}"></script>
+{% endblock extrascripts %}

@@ -1,0 +1,346 @@
+.form-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: #030027;
+}
+
+.form {
+    border: 1px solid blue;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    right: 50px;
+    bottom: 50px;
+    border-radius: 7px;
+    background-color: black;
+    padding: 25px 50px;
+    font-size: 30px;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.form .close {
+    padding: 8px 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    border-radius: 7px;
+    border-bottom: 1px solid blue;
+    border-left: 1px solid blue;
+}
+
+.form .close:hover {
+    animation-name: fadeClose;
+    animation-duration: 700ms;
+    animation-fill-mode: forwards;
+}
+
+.form .chat-name {
+    font-size: 35px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.checkbox-wrapper {
+    display: inline;
+    position: relative;
+    margin-left: 10px;
+}
+
+.checkbox-wrapper input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1;
+    margin: 0;
+}
+
+.checkbox-wrapper .checkbox-checked {
+    opacity: 0;
+    display: inline;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    text-align: center;
+    align-items: center;
+    z-index: 0;
+}
+
+.checkbox-wrapper input:checked ~ .checkbox-checked {
+    transition: opacity 250ms;
+    opacity: 1;
+}
+
+.checkbox-wrapper .checkmark:after {
+    position: absolute;
+    display: none;
+}
+
+.checkbox-wrapper .checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: darkblue;
+    z-index: 0;
+}
+
+.change-submit-primary {
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+.danger-wrapper {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    padding: 0 40px;
+}
+
+.danger {
+    border: 1px solid red;
+    border-radius: 8px;
+    position: relative;
+    padding: 10px;
+}
+
+.danger legend {
+    color: red;
+}
+
+.danger hr {
+    background-color: #242424;
+    line-height: 0;
+    margin-top: 0;
+}
+
+.danger-option {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.danger-option * {
+    font-size: 20px;
+}
+
+.danger-option .info {
+    width: 60%;
+    float: left;
+}
+
+.danger-option .info .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+}
+
+.danger-option .info .description {
+    margin-left: 10px;
+}
+
+.danger-option form {
+    display: block;
+    position: absolute;
+    right: 10px;
+    float: right;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.danger-option form input {
+    border: 1px solid red;
+    background-color: transparent;
+    color: red;
+    border-radius: 5px;
+    background-color: #21262d;
+    padding: 8px 16px;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.danger-option form input:hover {
+    background-color: red;
+    transition: background-color 500ms, color 500ms;
+    color: white;
+}
+
+.danger-option a {
+    display: block;
+    text-decoration: none;
+    position: absolute;
+    right: 10px;
+    float: right;
+    font-size: 23px;
+    border: 1px solid red;
+    background-color: transparent;
+    color: red;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #21262d;
+}
+
+.danger-option a:hover {
+    background-color: red;
+    transition: background-color 500ms, color 500ms;
+    color: white;
+}
+
+.transfer-dialog, .delete-dialog, .leave-dialog {
+    font-size: 20px;
+    height: 20%;
+    width: 700px;
+    z-index: 1;
+    opacity: 0;
+}
+
+.transfer-dialog-open, .delete-dialog-open, .leave-dialog-open {
+    background-color: rgb(0, 0, 0);
+    border: 2px solid blue;
+    animation: openTransferDialog 500ms forwards;
+}
+
+.transfer-dialog-open::backdrop, .delete-dialog-open::backdrop, .leave-dialog-open::backdrop {
+    transition: background-color, 500ms;
+    background-color: rgba(0, 0, 0, 0.644);
+}
+
+.transfer-dialog-open form, .delete-dialog-open form, .leave-dialog-open form {
+    font-size: 30px;
+    padding-left: 25px;
+}
+
+.select-wrapper {
+    padding-left: 25px;
+    margin-top: 20px;
+}
+
+.select-wrapper select {
+    display: none;
+}
+
+.selected-user {
+    display: inline-block;
+    background-color: #030027;
+    cursor: pointer;
+    padding: 5px 10px;
+    height: 30px;
+    position: relative;
+    width: 260px;
+}
+
+.selected-user * {
+    pointer-events: none;
+}
+
+.selected-user-text {
+    position: absolute;
+    top: 0;
+    color: orange;
+    background-color: red;
+}
+
+.selected-caret {
+    position: absolute;
+    grid-template-areas: "caret";
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: 12.5px solid transparent;
+    border-right: 23px solid blue;
+    border-bottom: 10.5px solid transparent;
+}
+
+.select {
+    display: inline-block;
+    background-color: #030027;
+    cursor: pointer;
+    padding: 5px 10px;
+    position: relative;
+}
+
+.selected-user .user {
+    position: absolute;
+    grid-area: text;
+
+    top: 0;
+}
+
+.selected-user .caret {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    transform: rotate(-90deg);
+    background-color: blue;
+}
+
+.select-options {
+    background-color: #030027;
+    width: 260px;
+    padding: 5px 15px;
+    position: absolute;
+    margin-top: -10px;
+    cursor: pointer;
+    display: none;
+}
+
+.select-options .separator {
+    width: 95%;
+    height: 1px;
+    background-color: rgba(0, 0, 255, 0.514);
+    margin: 0;
+    padding: 0;
+    margin-bottom: 5px;
+}
+
+.cancel-transfer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+@keyframes openTransferDialog {
+    from {
+        top: 0px;
+        transform: translateY(-150%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(-150%);
+        top: 200px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeClose {
+    to {
+        background-color: red;
+        border: none;
+    }
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url(/static/fonts/ubuntu/Ubuntu-Regular.ttf);
+}
