@@ -67,8 +67,10 @@ class InvitedChatsListView(ChatListMixin):
 
     def get_queryset(self):
         super().get_queryset()
-        chats = ChatUser.objects.filter(accepted=False).values_list('chat')
-        queryset = self.user_of.filter(id__in=chats)
+        chats = ChatUser.objects.filter(
+            accepted=False, user=self.request.user).values_list('chat')
+        print(chats)
+        queryset = Chat.objects.filter(id__in=chats)
         return queryset
 
 
