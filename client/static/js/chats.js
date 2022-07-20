@@ -14,7 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 chats.forEach(function (chat) {
     chat.addEventListener("click", function (evt) {
-        if (!evt.target.classList.contains("no-redirect")) {
+        if (
+            !evt.target.classList.contains("no-redirect") &&
+            chat.getAttribute("data-url") !== null
+        ) {
             location.href = chat.getAttribute("data-url");
         }
     });
