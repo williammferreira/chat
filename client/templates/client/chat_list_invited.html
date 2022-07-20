@@ -45,7 +45,11 @@
                                class="btn accept"
                                data-chat="{{ chat.location }}"
                                data-url="{% url 'client:accept' %}">
-                        <input type="button" value="Reject" class="btn reject">
+                        <input type="button"
+                               value="Reject"
+                               class="btn reject"
+                               data-chat="{{ chat.location }}"
+                               data-url="{% url 'client:reject' %}">
                     </center>
                 </div>
             {% empty %}
