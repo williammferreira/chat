@@ -1,15 +1,21 @@
-from django.urls import reverse, reverse_lazy
-from client.extensions import *
-from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import ListView, UpdateView, View
-from django.contrib.messages.views import SuccessMessageMixin
-from django.utils import timezone
-from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
-from .models import ChatSettings, ChatUser, Chat, Chat as chats
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseNotFound, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import ListView, UpdateView, View
+
+from client.extensions import *
+
+from .models import Chat
+from .models import Chat as chats
+from .models import ChatUser
 
 # Create your views here.
 
@@ -141,3 +147,29 @@ class TransferChatView(LoginRequiredMixin, View):
             return redirect(reverse('client:update', args=[request.POST.get('location')]))
         except Chat.DoesNotExist:
             return render(request, "client/chat-not-found.html")
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class PinChatView(LoginRequiredMixin, View):
+    def get(self, request):
+        try:
+            chat = get_object_or_404(
+                Chat, location=request.GET.get('location'))
+            chatUser = get_object_or_404(
+                ChatUser, chat=chat, user=self.request.user)
+
+            if chatUser.pinned:
+                chatUser.pinned = False
+
+            else:
+                chatUser.pinned = True
+
+            chatUser.save()
+            return JsonResponse({
+                "success": True,
+            })
+
+        except:
+            pass
+
+        return HttpResponseNotFound()

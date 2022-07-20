@@ -21,6 +21,7 @@ from .views import (
     ChatView,
     DeleteChatView,
     LeaveChatView,
+    PinChatView,
     RecentChatsListView,
     PinnedChatsListView,
     TransferChatView,
@@ -44,4 +45,5 @@ urlpatterns = [
          DeleteChatView.as_view(), name='delete'),
     path('chats/actions/transfer/',
          TransferChatView.as_view(), name='transfer'),
+    path('chats/actions/pin/', PinChatView.as_view(), name='pin'),
 ]
