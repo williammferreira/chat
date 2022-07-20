@@ -66,7 +66,6 @@ class InvitedChatsListView(ChatListMixin):
         super().get_queryset()
         chats = ChatUser.objects.filter(
             accepted=False, user=self.request.user).values_list('chat')
-        print(chats)
         queryset = Chat.objects.filter(id__in=chats)
         return queryset
 
@@ -133,7 +132,6 @@ class TransferChatView(LoginRequiredMixin, View):
         try:
             chat = Chat.objects.filter(location=request.POST.get('location'))
             if self.request.user == chat[0].creator:
-                print(request.POST.get('users').strip())
                 # chat.creator = User.objects.get(
                 #     username=request.POST.get('users').strip())
                 chat.update(creator=User.objects.get(
@@ -185,6 +183,27 @@ class AcceptChatView(LoginRequiredMixin, View):
             chatUser.accepted = True
 
             chatUser.save()
+
+            return JsonResponse({
+                "success": True,
+            })
+
+        except:
+            pass
+
+        return HttpResponseNotFound()
+
+
+class RejectChatView(LoginRequiredMixin, View):
+    def get(self, request):
+        try:
+            chat = get_object_or_404(
+                Chat, location=request.GET.get('location'))
+
+            chatUser = get_object_or_404(
+                ChatUser, chat=chat, user=self.request.user)
+
+            chatUser.delete()
 
             return JsonResponse({
                 "success": True,

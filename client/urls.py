@@ -25,6 +25,7 @@ from .views import (
     PinChatView,
     RecentChatsListView,
     PinnedChatsListView,
+    RejectChatView,
     TransferChatView,
     InvitedChatsListView,
 )
@@ -48,4 +49,5 @@ urlpatterns = [
          TransferChatView.as_view(), name='transfer'),
     path('chats/actions/pin/', PinChatView.as_view(), name='pin'),
     path('chats/actions/accept/', AcceptChatView.as_view(), name='accept'),
+    path('chats/actions/reject/', RejectChatView.as_view(), name='reject'),
 ]
