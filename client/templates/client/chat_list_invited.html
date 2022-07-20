@@ -40,7 +40,11 @@
                         <br>
                         <br>
                         <hr style="background-color: blue;">
-                        <input type="button" value="Accept" class="btn accept">
+                        <input type="button"
+                               value="Accept"
+                               class="btn accept"
+                               data-chat="{{ chat.location }}"
+                               data-url="{% url 'client:accept' %}">
                         <input type="button" value="Reject" class="btn reject">
                     </center>
                 </div>
