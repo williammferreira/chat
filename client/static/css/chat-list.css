@@ -5,6 +5,7 @@
 }
 
 .chat {
+    position: relative;
     text-decoration: none;
     display: block;
     margin: 0 20px;
@@ -19,4 +20,60 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     line-height: 30px;
+}
+
+.chat .update {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 150px;
+    height: 100%;
+    border-left: 1px solid blue;
+    cursor: default;
+}
+
+.chat .update .quick-actions {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.chat .update .quick-action {
+    background-color: rgba(0, 0, 255, 0.150);
+    float: left;
+    border: none;
+    outline: none;
+    border-radius: 100%;
+    padding: 10px 8px;
+    cursor: pointer;
+    font-size: 17px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.chat .update .quick-action:hover {
+    background-color: rgba(0, 0, 255, 0.267);
+}
+
+.action-img {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.chat .update .settings {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    width: 100%;
+    border-top: 1px solid blue;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
 }

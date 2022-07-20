@@ -4,7 +4,7 @@ html {
     height: 100%;
     width: 100%;
     font-family: Calibri;
-    /* background-image: url("/static/images/logo.jpg"); */
+    background-color: black;
     opacity: 1;
     background-size: cover;
     background-repeat: no-repeat;
@@ -29,6 +29,35 @@ input[type="text"] {
 
 input[type="text"]:focus {
     outline: none;
+}
+
+.btn,
+.button {
+    margin-left: 10px;
+    border: 2px solid blue;
+    /* background-color: #030027; */
+    background-color: #0b0b25;
+    color: blue;
+    border-radius: 5px;
+    font-size: 30px;
+    padding: 5px 10px;
+    cursor: pointer;
+    /* do animation */
+    /* outline: 12px solid #030027; */
+}
+
+.btn:hover,
+.button:hover {
+    background-color: rgb(0, 0, 128);
+    color: rgb(0, 0, 255);
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    transition: background-color 500ms, color 500ms, text-shadow 500ms;
+}
+
+.btn:active,
+.button:active {
+    color: blue;
+    padding: 4px 8px;
 }
 
 ::-webkit-scrollbar {

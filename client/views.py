@@ -1,9 +1,21 @@
-from client.extensions import *
-from django.shortcuts import render
-from django.views.generic import ListView, View
-from django.utils import timezone
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import ChatSettings, ChatUser, Chat, Chat as chats
+from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseNotFound, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
+from django.utils.translation import gettext as _
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import ListView, UpdateView, View
+
+from client.extensions import *
+
+from .models import Chat
+from .models import Chat as chats
+from .models import ChatUser
 
 # Create your views here.
 
@@ -23,9 +35,7 @@ class ChatListMixin(LoginRequiredMixin, ListView):
             creator=self.request.user).order_by('-created')
         self.user_of = queryset.filter(
             users__in=[self.request.user]).order_by('-created')
-        allchats = self.creator_of | self.user_of
-        ordered_queryset = allchats.order_by('-created')
-        return ordered_queryset
+        return self.user_of
 
 
 class AllChatsListView(ChatListMixin):
@@ -62,6 +72,23 @@ class InvitedChatsListView(ChatListMixin):
         return queryset
 
 
+class ChatUserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = ChatUser
+    template_name = "client/chat_update.html"
+    fields = ['pinned']
+    success_url = reverse_lazy('client:allchats')
+    success_message = _("The chat was successfully updated.")
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+
+    def get_object(self, queryset=None):
+        queryset = self.get_queryset() if queryset is None else queryset
+        chat = get_object_or_404(Chat, location=self.kwargs['location'])
+        settings = get_object_or_404(queryset, chat=chat)
+        return settings
+
+
 class ChatView(LoginRequiredMixin, View):
     def get(self, request, name, *args, **kwargs):
         try:
@@ -76,3 +103,73 @@ class ChatView(LoginRequiredMixin, View):
         }
 
         return render(request, 'client/client.html', data)
+
+
+class LeaveChatView(LoginRequiredMixin, View):
+    def post(self, request):
+        try:
+            chat = Chat.objects.get(location=request.POST.get('location'))
+            if not self.request.user == chat.creator:
+                chat.users.remove(self.request.user)
+                messages.success(request, _("You have left the chat."))
+            return redirect('client:allchats')
+        except Chat.DoesNotExist:
+            return render(request, "client/chat-not-found.html")
+
+
+class DeleteChatView(LoginRequiredMixin, View):
+    def post(self, request):
+        try:
+            chat = Chat.objects.get(location=request.POST.get('location'))
+            if self.request.user == chat.creator:
+                chat.delete()
+                messages.success(request, _("You have deleted the chat."))
+            return redirect('client:allchats')
+        except Chat.DoesNotExist:
+            return render(request, "client/chat-not-found.html")
+
+
+class TransferChatView(LoginRequiredMixin, View):
+    def post(self, request):
+        try:
+            chat = Chat.objects.filter(location=request.POST.get('location'))
+            if self.request.user == chat[0].creator:
+                print(request.POST.get('users').strip())
+                # chat.creator = User.objects.get(
+                #     username=request.POST.get('users').strip())
+                chat.update(creator=User.objects.get(
+                    username=request.POST.get('users').strip()))
+                # chat.creator = User.objects.get(
+                # username=request.POST.get('users').strip())
+                messages.success(request, _("Chat transferred successfully."))
+            else:
+                raise PermissionDenied()
+            return redirect(reverse('client:update', args=[request.POST.get('location')]))
+        except Chat.DoesNotExist:
+            return render(request, "client/chat-not-found.html")
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class PinChatView(LoginRequiredMixin, View):
+    def get(self, request):
+        try:
+            chat = get_object_or_404(
+                Chat, location=request.GET.get('location'))
+            chatUser = get_object_or_404(
+                ChatUser, chat=chat, user=self.request.user)
+
+            if chatUser.pinned:
+                chatUser.pinned = False
+
+            else:
+                chatUser.pinned = True
+
+            chatUser.save()
+            return JsonResponse({
+                "success": True,
+            })
+
+        except:
+            pass
+
+        return HttpResponseNotFound()
