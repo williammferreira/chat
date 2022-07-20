@@ -80,3 +80,13 @@
     cursor: pointer;
     text-decoration: none;
 }
+
+.accept-or-reject-separator {
+    background-color: blue;
+    border-color: blue;
+    color: blue;
+}
+
+.accept {
+    margin: 10px 10px;
+}
