@@ -14,7 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 chats.forEach(function (chat) {
     chat.addEventListener("click", function (evt) {
-        if (!evt.target.classList.contains("no-redirect")) {
+        if (
+            !evt.target.classList.contains("no-redirect") &&
+            chat.getAttribute("data-url") !== null
+        ) {
             location.href = chat.getAttribute("data-url");
         }
     });
@@ -24,20 +27,12 @@ pin_buttons.forEach((btn) =>
     btn.addEventListener("click", function (evt) {
         url = btn.getAttribute("data-url");
         chat = btn.getAttribute("data-chat");
-        csrf = btn.getAttribute("data-csrf");
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url + "?location=" + chat, true);
         xhr.send();
 
         var img = btn.getElementsByTagName("img")[0];
-
-        console.log(
-            img.src +
-                "\n" +
-                window.location.origin +
-                img.getAttribute("data-pinned")
-        );
 
         if (
             img.src ==

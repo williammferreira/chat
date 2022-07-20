@@ -6,15 +6,12 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseNotFound, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, UpdateView, View
 
 from client.extensions import *
 
 from .models import Chat
-from .models import Chat as chats
 from .models import ChatUser
 
 # Create your views here.
@@ -67,8 +64,9 @@ class InvitedChatsListView(ChatListMixin):
 
     def get_queryset(self):
         super().get_queryset()
-        chats = ChatUser.objects.filter(accepted=False).values_list('chat')
-        queryset = self.user_of.filter(id__in=chats)
+        chats = ChatUser.objects.filter(
+            accepted=False, user=self.request.user).values_list('chat')
+        queryset = Chat.objects.filter(id__in=chats)
         return queryset
 
 
@@ -134,7 +132,6 @@ class TransferChatView(LoginRequiredMixin, View):
         try:
             chat = Chat.objects.filter(location=request.POST.get('location'))
             if self.request.user == chat[0].creator:
-                print(request.POST.get('users').strip())
                 # chat.creator = User.objects.get(
                 #     username=request.POST.get('users').strip())
                 chat.update(creator=User.objects.get(
@@ -149,7 +146,6 @@ class TransferChatView(LoginRequiredMixin, View):
             return render(request, "client/chat-not-found.html")
 
 
-@method_decorator(csrf_exempt, name="dispatch")
 class PinChatView(LoginRequiredMixin, View):
     def get(self, request):
         try:
@@ -165,6 +161,50 @@ class PinChatView(LoginRequiredMixin, View):
                 chatUser.pinned = True
 
             chatUser.save()
+            return JsonResponse({
+                "success": True,
+            })
+
+        except:
+            pass
+
+        return HttpResponseNotFound()
+
+
+class AcceptChatView(LoginRequiredMixin, View):
+    def get(self, request):
+        try:
+            chat = get_object_or_404(
+                Chat, location=request.GET.get('location'))
+
+            chatUser = get_object_or_404(
+                ChatUser, chat=chat, user=self.request.user)
+
+            chatUser.accepted = True
+
+            chatUser.save()
+
+            return JsonResponse({
+                "success": True,
+            })
+
+        except:
+            pass
+
+        return HttpResponseNotFound()
+
+
+class RejectChatView(LoginRequiredMixin, View):
+    def get(self, request):
+        try:
+            chat = get_object_or_404(
+                Chat, location=request.GET.get('location'))
+
+            chatUser = get_object_or_404(
+                ChatUser, chat=chat, user=self.request.user)
+
+            chatUser.delete()
+
             return JsonResponse({
                 "success": True,
             })
