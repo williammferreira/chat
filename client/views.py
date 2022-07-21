@@ -1,3 +1,4 @@
+from curses import raw
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -27,11 +28,21 @@ class ChatListMixin(LoginRequiredMixin, ListView):
     template_name_suffix = "_list"
 
     def get_queryset(self):
+        self.user_of_list = []
+
         queryset = super().get_queryset()
+
         self.creator_of = queryset.filter(
             creator=self.request.user).order_by('-created')
-        self.user_of = queryset.filter(
-            users__in=[self.request.user]).order_by('-created')
+
+        users = ChatUser.objects.filter(
+            user=self.request.user, accepted=True).all()
+
+        for user in users:
+            self.user_of_list.append(user.chat.id)
+
+        self.user_of = Chat.objects.filter(id__in=self.user_of_list).all()
+
         return self.user_of
 
 
@@ -59,14 +70,15 @@ class PinnedChatsListView(ChatListMixin):
         return queryset
 
 
-class InvitedChatsListView(ChatListMixin):
+class InvitedChatsListView(ListView, LoginRequiredMixin):
     template_name_suffix = '_list_invited'
+    model = Chat
 
     def get_queryset(self):
-        super().get_queryset()
+        queryset = super().get_queryset()
         chats = ChatUser.objects.filter(
             accepted=False, user=self.request.user).values_list('chat')
-        queryset = Chat.objects.filter(id__in=chats)
+        queryset = queryset.filter(id__in=chats)
         return queryset
 
 
