@@ -20,7 +20,8 @@
             {% endif %}
         </b>
         {% for user in chat.users.all %}
-            {% if user != chat.creator %}
+            {% get_chatUser_for_chat chat user.id as chatUser %}
+            {% if user != chat.creator and chatUser.accepted %}
                 {% trans "," %}
                 {{ user.username }}
             {% endif %}
