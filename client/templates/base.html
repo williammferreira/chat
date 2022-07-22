@@ -60,8 +60,23 @@
                          alt="Home Icon"
                          width="30px"
                          height="30px">
-                <span class="sidelink-label">{% trans 'Home' %}</a>
-            </a>
+                    <span class="sidelink-label">{% trans 'Home' %}</span>
+                </a>
+                <a class="sidelink" href="{% url 'management:apps' %}">
+                    <img src="{% static 'images/apps_icon.png' %}"
+                         alt="Apps Icon"
+                         width="30px"
+                         height="30px">
+                    <span class="sidelink-label">{% trans 'Apps' %}</span>
+                </a>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="django-message {% if message.tags %}django-message-{{ message.tags }}{% endif %}">
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
         {% comment %} <span class="apps-link sidelink">Apps</span> {% endcomment %}
         {% comment %} <span class="new-chat-plus sidelink" onclick="location.replace(`{% url 'new_chat' %}`)">+<span> {% endcomment %}
